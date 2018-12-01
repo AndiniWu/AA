@@ -23,18 +23,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @GetMapping("/users")
-//    public ModelAndView getRegistration() {
-//        ModelAndView modelAndView = new ModelAndView();
-//        User user = new User();
-//        modelAndView.addObject("user", user);
-//        modelAndView.setViewName("registration");
-//        return modelAndView;
-//    }
     @GetMapping("/users")
-    public List<User> getAllUsers(){
-        return userService.findAll();
+    public ModelAndView getRegistration() {
+        ModelAndView modelAndView = new ModelAndView();
+        User user = new User();
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("registration");
+        return modelAndView;
     }
+//    @GetMapping("/users")
+//    public List<User> getAllUsers(){
+//        return userService.findAll();
+//    }
 
 
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)

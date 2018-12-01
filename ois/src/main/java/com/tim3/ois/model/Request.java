@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,6 +22,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EnableJpaAuditing
 @Table(name = "request")
 public class Request {
     @Id
@@ -36,11 +38,13 @@ public class Request {
     private String message;
 
     @Column(name = "status")
-    private String status = "waiting";
+    private String status;
+
+    @Column(name = "reject_note")
+    private String rejectNote;
 
     @Column(name = "request_date", updatable = false)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
-    private Date createdAt;
+    private long createdAt;
 
     @ManyToMany
     @JoinTable(name = "request_detail", joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "item_id"))
@@ -54,13 +58,11 @@ public class Request {
 //    @JoinTable(name = "approved_by", joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "user_id"))
 //    private User approvedBy;
 
-    @Column(name = "approval_date", updatable = false)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
-    private Date approvedAt;
+    @Column(name = "approval_date")
+    private Long approvedAt;
 
     @Column(name = "return_date")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
-    private Date returnAt;
+    private Long returnAt;
 
 
 }

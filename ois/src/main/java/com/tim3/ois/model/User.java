@@ -43,4 +43,6 @@ public class User {
     @NotNull(message = "Pleas provide the the role")
     private int role;
 
+    @Column(name = "superior")
+    private String superior;
 }
