@@ -23,15 +23,16 @@ public class AssignmentController {
     private ItemService itemService;
     @Autowired
     private AssignmentService assignmentService;
+//
+//    @PutMapping("/assignment/{id}")
+//    public Request createNewAssignment(@PathVariable(value = "id") int id,
+//                                    @RequestBody UserEmail reqEmail) {
+//        // Request request = requestService.findRequestById(id);
+//
+//        Request updatedRequest = assignmentService.updateRequest(id,reqEmail.getEmail());
+//        return updatedRequest;
+//    }
 
-    @PutMapping("/assignment/{id}")
-    public Request createNewAssignment(@PathVariable(value = "id") int id,
-                                    @RequestBody UserEmail reqEmail) {
-        // Request request = requestService.findRequestById(id);
-
-        Request updatedRequest = assignmentService.updateRequest(id,reqEmail.getEmail());
-        return updatedRequest;
-    }
 
 
 }

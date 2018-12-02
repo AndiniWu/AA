@@ -15,18 +15,18 @@ public class AssignmentService {
     private ItemService itemService;
     @Autowired
     private RequestService requestService;
-    public Request updateRequest(int id, String email) {
-        Item item;
-        Request request = requestService.findRequestById(id);
-
-        for (Item i:request.getItem()){
-            item=itemService.findItemById(i.getId());
-            System.out.println("item: " + item);
-            item.setQuantity(item.getQuantity()-i.getQuantity());
-            System.out.println("updatedItem: " + item.getQuantity() +" " + i.getQuantity());
-            Item tes = itemService.saveItem(item);
-            System.out.println(tes);
-        }
-        return requestService.updateRequest(id, email);
-    }
+//    public Request updateRequest(int id, String email) {
+//        Item item;
+//        Request request = requestService.findRequestById(id);
+//
+//        for (Item i:request.getItem()){
+//            item=itemService.findItemById(i.getId());
+//            System.out.println("item: " + item);
+//            item.setQuantity(item.getQuantity()-i.getQuantity());
+//            System.out.println("updatedItem: " + item.getQuantity() +" " + i.getQuantity());
+//            Item tes = itemService.saveItem(item);
+//            System.out.println(tes);
+//        }
+//        return requestService.updateRequest(id, email);
+//    }
 }

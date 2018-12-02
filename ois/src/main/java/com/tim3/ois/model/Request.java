@@ -8,14 +8,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Target;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Builder
@@ -31,7 +29,7 @@ public class Request {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "user")
+    @Column(name = "request_by")
     private String user;
 
     @Column(name = "message")
@@ -46,17 +44,12 @@ public class Request {
     @Column(name = "request_date", updatable = false)
     private long createdAt;
 
-    @ManyToMany
-    @JoinTable(name = "request_detail", joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "item_id"))
-    private Set<Item> item;
-
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "request_detail",joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "item_id"))
+//    private Set<Item> item ;
 
     @Column(name = "approvedBy")
     private String approvedBy;
-
-//    @OneToOne
-//    @JoinTable(name = "approved_by", joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "user_id"))
-//    private User approvedBy;
 
     @Column(name = "approval_date")
     private Long approvedAt;
