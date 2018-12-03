@@ -24,7 +24,7 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 //
-//    @PutMapping("/assignment/{id}")
+//    @PutMapping("/assignments/{id}")
 //    public Request createNewAssignment(@PathVariable(value = "id") int id,
 //                                    @RequestBody UserEmail reqEmail) {
 //        // Request request = requestService.findRequestById(id);

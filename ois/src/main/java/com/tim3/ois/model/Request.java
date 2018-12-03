@@ -20,7 +20,6 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@EnableJpaAuditing
 @Table(name = "request")
 public class Request {
     @Id
@@ -44,9 +43,20 @@ public class Request {
     @Column(name = "request_date", updatable = false)
     private long createdAt;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "request_detail",joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "item_id"))
-//    private Set<Item> item ;
+//    @ManyToMany
+//    @JoinTable(name = "request_detail",joinColumns ={@JoinColumn(referencedColumnName = "id",name = "reqId")},inverseJoinColumns =@JoinColumn(referencedColumnName = "id",name = "itemId"))
+//    private List<Item> item ;
+
+//    @ManyToMany
+//    @JoinTable(name = "request_detail",joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "quantity"))
+//   // @MapKeyJoinColumn(name = "item_id")
+//    @ElementCollection
+//    private Map<Item,Quantity> item = new HashMap<>();
+
+
+    @OneToMany(targetEntity = RequestDetail.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "request_id",referencedColumnName = "id")
+    private Set<RequestDetail> reqDetail;
 
     @Column(name = "approvedBy")
     private String approvedBy;
@@ -56,6 +66,5 @@ public class Request {
 
     @Column(name = "return_date")
     private Long returnAt;
-
-
 }
+

@@ -3,7 +3,7 @@ package com.tim3.ois.controller;
 import com.tim3.ois.controller.ItemController;
 import com.tim3.ois.model.Item;
 import com.tim3.ois.model.Request;
-import com.tim3.ois.model.RequestDetail;
+//import com.tim3.ois.model.RequestDetail;
 import com.tim3.ois.model.User;
 import com.tim3.ois.service.RequestService;
 import com.tim3.ois.service.ItemService;
@@ -22,15 +22,22 @@ public class RequestController {
     @Autowired
     private RequestService requestService;
 
-    @GetMapping("/request")
-    public List<Request> getAllLends(){
+    @GetMapping("/requests")
+    public List<Request> getAllRequest(){
         return requestService.findAll();
     }
-    @PostMapping(value = "/request", produces = MediaType.APPLICATION_JSON_VALUE)
+
+//    @GetMapping("/request/detail")
+//    public List<RequestDetail> getAllRequestDetail(){
+//        return requestService.findAllRequestDetail();
+//    }
+
+    @PostMapping(value = "/requests", produces = MediaType.APPLICATION_JSON_VALUE)
     public Request createNewRequest(
             @Valid
             @RequestBody
-                    Request request, RequestDetail requestDetail, BindingResult bindingResult) {
+                    Request request,
+            BindingResult bindingResult) {
 //        Request requestExists= requestService.findRequestById(request.getId());
 //
 //        if (requestExists != null) {
@@ -38,11 +45,12 @@ public class RequestController {
 //           return false;
 //        }
         requestService.saveRequest(request);
-        requestService.saveRequestDetail(requestDetail); // terakhir sampai sini
+//        RequestDetail requestDetail = new RequestDetail(request,item,item.getQuantity());
+//        requestService.saveRequestDetail(requestDetail); // terakhir sampai sini
         return request;
     }
 
-    @DeleteMapping("/request/{id}")
+    @DeleteMapping("/requests/{id}")
     public Boolean deleteRequest(@PathVariable(value = "id")int reqId){
         Request request = requestService.findRequestById(reqId);
         if(request==null){return false;}

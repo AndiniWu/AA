@@ -1,8 +1,8 @@
 package com.tim3.ois.service;
 
 import com.tim3.ois.model.Request;
-import com.tim3.ois.model.RequestDetail;
-import com.tim3.ois.repository.RequestDetailRepository;
+//import com.tim3.ois.model.RequestDetail;
+//import com.tim3.ois.repository.RequestDetailRepository;
 import com.tim3.ois.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -19,8 +19,8 @@ public class RequestService {
 
     private RequestRepository requestRepository;
 
-    @Autowired
-    private RequestDetailRepository requestDetailRepository;
+//    @Autowired
+//    private RequestDetailRepository requestDetailRepository;
 
     @Autowired
     public RequestService(RequestRepository requestRepository){
@@ -29,10 +29,10 @@ public class RequestService {
     public List<Request> findAll(){
         return requestRepository.findAll();
     }
-
-    public List<RequestDetail> findAllRequestDetail(){
-        return requestDetailRepository.findAll();
-    }
+//
+//    public List<RequestDetail> findAllRequestDetail(){
+//        return requestDetailRepository.findAll();
+//    }
 
     public Request findRequestById(int id){ return requestRepository.findById(id);}
 
@@ -42,9 +42,9 @@ public class RequestService {
         System.out.println(request);
         return request;
     }
-    public RequestDetail saveRequestDetail(RequestDetail reqDetail){
-        return requestDetailRepository.save(reqDetail);
-    }
+//    public RequestDetail saveRequestDetail(RequestDetail reqDetail){
+//        return requestDetailRepository.save(reqDetail);
+//    }
 
     public Request updateRequest(int id, String email) {
         Request request= requestRepository.findById(id);
@@ -58,7 +58,7 @@ public class RequestService {
         requestRepository.delete(request);
     }
 
-    public void deleteRequestDetail(RequestDetail reqDetail){
-         requestDetailRepository.delete(reqDetail);
-    }
+//    public void deleteRequestDetail(RequestDetail reqDetail){
+//         requestDetailRepository.delete(reqDetail);
+//    }
 }

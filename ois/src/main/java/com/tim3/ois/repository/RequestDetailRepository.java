@@ -12,6 +12,4 @@ import java.util.Date;
 
 @Repository("requestDetailRepository")
 public interface RequestDetailRepository extends JpaRepository<RequestDetail, Integer> {
-    RequestDetail findByRequest(int id);
-    RequestDetail findById(int id);
 }
