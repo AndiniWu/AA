@@ -5,6 +5,8 @@ import com.tim3.ois.model.Item;
 import com.tim3.ois.model.Request;
 //import com.tim3.ois.model.RequestDetail;
 import com.tim3.ois.model.User;
+import com.tim3.ois.model.UserEmail;
+import com.tim3.ois.service.RequestDetailService;
 import com.tim3.ois.service.RequestService;
 import com.tim3.ois.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ import java.util.Set;
 public class RequestController {
     @Autowired
     private RequestService requestService;
+
+    @Autowired
+    private RequestDetailService requestDetailService;
 
     @GetMapping("/requests")
     public List<Request> getAllRequest(){
@@ -58,6 +63,17 @@ public class RequestController {
         return true;
     }
 //
+
+    @PutMapping("/requests/{id}")
+    public Request updateRequest(@PathVariable(value = "id") int id,
+                                       @RequestBody UserEmail u,
+                                       @RequestParam(value = "status",required = false) int status) {
+        // Request request = requestService.findRequestById(id);
+        Request updatedRequest = requestDetailService.updateRequest(id,u.getApprovedBy(),u.getHandedBy(),status,u.getRejectNote());
+        return updatedRequest;
+
+    }
+
 
 
 

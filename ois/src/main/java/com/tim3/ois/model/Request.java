@@ -37,6 +37,9 @@ public class Request {
     @Column(name = "status")
     private String status;
 
+//    @Column(name = "statusCode")
+//    private int statusCode;
+
     @Column(name = "reject_note")
     private String rejectNote;
 
@@ -64,7 +67,12 @@ public class Request {
     @Column(name = "approval_date")
     private Long approvedAt;
 
+    @Column(name = "handed_by")
+    private String handedBy;
+
     @Column(name = "return_date")
     private Long returnAt;
+
+
 }
 

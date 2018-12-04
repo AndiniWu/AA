@@ -23,18 +23,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
-    public ModelAndView getRegistration() {
-        ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
-        return modelAndView;
-    }
 //    @GetMapping("/users")
-//    public List<User> getAllUsers(){
-//        return userService.findAll();
+//    public ModelAndView getRegistration() {
+//        ModelAndView modelAndView = new ModelAndView();
+//        User user = new User();
+//        modelAndView.addObject("user", user);
+//        modelAndView.setViewName("registration");
+//        return modelAndView;
 //    }
+    @GetMapping("/users")
+    public List<User> getAllUsers(){
+        return userService.findAll();
+    }
 
 
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,22 +42,19 @@ public class UserController {
             @Valid
             @RequestBody
                     User user, BindingResult bindingResult) {
-        User userExists = userService.findUserByEmail(user.getEmail());
-        if (userExists != null) {
-            //bindingResult.rejectValue("email", "There is already a user registered with the email provided");
-            return false;
-        }
-        userService.saveUser(user);
-        return true;
+
+        return userService.saveUser(user);
+
     }
 
     @PutMapping("/users/{id}")
-    public User updateUser(@PathVariable(value = "id") int userId,
+    public User updateUserPassword(@PathVariable(value = "id") int userId,
                            @Valid @RequestBody User userNow) {
         User user = userService.findUserById(userId);
         user.setPassword(userNow.getPassword());
-        User updatedUser = userService.saveUser(user);
-        return updatedUser;
+        userService.saveUser(user);
+        return user;
+
     }
 
     @DeleteMapping("/users/{id}")

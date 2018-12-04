@@ -25,9 +25,18 @@ public class UserService {
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-    public User saveUser(User user){
-        return userRepository.save(user);
+    public Boolean saveUser(User u){
+        User userExists = userRepository.findByEmail(u.getEmail());
+        if (userExists != null) {
+            //bindingResult.rejectValue("email", "There is already a user registered with the email provided");
+            return false;
+        }
+        else {
+          userRepository.save(u);
+          return true;
+        }
     }
+
     public void deleteUser(User user){
         userRepository.delete(user);
     }

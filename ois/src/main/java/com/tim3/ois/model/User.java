@@ -43,6 +43,11 @@ public class User {
     @NotNull(message = "Pleas provide the the role")
     private int role;
 
-    @Column(name = "superior")
-    private String superior;
+//    @JoinColumn(name = "superior")
+//    private String superior;
+//
+    @ManyToOne
+    @JoinColumn(name = "superior_id")
+    private User superior;
+
 }

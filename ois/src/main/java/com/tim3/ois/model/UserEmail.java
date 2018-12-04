@@ -12,5 +12,7 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserEmail {
-    private String email;
+    private String approvedBy;
+    private String handedBy;
+    private String rejectNote;
 }
