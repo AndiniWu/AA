@@ -28,8 +28,9 @@ public class Request {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "request_by")
-    private String user;
+    @ManyToOne
+    @JoinColumn(name = "request_by",referencedColumnName = "id")
+    private User user;
 
     @Column(name = "message")
     private String message;
@@ -40,8 +41,6 @@ public class Request {
 //    @Column(name = "statusCode")
 //    private int statusCode;
 
-    @Column(name = "reject_note")
-    private String rejectNote;
 
     @Column(name = "request_date", updatable = false)
     private long createdAt;
@@ -50,19 +49,13 @@ public class Request {
 //    @JoinTable(name = "request_detail",joinColumns ={@JoinColumn(referencedColumnName = "id",name = "reqId")},inverseJoinColumns =@JoinColumn(referencedColumnName = "id",name = "itemId"))
 //    private List<Item> item ;
 
-//    @ManyToMany
-//    @JoinTable(name = "request_detail",joinColumns ={@JoinColumn(name = "req_id")},inverseJoinColumns =@JoinColumn(name = "quantity"))
-//   // @MapKeyJoinColumn(name = "item_id")
-//    @ElementCollection
-//    private Map<Item,Quantity> item = new HashMap<>();
-
 
     @OneToMany(targetEntity = RequestDetail.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id",referencedColumnName = "id")
     private Set<RequestDetail> reqDetail;
-
-    @Column(name = "approvedBy")
-    private String approvedBy;
+//
+//    @Column(name = "approvedBy")
+//    private String approvedBy;
 
     @Column(name = "approval_date")
     private Long approvedAt;
@@ -70,9 +63,17 @@ public class Request {
     @Column(name = "handed_by")
     private String handedBy;
 
+    @Column(name = "reject_note")
+    private String rejectNote;
+
+    @Column(name = "rejected_date")
+    private Long rejectedAt;
+
+
     @Column(name = "return_date")
-    private Long returnAt;
+    private Long returnedAt;
 
-
+    @Column(name = "return_received_by")
+    private String receivedBy;
 }
 

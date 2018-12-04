@@ -5,7 +5,7 @@ import com.tim3.ois.model.Item;
 import com.tim3.ois.model.Request;
 //import com.tim3.ois.model.RequestDetail;
 import com.tim3.ois.model.User;
-import com.tim3.ois.model.UserEmail;
+//import com.tim3.ois.model.UserEmail;
 import com.tim3.ois.service.RequestDetailService;
 import com.tim3.ois.service.RequestService;
 import com.tim3.ois.service.ItemService;
@@ -66,10 +66,10 @@ public class RequestController {
 
     @PutMapping("/requests/{id}")
     public Request updateRequest(@PathVariable(value = "id") int id,
-                                       @RequestBody UserEmail u,
+                                       @RequestBody(required = false) Request req,
                                        @RequestParam(value = "status",required = false) int status) {
         // Request request = requestService.findRequestById(id);
-        Request updatedRequest = requestDetailService.updateRequest(id,u.getApprovedBy(),u.getHandedBy(),status,u.getRejectNote());
+        Request updatedRequest = requestDetailService.updateRequest(id, req ,status);
         return updatedRequest;
 
     }
