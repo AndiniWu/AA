@@ -1,5 +1,6 @@
 package com.tim3.ois.service;
 
+import com.tim3.ois.exception.ResourceNotFoundException;
 import com.tim3.ois.model.Request;
 //import com.tim3.ois.model.RequestDetail;
 //import com.tim3.ois.repository.RequestDetailRepository;
@@ -37,7 +38,12 @@ public class RequestService {
 //        return requestDetailRepository.findAll();
 //    }
 
-    public Request findRequestById(int id){ return requestRepository.findById(id);}
+    public Request findRequestById(int id) throws ResourceNotFoundException {
+        Request request = requestRepository.findById(id);
+        if(request==null){throw new ResourceNotFoundException("Request not found with id : "+id);}
+        return request;
+    }
+
 
     public Request saveRequest(Request request){
         request.setCreatedAt(new Date().getTime());
@@ -97,9 +103,6 @@ public class RequestService {
 
         return updatedRequest;
     }
-
-
-
 
     public void deleteRequest(Request request){
         requestRepository.delete(request);

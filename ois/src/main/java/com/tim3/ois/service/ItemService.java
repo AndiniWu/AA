@@ -1,5 +1,6 @@
 package com.tim3.ois.service;
 
+import com.tim3.ois.exception.ResourceNotFoundException;
 import com.tim3.ois.repository.ItemRepository;
 
 import com.tim3.ois.model.Item;
@@ -21,8 +22,11 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public Item findItemById(int id){
-        return itemRepository.findById(id);
+    public Item findItemById(int id) throws ResourceNotFoundException{
+        Item item = itemRepository.findById(id);
+        if(item==null){throw new ResourceNotFoundException("Request not found with id : "+id);}
+        return item;
+
     }
     public Item findItemByName(String name) {
         return itemRepository.findByName(name);

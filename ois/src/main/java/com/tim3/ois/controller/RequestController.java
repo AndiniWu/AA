@@ -32,6 +32,10 @@ public class RequestController {
         return requestService.findAll();
     }
 
+    @GetMapping("/requests/{id}")
+    public Request getRequest(@PathVariable(value = "id") int reqId){
+        return requestService.findRequestById(reqId);
+    }
 //    @GetMapping("/request/detail")
 //    public List<RequestDetail> getAllRequestDetail(){
 //        return requestService.findAllRequestDetail();

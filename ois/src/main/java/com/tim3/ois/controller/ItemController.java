@@ -26,6 +26,11 @@ public class ItemController {
         return itemService.findAll();
     }
 
+    @GetMapping("/items/{id}")
+    public Item getItem(@PathVariable(value = "id") int itemId){
+        return itemService.findItemById(itemId);
+    }
+
     @PostMapping(value = "/items", produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean createNewItem(
             @Valid

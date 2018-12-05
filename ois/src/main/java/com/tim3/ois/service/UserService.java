@@ -1,11 +1,9 @@
 package com.tim3.ois.service;
 
-
-//import com.tim3.ois.model.Role;
+import com.tim3.ois.exception.ResourceNotFoundException;
 import com.tim3.ois.model.User;
 import com.tim3.ois.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +19,11 @@ public class UserService {
         this.userRepository=userRepository;
     }
     public List<User> findAll() {return userRepository.findAll();}
-    public User findUserById(int id){return userRepository.findById(id);}
+    public User findUserById(int id) throws ResourceNotFoundException {
+        User user = userRepository.findById(id);
+        if(user==null){throw new ResourceNotFoundException("User not found with id : "+id);}
+        return user;
+    }
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
