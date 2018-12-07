@@ -24,7 +24,7 @@ public class ItemService {
 
     public Item findItemById(int id) throws ResourceNotFoundException{
         Item item = itemRepository.findById(id);
-        if(item==null){throw new ResourceNotFoundException("Request not found with id : "+id);}
+        if(item==null){throw new ResourceNotFoundException("Item","id",id);}
         return item;
 
     }

@@ -40,7 +40,7 @@ public class RequestService {
 
     public Request findRequestById(int id) throws ResourceNotFoundException {
         Request request = requestRepository.findById(id);
-        if(request==null){throw new ResourceNotFoundException("Request not found with id : "+id);}
+        if(request==null){throw new ResourceNotFoundException("Request","id" ,id);}
         return request;
     }
 

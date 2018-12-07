@@ -7,6 +7,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+<style>
+    .col-sm-9{
+        margin:5px;
+    }
+</style>
 <body>
 
 <div class="container">
@@ -43,6 +48,17 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-9">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Dropdown Example
+                                <span class="caret"></span></button>
+                            <ul id="superior" class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
                         <button id="register" class="btn btn-primary btn-block">Register User</button>
                     </div>
                 </div>
@@ -50,7 +66,44 @@
 
     </div>
 </div>
-<script type="text/javascript" src="/js/javascript.js"></script>
+<script>
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/api/users/superiors',
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType:"json",
+        success: function (data) {
+            console.log("yes. data: " + data)
+            if (data) {
+                var len = data.length;
+                var txt = "";
+                if (len > 0) {
+                    for(var i=0;i<len;i++){
+                        if(data[i].name && data[i].email){
+                            txt += "<li id="+data[i].email +">"+data[i].name+"</li>";
+                        }
+                    }
+                    if(txt != ""){
+                        $("#superior").append(txt);
+                    }
+                    // for (var i = 0; i < len; i++) {
+                    //     if (data[i].name) {
+                    //         txt += "<li id=${data.email}> ${data.name}</li>";
+                    //     }
+                    //     $("#superior").append(txt);
+                    // }
+                    alert("Success :"+data)
+                    //document.location.href = 'index.html'
+                }
+            }
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+</script>
 
 </body>
 </html>
