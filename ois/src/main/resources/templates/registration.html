@@ -4,7 +4,8 @@
 <head>
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
@@ -51,8 +52,8 @@
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Dropdown Example
                                 <span class="caret"></span></button>
-                            <ul id="superior" class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+                            <ul id="superiorMenu" class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                <li role="presentation"><a role="menuitem">HTML</a></li>
                             </ul>
                         </div>
                     </div>
@@ -67,6 +68,9 @@
     </div>
 </div>
 <script>
+    $( document ).ready(function() {
+        console.log( "ready!" );
+
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/api/users/superiors',
@@ -82,20 +86,15 @@
                 if (len > 0) {
                     for(var i=0;i<len;i++){
                         if(data[i].name && data[i].email){
-                            txt += "<li id="+data[i].email +">"+data[i].name+"</li>";
+                            txt += '<li role ="presentation" value=""'+data[i].id +'><a role="menuitem">'+data[i].email+'</a></li>';
                         }
                     }
                     if(txt != ""){
-                        $("#superior").append(txt);
+                        $("#superiorMenu").append(txt);
                     }
-                    // for (var i = 0; i < len; i++) {
-                    //     if (data[i].name) {
-                    //         txt += "<li id=${data.email}> ${data.name}</li>";
-                    //     }
-                    //     $("#superior").append(txt);
-                    // }
-                    alert("Success :"+data)
-                    //document.location.href = 'index.html'
+
+                    // alert("Success :"+data);
+
                 }
             }
         },
@@ -103,6 +102,16 @@
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
         }
     });
+
+    $("#superiorMenu a").click(function(e){
+        e.preventDefault(); // cancel the link behaviour
+        var selText = $(this).text();
+        $("#menu1").text(selText);
+        console.log(selText)
+    });
+
+    });
+
 </script>
 
 </body>

@@ -35,6 +35,7 @@
         var password = document.getElementById("password").value;
         var name = document.getElementById("name").value;
         var role = document.querySelector('input[name="optradio"]:checked').value;
+        var superior
         console.log('{"name": "' + name + '", "email": "' + email + '", "email": "' + password + '", "role": "' + role + '"}');
         $.ajax({
             type: 'POST',
