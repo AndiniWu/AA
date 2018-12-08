@@ -19,10 +19,9 @@
                 }
                 else {
                     msg += "Login succeed"
+                    window.location.href = 'http://localhost:8080/index'
                 }
                 console.log(msg);
-                //alert("Success :"+data)
-                //document.location.href = 'index.html'
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
@@ -35,13 +34,17 @@
         var password = document.getElementById("password").value;
         var name = document.getElementById("name").value;
         var role = document.querySelector('input[name="optradio"]:checked').value;
-        var superior
-        console.log('{"name": "' + name + '", "email": "' + email + '", "email": "' + password + '", "role": "' + role + '"}');
+        var superior = document.getElementById("superiorList").value;
+        var txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role + '}'
+        if(superior){
+            txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role + ', "superior": { "id" : '+superior+'}}'
+        }
+        console.log('{"name": "' + name + '", "email": "' + email + '", "email": "' + password + '", "role": ' + role + ', "superior": { "id" : '+superior+'}}');
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/users',
             data:
-                '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": "' + role + '"}',
+                txt,
             headers: {
                 "Content-Type": "application/json", "Accept": "application/json"
             },

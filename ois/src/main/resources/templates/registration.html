@@ -40,24 +40,16 @@
                 <div class="form-group">
                     <div class="col-sm-9">
                         <label class="radio-inline">
-                            <input value=1 type="radio" name="optradio" checked>Employee
+                            <input value=1 type="radio" name="optradio" checked>Superior Employee
                         </label>
                         <label class="radio-inline">
-                            <input value=2 type="radio" name="optradio">Superior Employee
+                            <input value=2 type="radio" name="optradio" class="enable_d">Employee
                         </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Dropdown Example
-                                <span class="caret"></span></button>
-                            <ul id="superiorMenu" class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                <li role="presentation"><a role="menuitem">HTML</a></li>
-                            </ul>
+                        <select id="superiorList" disabled>
+                            <option>Superior (Optional)</option>
+                        </select>
                         </div>
                     </div>
-                </div>
                 <div class="form-group">
                     <div class="col-sm-9">
                         <button id="register" class="btn btn-primary btn-block">Register User</button>
@@ -68,8 +60,8 @@
     </div>
 </div>
 <script>
-    $( document ).ready(function() {
-        console.log( "ready!" );
+    // $( document ).ready(function() {
+    //     console.log( "ready!" );
 
     $.ajax({
         type: 'GET',
@@ -86,15 +78,13 @@
                 if (len > 0) {
                     for(var i=0;i<len;i++){
                         if(data[i].name && data[i].email){
-                            txt += '<li role ="presentation" value=""'+data[i].id +'><a role="menuitem">'+data[i].email+'</a></li>';
+                            txt += '<option value='+data[i].id+'>'+data[i].email+'</option>'
                         }
                     }
                     if(txt != ""){
-                        $("#superiorMenu").append(txt);
+                        $("#superiorList").append(txt);
                     }
-
-                    // alert("Success :"+data);
-
+                    alert("Success :"+data);
                 }
             }
         },
@@ -103,16 +93,16 @@
         }
     });
 
-    $("#superiorMenu a").click(function(e){
-        e.preventDefault(); // cancel the link behaviour
-        var selText = $(this).text();
-        $("#menu1").text(selText);
-        console.log(selText)
+    $('input:radio').click(function() {
+        $("#superiorList").prop("disabled",true);
+        if($(this).hasClass('enable_d')) {
+            $("#superiorList").prop("disabled",false);
+        }
     });
-
-    });
+    // });
 
 </script>
+<script type="text/javascript" src="/js/javascript.js"></script>
 
 </body>
 </html>
