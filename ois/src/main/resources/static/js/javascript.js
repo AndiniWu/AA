@@ -36,10 +36,10 @@
         var role = document.querySelector('input[name="optradio"]:checked').value;
         var superior = document.getElementById("superiorList").value;
         var txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role + '}'
-        if(superior){
+        if(superior!=""){
             txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role + ', "superior": { "id" : '+superior+'}}'
         }
-        console.log('{"name": "' + name + '", "email": "' + email + '", "email": "' + password + '", "role": ' + role + ', "superior": { "id" : '+superior+'}}');
+        console.log('{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role + ', "superior": { "id" : '+superior+'}}');
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/users',
