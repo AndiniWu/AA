@@ -36,6 +36,11 @@ public class UserController {
     public List<User> getAllUsers(){
         return userService.findAll();
     }
+    @GetMapping(value = "/users/superiors",produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<User> getAllSuperiors(){
+        System.out.println(userService.findUsersByRole(1));
+        return userService.findUsersByRole(1);
+    }
 
 
     @GetMapping("/users/{id}")
@@ -49,18 +54,23 @@ public class UserController {
             @RequestBody
                     User user, BindingResult bindingResult) {
 
-        return userService.saveUser(user);
+        try{return userService.saveUser(user);}
+        catch (ResourceNotFoundException ex){throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Please provide correct User data");}
+        //TERAKHIR SAMPAI SINI 6/12/2018 13:15
     }
 
     @PutMapping("/users/{id}")
     public User updateUserPassword(@PathVariable(value = "id") int userId,
-                           @Valid @RequestBody User userNow) {
-        User user = userService.findUserById(userId);
+                           @Valid @RequestBody User user) {
+//        User user = userService.findUserById(userId);
 //        if(user==null){throw new ResourceNotFoundException("User","id",userId);}
-        user.setPassword(userNow.getPassword());
-        userService.saveUser(user);
-        return user;
+//        user.setPassword(userNow.getPassword());
+        try {
 
+            return userService.updateUser(user);
+        }catch (ResourceNotFoundException ex){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Please provide correct User Id");
+        }
     }
 
     @DeleteMapping("/users/{id}")

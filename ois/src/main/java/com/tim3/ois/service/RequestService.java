@@ -40,7 +40,7 @@ public class RequestService {
 
     public Request findRequestById(int id) throws ResourceNotFoundException {
         Request request = requestRepository.findById(id);
-        if(request==null){throw new ResourceNotFoundException("Request not found with id : "+id);}
+        if(request==null){throw new ResourceNotFoundException("Request","id" ,id);}
         return request;
     }
 
@@ -88,7 +88,8 @@ public class RequestService {
     public Request updateRequest(int id, Request req) {
         Request request= requestRepository.findById(id);
         request.setHandedBy(req.getHandedBy());
-        request.setStatus("Item had been taken by requester");
+        request.setHandedAt(new Date().getTime());
+        request.setStatus("Item(s) had been taken by requester");
         Request updatedRequest = requestRepository.save(request);
         return updatedRequest;
     }
@@ -96,7 +97,7 @@ public class RequestService {
     //UPDATE REQUEST STATUS ITEM RETURNED 4
     public Request updateRequest(int id,Request req,String EXTRA) {
         Request request= requestRepository.findById(id);
-        request.setStatus("Item had been returned by requester");
+        request.setStatus("Item(s) had been returned by requester");
         request.setReturnedAt(new Date().getTime());
         request.setReceivedBy(req.getReceivedBy());
         Request updatedRequest = requestRepository.save(request);

@@ -60,6 +60,9 @@ public class Request {
     @Column(name = "approval_date")
     private Long approvedAt;
 
+    @Column(name = "handed_date")
+    private Long handedAt;
+
     @Column(name = "handed_by")
     private String handedBy;
 
@@ -68,7 +71,6 @@ public class Request {
 
     @Column(name = "rejected_date")
     private Long rejectedAt;
-
 
     @Column(name = "return_date")
     private Long returnedAt;

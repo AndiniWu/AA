@@ -71,7 +71,7 @@ public class RequestController {
     @PutMapping("/requests/{id}")
     public Request updateRequest(@PathVariable(value = "id") int id,
                                        @RequestBody(required = false) Request req,
-                                       @RequestParam(value = "status",required = false) int status) {
+                                       @RequestParam(value = "status",required = false,defaultValue = "0") Integer status) {
         // Request request = requestService.findRequestById(id);
         Request updatedRequest = requestDetailService.updateRequest(id, req ,status);
         return updatedRequest;
