@@ -192,3 +192,46 @@
 .th1{
 	font-weight: normal;
 }
+
+.col-md-3{
+  font-weight: bold;
+  float: left;
+}
+
+.col-md-6{
+  float: left;
+}
+
+.col-md-9{
+  margin-top: 2%;
+}
+
+.col-md-9 label{
+  margin-left: 14%;
+}
+
+.col-md-9 button{
+  margin-left: 3%;
+  border-style: inset;
+  color: #000000;
+  font-weight: bold;
+}
+
+.title1{
+  margin: 5% 0 2% 5%;
+  font-size: 15pt;
+}
+
+.bold1{
+  font-size: 17pt;
+}
+
+.form-control{
+  height: 25pt;
+}
+
+.wrap img{
+  float: none;
+  width: 50%;
+  height: 50%;
+}
