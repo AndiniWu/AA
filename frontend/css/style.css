@@ -198,6 +198,11 @@
   float: left;
 }
 
+.col-md-5{
+  font-weight: bold;
+  float: left;
+}
+
 .col-md-6{
   float: left;
 }

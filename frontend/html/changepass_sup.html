@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  	<title>OIS - Edit Profile</title>
+  	<title>OIS - Change Password</title>
   	<!-- <base target="_self"> -->
   	<!-- <link rel="shortcut icon" href="https://www.codeply.com/images/cp_ico.png"> -->
 
@@ -27,7 +27,7 @@
 	    	<ul class="navbar-nav">
 	      		<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	        			<img src="../img/bg.png" style="border-radius: 100%; border: 1px solid black" width="50px" height="50px"> <b>Employee</b>
+	        			<img src="../img/bg.png" style="border-radius: 100%; border: 1px solid black" width="50px" height="50px"> <b>Superior</b>
 	        		</a>
 	        		<div class="dropdown-menu">
 			            <a class="dropdown-item" href="#">Edit Profile</a>
@@ -50,6 +50,7 @@
 					        </div>
 			            <a class="dropdown-item nav-link dropdown-toggle navbar1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Loan</a>
 			            	<div class="dropdown-menu">
+			            		<a class="dropdown-item" href="#">Approved Loan</a>
 					            <a class="dropdown-item" href="#">My Loan Lists</a>
 					            <a class="dropdown-item" href="#">Add New Loan</a>
 					        </div>
@@ -99,6 +100,9 @@
 	            </a>
 	            <!-- Submenu content -->
 	            <div id='submenu3' class="collapse sidebar-submenu">
+	            	<a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                    <span class="menu-collapsed">Approved Loan</span>
+	                </a>
 	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">My Loan Lists</span>
 	                </a>
@@ -120,82 +124,43 @@
 
 	    <!-- MAIN -->
 	    <div class="col-md-9">
-	    	<span class="title1"><b class="bold1">E</b>DIT<b class="bold1">P</b>ROFILE</span>
+	    	<span class="title1"><b class="bold1">C</b>HANGE<b class="bold1">P</b>ASSWORD</span>
 	    	<form>
 			    <div class="col-md-9">
-			    	<div class="col-md-3">
-			    		<label class="col-form-label">Id</label>
+			    	<div class="col-md-5">
+			    		<label class="col-form-label">Old Password*</label>
 			    	</div>
 			    	<div class="col-md-6">
-			    		<input type="text" class="form-control" name="id" maxlength="11" disabled="true">
+			    		<input type="text" class="form-control" name="password" maxlength="11" required>
 			    	</div>
-			    	<div class="col-md-3"></div>
+			    	<div class="col-md-1"></div>
 			    </div>
 			    <div class="col-md-9"></div>
 			    <div class="col-md-9">
-			    	<div class="col-md-3">
-			    		<label class="col-form-label">NIK</label>
+			    	<div class="col-md-5">
+			    		<label class="col-form-label">New Password*</label>
 			    	</div>
 			    	<div class="col-md-6">
-			    		<input type="number" class="form-control" name="nik" maxlength="20">
+			    		<input type="text" class="form-control" name="password" maxlength="20" required>
 			    	</div>
-			    	<div class="col-md-3"></div>
+			    	<div class="col-md-1"></div>
 			    </div>
 			    <div class="col-md-9"></div>
 			    <div class="col-md-9">
-			    	<div class="col-md-3">
-			    		<label class="col-form-label">Name</label>
+			    	<div class="col-md-5">
+			    		<label class="col-form-label">Confirm New Password*</label>
 			    	</div>
 			    	<div class="col-md-6">
-			    		<input type="text" class="form-control" name="name">
+			    		<input type="text" class="form-control" name="password" required>
 			    	</div>
-			    	<div class="col-md-3"></div>
-			    </div>
-			    <div class="col-md-9"></div>
-			    <div class="col-md-9">
-			    	<div class="col-md-3">
-			    		<label class="col-form-label">Division</label>
-			    	</div>
-			    	<div class="col-md-6">
-			    		<input type="text" class="form-control" name="division">
-			    	</div>
-			    	<div class="col-md-3"></div>
-			    </div>
-			    <div class="col-md-9"></div>
-			    <div class="col-md-9">
-			    	<div class="col-md-3">
-			    		<label class="col-form-label">ContactNum</label>
-			    	</div>
-			    	<div class="col-md-6">
-			    		<input type="number" class="form-control" name="contact" maxlength="14">
-			    	</div>
-			    	<div class="col-md-3"></div>
-			    </div>
-			    <div class="col-md-9"></div>
-			    <div class="col-md-9">
-			    	<div class="col-md-3">
-			    		<label class="col-form-label">Address</label>
-			    	</div>
-			    	<div class="col-md-9" style="float: left;">
-			    		<textarea class="form-control" name="address"></textarea>
-			    	</div>
-			    </div>
-			    <div class="col-md-9"></div>
-			    <div class="col-md-9 wrap" style="margin-top: 7%;">
-			    	<div class="col-md-3">
-			    		<label class="col-form-label">Change Picture</label>
-			    	</div>
-			    	<div class="col-md-6">
-			    		<input type="file" name="picture">
-			    	</div>
-			    	
+			    	<div class="col-md-1"></div>
 			    </div>
 			    <div class="col-md-9">
 			    	<div class="col-md-3"></div>
 				    <div class="col-md-6" style="margin-top: 7%;">
 				    	<button type="submit" class="btn btn-success">SUBMIT</button>
 				    	<button type="reset" class="btn btn-warning">RESET</button>
-				    	<button class="btn btn-primary" onclick="window.location.href='dash_emp.html'">BACK</button>
+				    	<button class="btn btn-primary" onclick="window.location.href='dash_sup.html'">BACK</button>
 				    </div>
 				    <div class="col-md-3"></div>
 			    </div>
