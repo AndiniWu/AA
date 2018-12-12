@@ -240,3 +240,31 @@
   width: 50%;
   height: 50%;
 }
+
+.btn1{
+  background-color: #208ACA;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.title2{
+  font-weight: normal;
+}
+
+.col-md-4{
+  float: left;
+  margin-left: -10%;
+}
+
+.btn2{
+  margin-top: -1%;
+  float: right;
+}
+
+.thead-light{
+  text-align: center;
+}
+
+.action1 button{
+  font-size: 8pt;
+}
