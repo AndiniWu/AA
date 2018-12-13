@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  	<title>OIS - Loan Detail</title>
+  	<title>OIS - Approve Loan List</title>
   	<!-- <base target="_self"> -->
   	<!-- <link rel="shortcut icon" href="https://www.codeply.com/images/cp_ico.png"> -->
 
@@ -124,8 +124,8 @@
 
 	    <!-- MAIN -->
 	    <div class="col-md-9 container">
-	    	<div class="col-md-3 title2">
-	    		<span class="title1"><b class="bold1">L</b>OAN<b class="bold1">D</b>ETAIL</span>
+	    	<div class="col-md-5 title2">
+	    		<span class="title1"><b class="bold1">A</b>PPROVE<b class="bold1">L</b>OAN<b class="bold1">L</b>IST</span>
 	    	</div>
 	    	<div class="col-md-4 form-group">
                 <div class="input-group">
@@ -135,23 +135,16 @@
                     </span>
                 </div>
             </div>
-            <div class="col-md-9"><br><br></div>
-            <div class="col-md-3">
-            	Request Id : <br><br>
-            </div>
+            <div class="col-md-3"></div>
 
             <div>
             	<table class="table table-hover table-bordered">
             		<thead class="thead-light">
             			<tr>
-            				<th>ReqIdDetail</th>
-            				<th>ItemId</th>
-            				<th>Name</th>
-            				<th>Qty</th>
-            				<th>ApprovedBy</th>
-            				<th>GivenBy</th>
-            				<th>ReceivedBy</th>
-            				<th>Status</th>
+            				<th>RequestId</th>
+            				<th>RequestBy</th>
+            				<th>RequestDate</th>
+            				<th>Action</th>
             			</tr>
             		</thead>
             		<tbody>
@@ -159,24 +152,15 @@
             				<td></td>
             				<td></td>
             				<td></td>
-            				<td></td>
-            				<td></td>
-            				<td></td>
-            				<td></td>
-            				<td></td>
+            				<td class="action1">
+            					<button class="btn btn-warning">Detail</button>
+            					<button class="btn btn-success">Approve Loan</button>
+            					<button class="btn btn-danger">Don't Approve</button>
+            				</td>
             			</tr>
             		</tbody>
             	</table>
-            	<div class="col-md-9">
-            		<div class="col-md-6"></div>
-            		<div class="col-md-6">
-						<button class="btn btn-success" onclick="window.location.href='myloanlist_sup.html'">BACK</button>
-
-						
-
-            		</div>     		
-            	</div>
-            </div>
+            	
         </div>
 	</div>
 		
