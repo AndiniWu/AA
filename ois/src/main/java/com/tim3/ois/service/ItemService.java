@@ -26,8 +26,17 @@ public class ItemService {
         Item item = itemRepository.findById(id);
         if(item==null){throw new ResourceNotFoundException("Item","id",id);}
         return item;
-
     }
+    public Item updateItem(int id,Item itemNow){
+        Item item = itemRepository.findById(id);
+        item.setQuantity(itemNow.getQuantity());
+        item.setDescription(itemNow.getDescription());
+        item.setPrice(itemNow.getPrice());
+        item.setName(itemNow.getName());
+        Item updatedItem = itemRepository.save(item);
+        return updatedItem;
+    }
+
     public Item findItemByName(String name) {
         return itemRepository.findByName(name);
     }

@@ -23,7 +23,7 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public Boolean login(@Valid
+    public int login(@Valid
                          @RequestBody LoginModel loginModel){
         return userService.findUserByEmailAndPassword(loginModel.getEmail(),loginModel.getPassword());
     }

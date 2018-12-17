@@ -47,13 +47,7 @@ public class ItemController {
     @PutMapping("/items/{id}")
     public Item updateItem(@PathVariable(value = "id") int itemId,
                            @Valid @RequestBody Item itemNow) {
-        Item item = itemService.findItemById(itemId);
-        item.setQuantity(itemNow.getQuantity());
-        item.setDescription(itemNow.getDescription());
-        item.setPrice(itemNow.getPrice());
-        item.setName(itemNow.getName());
-        Item updatedItem = itemService.saveItem(item);
-        return updatedItem;
+        return itemService.updateItem(itemId,itemNow);
     }
 
     @DeleteMapping("/items/{id}")
