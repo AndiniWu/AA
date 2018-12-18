@@ -12,6 +12,9 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginModel {
+    private int id;
     private String email;
+    private String name;
+    private int role;
     private String password;
 }

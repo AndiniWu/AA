@@ -1,38 +1,3 @@
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-function checkCookie() {
-    var email = getCookie("userId");
-    alert(email);
-    if (email != "") {
-        alert("Welcome again " + email);
-    } else {
-        email = document.getElementById("email").value;
-        if (email != "" && email != null) {
-            setCookie("email", email, 365);
-        }
-    }
-}
-
-
 $("#login").click(function () {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
@@ -48,15 +13,16 @@ $("#login").click(function () {
         dataType: "json", //to parse string into JSON object,
         success: function (data) {
             var msg = "Call Success. result: ";
-            if (data === 0) {
-                msg += "Wrong Username/password";
-                console.log("cookies not saved");
+            if (data) {
+                msg += "Login succeed";
+                var cvalue = [data.id,data.email,data.name,data.role];
+                setCookie("user",cvalue,1);
+                console.log("cookies saved :\n" + getCookie("user"));
+                // window.location.href = 'http://localhost:8080/index';
             }
             else {
-                msg += "Login succeed";
-                setCookie("userId", data, 1);
-                console.log(getCookie("userId"),"cookies saved");
-                // window.location.href = 'http://localhost:8080/index';
+                msg += "Wrong Username/password";
+                console.log("cookies not saved");
             }
             console.log(msg);
         },

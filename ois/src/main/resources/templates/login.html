@@ -2,91 +2,77 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login Form</title>
+    <title>OIS - Login</title>
+    <link rel="stylesheet" type="text/css" href="/css/css.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
-    .col-sm-9{
-        margin:5px;
+    .pad{
+        padding: 15px 10px 15px 10px;
+    }
+    #login {
+        width: 100px;
+
     }
 </style>
 <body>
+<!--<div class="Rectangle">-->
+    <!--<h1>Login</h1>-->
+<!--<div class="container">-->
+    <!--<div class="LoginPage">-->
+            <!--<div class="row">-->
+                <!--<div  class="col-md-6 col-md-offset-3">-->
+                    <!--<div class="box">-->
+                    <!--<div class="form-group">-->
+                        <!--<div class="col-sm-9">-->
+                            <!--<label style="margin-right: 100px;">Email</label>-->
+                            <!--<input id="email" type="email" placeholder="Email"-->
+                                   <!--class="form-control"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<div class="col-sm-9">-->
+                            <!--<label style="margin-right: 63px;">Password</label>-->
+                            <!--<input id="password" type="password" placeholder="Password" class="form-control"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<div class="col-sm-9">-->
+                            <!--<button id="login" class="btn btn-primary btn-block">Login</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
 
-<div class="container">
-    <div class="row">
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
-        <div  class="col-md-6 col-md-offset-3">
-            <h2>Login Form</h2>
-
-            <div class="form-group">
-                <div class="col-sm-9">
-                    <input id="email" type="email" placeholder="Email"
-                           class="form-control"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-9">
-                    <input id="password" type="password" placeholder="Password" class="form-control"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-9">
-                    <button id="login" class="btn btn-primary btn-block">Login</button>
-                </div>
-            </div>
+<div class="LoginPage">
+    <div class="Rectangle">
+        Login
+    </div>
+    <div class="box">
+        <div class="lbl">
+            <label style="margin-right: 100px;">Email</label>
+            <input type="email" class="pad" name="email" placeholder = "email" id="email">
         </div>
-
+        <div class="lbl">
+            <label style="margin-right: 63px;">Password</label>
+            <input type="password"   class="pad" name="password" placeholder = "password" id="password">
+        </div>
+        <div class="lbl">
+            <button id="login" class="btn btn-primary">Login</button>
+        </div>
     </div>
 </div>
-<script type="text/javascript" src="/js/javascript.js">
-// <script>
-    // function setCookie(cname, cvalue, exdays) {
-    //     var d = new Date();
-    //     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    //     var expires = "expires="+d.toUTCString();
-    //     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    // }
-    // function getCookie(cname) {
-    //     var name = cname + "=";
-    //     var ca = document.cookie.split(';');
-    //     for(var i = 0; i < ca.length; i++) {
-    //         var c = ca[i];
-    //         while (c.charAt(0) == ' ') {
-    //             c = c.substring(1);
-    //         }
-    //         if (c.indexOf(name) == 0) {
-    //             return c.substring(name.length, c.length);
-    //         }
-    //     }
-    //     return "";
-    // }
-    // function checkCookie() {
-    //     var email = getCookie("email");
-    //     alert(email);
-    //     if (email != "") {
-    //         alert("Welcome again " + email);
-    //     } else {
-    //         email = document.getElementById("email").value;
-    //         if (email != "" && email != null) {
-    //             setCookie("email", email, 365);
-    //         }
-    //     }
-    // }
-    //
-    // $("#login").click(function (){
-    //     var email = document.getElementById("email").value;
-    //     if(email) {
-    //         setCookie("email", email, 1);
-    //         console.log(getCookie("email"));
-    //     }
-    //     else{
-    //         console.log("cookie not saved")
-    //     }
-    // });
 
-</script>
+<script type="text/javascript" src="/js/javascript.js"></script>
+<script type="text/javascript" src="/js/cookies.js"></script>
 
 </body>
 </html>

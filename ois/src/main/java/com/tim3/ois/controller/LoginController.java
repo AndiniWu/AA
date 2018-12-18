@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -23,9 +25,10 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public int login(@Valid
-                         @RequestBody LoginModel loginModel){
-        return userService.findUserByEmailAndPassword(loginModel.getEmail(),loginModel.getPassword());
+    public User login(@Valid
+                         @RequestBody LoginModel loginModel) {
+        return userService.findUserByEmailAndPassword(loginModel.getEmail(), loginModel.getPassword());
+
     }
 
 }

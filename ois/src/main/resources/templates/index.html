@@ -1,68 +1,190 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/css.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<title>OIS - Dashboard</title>
+  	<!-- <base target="_self"> -->
+  	<!-- <link rel="shortcut icon" href="https://www.codeply.com/images/cp_ico.png"> -->
+
+  	<!-- <link rel="stylesheet" href="../css/custom.scss"> -->
+  	<link rel="stylesheet" href="/css/css.css">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" />
+  	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
+	<!-- Bootstrap NavBar -->
+	<nav class="navbar navbar-expand-md navbar-dark bg-primary" id="navbar1">
+	  	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	    	<span class="navbar-toggler-icon"></span>
+	  	</button>
+	  	<a class="navbar-brand" href="#">
+	    	<!-- <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> -->
+	    	<span class="menu-collapsed"><b>O</b><i>FFICE &nbsp;</i><b>I</b><i>NVENTORY</i></span>
+	  	</a>
+	  	<div style="width: 75%;"></div>
+	  	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+	    	<ul class="navbar-nav">
+	      		<li class="nav-item dropdown">
+					<a id="profile" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-<div class="sidenav">
-    <button class="dropdown-btn">Dropdown
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-    </div>
+	        		</a>
+	        		<div class="dropdown-menu">
+			            <a class="dropdown-item" href="#">Edit Profile</a>
+			            <a class="dropdown-item" href="#">Logout</a>
+			            <a class="dropdown-item" href="#">Change Password</a>
+			        </div>
+	      		</li>
+	      
+	      <!-- This menu is hidden in bigger devices with d-sm-none. 
+	           The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
+	      		<li class="nav-item dropdown d-sm-block d-md-none">
+	        		<a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          			Menu
+	        		</a>
+	        		<div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
+			            <a class="dropdown-item" href="#">Dashboard</a>
+			            <a class="dropdown-item nav-link dropdown-toggle navbar1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
+			            	<div class="dropdown-menu">
+					            <a class="dropdown-item" href="#">All Users</a>
+					            <a class="dropdown-item" href="#">Add User</a>
+					        </div>
+			            <a class="dropdown-item nav-link dropdown-toggle navbar1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Item</a>
+			            	<div class="dropdown-menu">
+					            <a class="dropdown-item" href="#">All Items</a>
+					            <a class="dropdown-item" href="#">Available Item</a>
+					            <a class="dropdown-item" href="#">Add New Item</a>
+					        </div>
+			            <a class="dropdown-item nav-link dropdown-toggle navbar1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Loan</a>
+			            	<div class="dropdown-menu">
+					            <a class="dropdown-item" href="#">All Loan List</a>
+					            <a class="dropdown-item" href="#">My Loan Lists</a>
+					            <a class="dropdown-item" href="#">Add New Loan</a>
+					        </div>
+			        </div>
+	      		</li><!-- Smaller devices menu END -->
+	      
+	    	</ul>
+	  	</div>
+	</nav><!-- NavBar END -->
 
-    <button class="dropdown-btn">Dropdown2
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-    </div>
 
-    <button class="dropdown-btn">Dropdown3
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-    </div>
+	<!-- Bootstrap row -->
+	<div class="row" id="body-row">
+    	<!-- Sidebar -->
+    	<div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
+    	<!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+        	<!-- Bootstrap List Group -->
+        	<ul class="list-group">
+            	
+            	<a href="#" class="bg-list1 list-group-item list-group-item-action">
+	                <div class="d-flex w-100 justify-content-start align-items-center">
+	                    <span class="fa fa-dashboard fa-fw mr-3"></span>
+	                    <span class="menu-collapsed">Dashboard</span>
+	                </div>
+	            </a>	
 
-    <button class="dropdown-btn">Dropdown4
-        <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-container">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-    </div>
-</div>
+            	<!-- Menu with submenu -->
+            	<a href="#submenu1" data-toggle="collapse" aria-expanded="false" class="bg-list1 list-group-item list-group-item-action flex-column align-items-start">
+	                <div class="d-flex w-100 justify-content-start align-items-center">
+	                    <span class="fa fa-user fa-fw mr-3"></span> 
+	                    <span class="menu-collapsed">User</span>
+	                    <span class="submenu-icon ml-auto"></span>
+	                </div>
+            	</a>
+	            <!-- Submenu content -->
+	            <div id='submenu1' class="collapse sidebar-submenu">
+	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                    <span class="menu-collapsed">All Users</span>
+	                </a>
+	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                    <span class="menu-collapsed">Add User</span>
+	                </a>
+	            </div>
+	            <a href="#submenu2" data-toggle="collapse" aria-expanded="false" class="bg-list1 list-group-item list-group-item-action flex-column align-items-start">
+	                <div class="d-flex w-100 justify-content-start align-items-center">
+	                    <span class="fa fa-list fa-fw mr-3"></span>
+	                    <span class="menu-collapsed">Item</span>
+	                    <span class="submenu-icon ml-auto"></span>
+	                </div>
+	            </a>
+	            <!-- Submenu content -->
+	            <div id='submenu2' class="collapse sidebar-submenu">
+	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                    <span class="menu-collapsed">All Items</span>
+	                </a>
+	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                    <span class="menu-collapsed">Available Item</span>
+	                </a>
+	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                    <span class="menu-collapsed">Add New Item</span>
+	                </a>
+	            </div> 
+	            <a href="#submenu3" data-toggle="collapse" aria-expanded="false" class="bg-list1 list-group-item list-group-item-action flex-column align-items-start">
+	                <div class="d-flex w-100 justify-content-start align-items-center">
+	                    <span class="fa fa-hand-o-right fa-fw mr-3"></span>
+	                    <span class="menu-collapsed">Loan</span>
+	                    <span class="submenu-icon ml-auto"></span>
+	                </div>
+	            </a>
+	            <!-- Submenu content -->
+	            <div id='submenu3' class="collapse sidebar-submenu">
+	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                    <span class="menu-collapsed">All Loan List</span>
+	                </a>
+	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                    <span class="menu-collapsed">My Loan Lists</span>
+	                </a>
+	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                    <span class="menu-collapsed">Add New Loan</span>
+	                </a>
 
-<script>
-    var dropdown = document.getElementsByClassName("dropdown-btn");
-    var i;
+	            </div>
+	            <a href="#" data-toggle="sidebar-colapse" class="bg-list2 list-group-item list-group-item-action d-flex align-items-center">
+	                <div class="d-flex w-100 justify-content-start align-items-center">
+	                    <span id="collapse-icon" class="fa fa-2x mr-3"></span>
+	                    <span id="collapse-text" class="menu-collapsed">Collapse</span>
+	                </div>
+	            </a>
 
-    for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-                dropdownContent.style.display = "none";
-            } else {
-                dropdownContent.style.display = "block";
-            }
-        });
-    }
-</script>
+	            
+	        </ul><!-- List Group END-->
+	    </div><!-- sidebar-container END -->
+
+	    <!-- MAIN -->
+	    <div class="col-md-9">
+	    <div class="col-md-3 col">
+	    	<h5>View Item Lists</h5>
+	    	<p>Total :<br>Taken: <br>Available:</p>
+		</div>
+		<div class="col-md-3 col">
+			<h5>View Loan Lists</h5>
+	    	<p>Request :<br>Pending: <br>Approved:</p>
+		</div>
+		<div class="col-md-3 col sty1">
+			<button><b>My Loan</b></button>
+		</div>
+		<div class="col-md-9" style="float: none;">
+		
+    	<h4>Recent Update</h4>
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th class="th1">[] just made a Loan Request ID: []</th>
+    			</tr>
+    		</thead>
+    	</table>
+ 		
+ 	</div>
+	</div>
+    </div><!-- body-row END -->
+      <!--scripts loaded here-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+    <script src="/js/cookies.js"></script>
+    <script src="/js/index.js"></script>
+
 
 </body>
 </html>

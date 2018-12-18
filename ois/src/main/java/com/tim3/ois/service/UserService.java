@@ -32,13 +32,13 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public int findUserByEmailAndPassword(String email,String password){
+    public User findUserByEmailAndPassword(String email,String password) throws ResourceNotFoundException{
         User user = userRepository.findByEmailAndAndPassword(email,password);
         if(user==null){
-            return 0;
+            throw new ResourceNotFoundException("User","email/password",email+ "/"+password);
         }
-        System.out.println(user.getId());
-        return user.getId();
+        System.out.println(user);
+        return user;
     }
 
     public User updateUser(User u) throws ResourceNotFoundException{
