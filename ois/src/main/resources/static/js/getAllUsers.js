@@ -4,7 +4,7 @@ function getAllUsers(){
         "\t    \t</div>\n" +
         "            <div class=\"col-md-4 form-group\">\n" +
         "                <div class=\"input-group\">\n" +
-        "                    <input type=\"text\" class=\"form-control\" placeholder=\"Search for...\">\n" +
+        "                    <input id='findByEmail' type=\"text\" class=\"form-control\" placeholder=\"Find by email...\">\n" +
         "                    <span class=\"input-group-append\">\n" +
         "                      \t<button class=\"btn1 fa fa-search\"></button>\n" +
         "                    </span>\n" +
@@ -15,7 +15,7 @@ function getAllUsers(){
         "            \t<button class=\"btn btn-success btn2 fa fa-plus\"> Add New User</button>\n" +
         "            </div>\n" +
         "            <div>\n" +
-        "            \t<table class=\"table table-hover table-bordered\">\n" +
+        "            \t<table id='userTable' class=\"table table-hover table-bordered\">\n" +
         "            \t\t<thead class=\"thead-light\">\n" +
         "            \t\t\t<tr>\n" +
         "            \t\t\t\t<th>ID</th>\n" +

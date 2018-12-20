@@ -13,9 +13,6 @@ $('#logout').click(function(e){
 $('#getAllUsers').click(function(e){
     e.preventDefault();
     isi.innerHTML=getAllUsers();
-
-
-
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/api/users',
@@ -80,6 +77,7 @@ $('#getAllUsers').click(function(e){
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
         }
     });
+    $("#findByEmail").on('keyup',findByEmail());//terakhir sampai sini 20/12/2018
 
 
 });
