@@ -1,0 +1,129 @@
+function addUser() {
+    return '<span class="title1"><b class="bold1">A</b>DD<b class="bold1">U</b>SER</span>\n' +
+        '\t    \t<form>\n' +
+        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    \t\t<label class="col-form-label">Id</label>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-6">\n' +
+        '\t\t\t    \t\t<input type="text" class="form-control" name="id" maxlength="11" disabled="true">\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-3"></div>\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t    <div class="col-md-9"></div>\n' +
+        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    \t\t<label class="col-form-label">NIK*</label>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-6">\n' +
+        '\t\t\t    \t\t<input id="nik" type="number" class="form-control" name="nik" maxlength="20" required>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-3"></div>\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t    <div class="col-md-9"></div>\n' +
+        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    \t\t<label class="col-form-label">Name*</label>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-6">\n' +
+        '\t\t\t    \t\t<input id="name" type="text" class="form-control" name="name" required>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-3"></div>\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t    <div class="col-md-9"></div>\n' +
+        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    \t\t<label class="col-form-label">Email*</label>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-6">\n' +
+        '\t\t\t    \t\t<input id="email" type="email" class="form-control" name="email" required>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-3"></div>\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t    <div class="col-md-9"></div>\n' +
+        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    \t\t<label class="col-form-label">Password*</label>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-6">\n' +
+        '\t\t\t    \t\t<input id="password" type="password" class="form-control" name="password" required>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-3"></div>\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t    <div class="col-md-9"></div>\n' +
+        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    \t\t<label class="col-form-label">Division*</label>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-6">\n' +
+        '\t\t\t    \t\t<input id="division" type="text" class="form-control" name="division" required>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-3"></div>\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t    <div class="col-md-9"></div>\n' +
+        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    \t\t<label class="col-form-label">Position*</label>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-6">\n' +
+        '\t\t\t    \t\t<input id="position" type="text" class="form-control" name="position" required>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-3"></div>\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t    <div class="col-md-9"></div>\n' +
+        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    \t\t<label class="col-form-label">ContactNum*</label>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-6">\n' +
+        '\t\t\t    \t\t<input id="cnumber" type="number" class="form-control" name="contact" maxlength="14" required>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-3"></div>\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t    <div class="col-md-9"></div>\n' +
+        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    \t\t<label class="col-form-label">Address*</label>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-6" style="float: left;">\n' +
+        '\t\t\t    \t\t<textarea id="address" class="form-control" name="address" required></textarea>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t    <div class="col-md-9"></div>\n' +
+        '<div class="col-md-9">\n' +
+        ' <div class="col-md-3">' +
+        '       <label class="col-form-label">Role*</label>\n' +
+        '   </div>' +
+        ' <div class="col-md-3"><label class="radio-inline">\n' +
+        ' <input value=1 type="radio" name="optradio" checked> &nbsp;Superior Employee' +
+        ' </label>' +
+        '</div>\n' +
+        ' <div class="col-md-3">' +
+        '<label class="radio-inline">\n' +
+        ' <input value=2 type="radio" name="optradio" class="enable_d">Employee' +
+        '  </label>\n' +
+        ' <select id="superiorList" disabled>\n' +
+        '<option value="">Superior (Optional)</option>\n' +
+        '</select>' +
+        '</div>' +
+        '</div>' +
+        '\t\t\t    <div class="col-md-9 wrap" style="margin-top: 7%;">\n' +
+        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    \t\t<label class="col-form-label">Picture*</label>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t<div class="col-md-6">\n' +
+        '\t\t\t    \t\t<input id="picture" type="file" name="picture" required>\n' +
+        '\t\t\t    \t</div>\n' +
+        '\t\t\t    \t\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    \t<div class="col-md-3"></div>\n' +
+        '\t\t\t\t    <div class="col-md-6" style="margin-top: 7%;">\n' +
+        '\t\t\t\t    \t<button id="register" type="submit" class="btn btn-success">SUBMIT</button>\n' +
+        '\t\t\t\t    \t<button type="reset" class="btn btn-warning">RESET</button>\n' +
+        '\t\t\t\t    \t<button class="btn btn-primary" onclick="window.location.href=\'dash_admin.html\'">BACK</button>\n' +
+        '\t\t\t\t    </div>\n' +
+        '\t\t\t\t    <div class="col-md-3"></div>\n' +
+        '\t\t\t    </div>\n' +
+        '\t\t\t</form>'
+}

@@ -33,7 +33,7 @@ public class UserService {
     }
 
     public User findUserByEmailAndPassword(String email,String password) throws ResourceNotFoundException{
-        User user = userRepository.findByEmailAndAndPassword(email,password);
+        User user = userRepository.findByEmailAndPassword(email,password);
         if(user==null){
             throw new ResourceNotFoundException("User","email/password",email+ "/"+password);
         }

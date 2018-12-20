@@ -31,7 +31,7 @@
 	        		</a>
 	        		<div class="dropdown-menu">
 			            <a class="dropdown-item" href="#">Edit Profile</a>
-			            <a class="dropdown-item" href="#">Logout</a>
+			            <a id="logout" class="dropdown-item" href="#">Logout</a>
 			            <a class="dropdown-item" href="#">Change Password</a>
 			        </div>
 	      		</li>
@@ -77,7 +77,7 @@
         	<!-- Bootstrap List Group -->
         	<ul class="list-group">
             	
-            	<a href="#" class="bg-list1 list-group-item list-group-item-action">
+            	<a href="index" class="bg-list1 list-group-item list-group-item-action">
 	                <div class="d-flex w-100 justify-content-start align-items-center">
 	                    <span class="fa fa-dashboard fa-fw mr-3"></span>
 	                    <span class="menu-collapsed">Dashboard</span>
@@ -94,10 +94,10 @@
             	</a>
 	            <!-- Submenu content -->
 	            <div id='submenu1' class="collapse sidebar-submenu">
-	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a id="getAllUsers" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">All Users</span>
 	                </a>
-	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a id="addUser" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">Add User</span>
 	                </a>
 	            </div>
@@ -110,13 +110,13 @@
 	            </a>
 	            <!-- Submenu content -->
 	            <div id='submenu2' class="collapse sidebar-submenu">
-	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a onclick="getAllItems()" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">All Items</span>
 	                </a>
-	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a onclick="getAvailableItem()" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">Available Item</span>
 	                </a>
-	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a onclick="addItem()" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">Add New Item</span>
 	                </a>
 	            </div> 
@@ -129,13 +129,13 @@
 	            </a>
 	            <!-- Submenu content -->
 	            <div id='submenu3' class="collapse sidebar-submenu">
-	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a onclick="getAllLoan()"	href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">All Loan List</span>
 	                </a>
-	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a onclick="getLoan()" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">My Loan Lists</span>
 	                </a>
-	                <a href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a  onclick="addLoan()" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">Add New Loan</span>
 	                </a>
 
@@ -152,7 +152,8 @@
 	    </div><!-- sidebar-container END -->
 
 	    <!-- MAIN -->
-	    <div class="col-md-9">
+		<!--CONTENT-->
+	    <div id="isi" class="col-md-9">
 	    <div class="col-md-3 col">
 	    	<h5>View Item Lists</h5>
 	    	<p>Total :<br>Taken: <br>Available:</p>
@@ -183,8 +184,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
     <script src="/js/cookies.js"></script>
-    <script src="/js/index.js"></script>
+	<script src="/js/index.js"></script>
+	<script src="/js/addUser.js"></script>
 
+	<script>
 
+	</script>
 </body>
 </html>

@@ -41,7 +41,6 @@ public class Item {
 
     @Column(name="picture")
     private String picture;
-
 }
 
 
