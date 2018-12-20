@@ -1,66 +1,8 @@
-//COLLAPSE
-// Hide submenus
-$('#body-row .collapse').collapse('hide'); 
+var user = getCookie("user");
+user = user.split(',');
+document.getElementById("profile").innerText = user[2];
 
-// Collapse/Expand icon
-$('#collapse-icon').addClass('fa-angle-double-left'); 
 
-// Collapse click
-$('[data-toggle=sidebar-colapse]').click(function() {
-    SidebarCollapse();
-});
-
-function SidebarCollapse () {
-    $('.menu-collapsed').toggleClass('d-none');
-    $('.sidebar-submenu').toggleClass('d-none');
-    $('.submenu-icon').toggleClass('d-none');
-    $('#sidebar-container').toggleClass('sidebar-expanded sidebar-collapsed');
-    
-    // Treating d-flex/d-none on separators with title
-    var SeparatorTitle = $('.sidebar-separator-title');
-    if ( SeparatorTitle.hasClass('d-flex') ) {
-        SeparatorTitle.removeClass('d-flex');
-    } else {
-        SeparatorTitle.addClass('d-flex');
-    }
-    
-    // Collapse/Expand icon
-    $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
-}
-
-//MODAL
-$('#exampleModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var recipient = button.data('whatever') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  modal.find('.modal-title').text('New message to ' + recipient)
-  modal.find('.modal-body input').val(recipient)
-})
-
-// $(document).ready(function() {
-    var user = getCookie("user");
-    user = user.split(',');
-    document.getElementById("profile").innerText = user[2];
-// });
-
-//IMAGE UPLOAD
-// $("input").change(function(e) {
-
-//     for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
-        
-//         var file = e.originalEvent.srcElement.files[i];
-        
-//         var img = document.createElement("img");
-//         var reader = new FileReader();
-//         reader.onloadend = function() {
-//             img.src = reader.result;
-//         }
-//         reader.readAsDataURL(file);
-//         $("input").after(img);
-//     }
-// });
 var isi= document.getElementById("isi")
 $('#logout').click(function(e){
     e.preventDefault();
@@ -70,7 +12,76 @@ $('#logout').click(function(e){
 
 $('#getAllUsers').click(function(e){
     e.preventDefault();
-    window.location = "login";
+    isi.innerHTML=getAllUsers();
+
+
+
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/api/users',
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType:"json",
+        success: function (data) {
+            console.log("yes. data: " + data)
+            if (data) {
+                var len = data.length;
+                var txt = ``;
+                if (len > 0) {
+                    for (var i = 0; i < len; i++) {
+                        if(data[i].superior!=null) {
+                            txt += `<tr>\n 
+                                          \t\t\t\t<td id=${data[i].id}>${data[i].id}</td>\n 
+                                            \t\t\t\t<td id=${data[i].email}>${data[i].email}</td>\n 
+                                            \t\t\t\t<td>${data[i].nik}</td>\n 
+                                            \t\t\t\t<td>${data[i].name}</td>\n 
+                                            \t\t\t\t<td>${data[i].division}</td>\n 
+                                            \t\t\t\t<td>${data[i].position}</td>\n 
+                                            \t\t\t\t<td>${data[i].cnumber}</td>\n 
+                                            \t\t\t\t<td>${data[i].address}</td>\n 
+                                            \t\t\t\t<td>${data[i].superior.name}</td>\n 
+                                            \t\t\t\t<td>${data[i].picture}</td>\n 
+                                            \t\t\t\t<td class="action1">\n 
+                                            \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>\n
+                                            \t\t\t\t\t<button onclick="deleteUser(${data[i].id})" class="btn btn-danger">Delete</button>\n 
+                                            \t\t\t\t</td>\n
+                                            \t\t\t</tr>`;
+                            }
+                        else if(data[i].superior==null){
+                            txt += `<tr>\n
+                                          \t\t\t\t<td id=${data[i].id}>${data[i].id}</td>\n 
+                                            \t\t\t\t<td id=${data[i].email}>${data[i].email}</td>\n 
+                                            \t\t\t\t<td>${data[i].nik}</td>\n
+                                            \t\t\t\t<td>${data[i].name}</td>\n
+                                            \t\t\t\t<td>${data[i].division}</td>\n
+                                            \t\t\t\t<td>${data[i].position}</td>\n
+                                            \t\t\t\t<td>${data[i].cnumber}</td>\n
+                                            \t\t\t\t<td>${data[i].address}</td>\n
+                                            \t\t\t\t<td> </td>\n
+                                            \t\t\t\t<td>${data[i].picture}</td>\n
+                                            \t\t\t\t<td class="action1">\n
+                                            \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>\n
+                                            \t\t\t\t\t<button onclick="deleteUser(${data[i].id})" class="btn btn-danger">Delete</button>\n
+                                            \t\t\t\t</td>\n
+                                            \t\t\t</tr>`;
+                            }
+                        }
+
+                    if(txt){
+                        $("#userList").append(txt);
+                    }
+                    // alert("Success :"+data);
+                    console.log(data);
+                }
+            }
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+
+
 });
 
 $('#addUser').click(function(e){
