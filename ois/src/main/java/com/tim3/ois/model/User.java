@@ -41,7 +41,7 @@ public class User {
 
     @Column(name = "role")
     @NotNull(message = "Pleas provide the the role")
-    private int role;
+    private Integer role;
 
     @Column(name = "nik")
     private String nik;

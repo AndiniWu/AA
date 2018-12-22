@@ -1,13 +1,14 @@
 function agetUserById(id){
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/api/users/'+id,
+        url: `http://localhost:8080/api/users/${id}`,
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },
         dataType:"json",
         success: function (data) {
             console.log("yes. data: " + data)
+            $('#id').val(data.id);
             $("#nik").val(parseInt(data.nik));
             $('#name').val(data.name);
             $('#email').val(data.email);
@@ -16,11 +17,10 @@ function agetUserById(id){
             $('#position').val(data.position);
             $('#cnumber').val(parseInt(data.cnumber));
             $('#address').val(data.address);
-            if(data.role==2){$('#emp').prop('checked',true)}
-            if(data.superior!=null){
-            $('#superiorList').val(data.superior.email);}
-            agetAllSuperiors();
-            },
+            if(data.role==2){
+                $('#emp').prop('checked',true);
+                $('#superiorList').val(data.superior.id);
+            }},
         error: function (error) {
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
         }
@@ -31,7 +31,7 @@ function agetUserById(id){
 function agetAllUsers(){
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/api/users',
+        url: 'http://localhost:8080/api/users?orderBy=role&sortBy=asc',
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },
@@ -169,22 +169,19 @@ function aaddUser(type){
         });
     }
     else if (type=="PUT"){
+        var id=$('#id').val();
+        console.log(`http://localhost:8080/api/users/${id}`)
         $.ajax({
             type: 'PUT',
-            url: 'http://localhost:8080/api/users'/+id,
+            url: `http://localhost:8080/api/users/${id}`,
             data: txt,
             headers: {
                 "Content-Type": "application/json", "Accept": "application/json"
             },
             dataType: "json", //to parse string into JSON object,
             success: function (data) {
-                var msg = "Call Success. result: ";
-                if (data === false) {
-                    msg += "There is already a user registered with the email provided"
-                }
-                else {
-                    msg += "Successed to save user";
-                }
+                var msg = `Call Success. result: ${data}`;
+
                 console.log(msg);
                 //alert("Success :"+data)
             },

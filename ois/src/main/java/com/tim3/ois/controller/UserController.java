@@ -22,20 +22,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @GetMapping("/users")
-//    public ModelAndView getRegistration() {
-//        ModelAndView modelAndView = new ModelAndView();
-//        User user = new User();
-//        modelAndView.addObject("user", user);
-//        modelAndView.setViewName("registration");
-//        return modelAndView;
-//    }
-
-
     @GetMapping("/users")
-    public List<User> getAllUsers(){
-        return userService.findAll();
+    public List<User> getAllUsers(@RequestParam(value = "orderBy", defaultValue = "role")String orderBy,
+                                  @RequestParam(value = "sortBy", defaultValue = "")String sortBy){
+        return userService.findBy(orderBy,sortBy);
     }
+
     @GetMapping(value = "/users/superiors",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAllSuperiors(){
         System.out.println(userService.findUsersByRole(1));
@@ -53,21 +45,19 @@ public class UserController {
             @Valid
             @RequestBody
                     User user, BindingResult bindingResult) {
-
         try{return userService.saveUser(user);}
         catch (ResourceNotFoundException ex){throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Please provide correct User data");}
         //TERAKHIR SAMPAI SINI 6/12/2018 13:15
     }
 
     @PutMapping("/users/{id}")
-    public User updateUserPassword(@PathVariable(value = "id") int userId,
-                           @Valid @RequestBody User user) {
+    public User updateUser(@PathVariable(value = "id") int id,
+                           @RequestBody User user) {
 //        User user = userService.findUserById(userId);
 //        if(user==null){throw new ResourceNotFoundException("User","id",userId);}
 //        user.setPassword(userNow.getPassword());
         try {
-
-            return userService.updateUser(user);
+            return userService.updateUser(id,user);
         }catch (ResourceNotFoundException ex){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Please provide correct User Id");
         }

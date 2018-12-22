@@ -2,40 +2,46 @@ var user = getCookie("user");
 user = user.split(',');
 document.getElementById("profile").innerText = user[2];
 
-var isi= document.getElementById("isi")
+var isi= document.getElementById("isi") //sebagai tempat pergantian konten halaman
+
 $('#logout').click(function(e){
     e.preventDefault();
     deleteCookie("user");
     window.location = "login";
 });
 
+function superiorList(){
+    $('input:radio[name="optradio"]').click(function() {
+        $("#superiorList").prop("disabled",false);
+        if($(this).hasClass('enable_d')) {
+            $("#superiorList").prop("disabled",true);
+        }
+    });
+}
+
 $('#addUser').click(function(e){
     e.preventDefault();
 
     isi.innerHTML=addUser(); //mengubah isi konten dengan halaman adduser
     agetAllSuperiors();
-    $('input:radio').click(function() {
-        $("#superiorList").prop("disabled",true);
-        if($(this).hasClass('enable_d')) {
-            $("#superiorList").prop("disabled",false);
-        }
-    });
+    superiorList();
     $("#register").click(function () {
         aaddUser("POST")
     });
 });
 
-function editUser(userId){
+function editUser(userId){ //still working on
     isi.innerHTML=addUser();
-    $('#title').html("<b class=\"bold1\">A</b>DD<b class=\"bold1\">U</b>SER</span>");
-    agetAllSuperiors();
+    $('#title').html('<b class=\"bold1\">E</b>DIT<b class=\"bold1\">&nbsp;U</b>SER');
     agetUserById(userId);
+    agetAllSuperiors();
+    superiorList();
     $("#register").click(function () {
         aaddUser("PUT")
     });
 };
 function deleteUser(userId){
-
+    // under construction
 };
 
 

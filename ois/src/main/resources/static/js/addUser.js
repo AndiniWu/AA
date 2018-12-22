@@ -95,15 +95,15 @@ function addUser() {
         '       <label class="col-form-label">Role*</label>\n' +
         '   </div>' +
         ' <div class="col-md-3"><label class="radio-inline">\n' +
-        ' <input value=1 type="radio" name="optradio" checked> &nbsp;Superior Employee' +
+        ' <input value=1 type="radio" name="optradio" class="enable_d" checked> &nbsp;Superior Employee' +
         ' </label>' +
         '</div>\n' +
         ' <div class="col-md-3">' +
         '<label class="radio-inline">\n' +
-        ' <input value=2 id="emp" type="radio" name="optradio" class="enable_d">Employee' +
+        ' <input value=2 id="emp" type="radio" name="optradio" >Employee' +
         '  </label>\n' +
-        ' <select id="superiorList" disabled>\n' +
-        '<option value="">Superior (Optional)</option>\n' +
+        ' <select id="superiorList">\n' +
+        '<option value="">Optional</option>\n' +
         '</select>' +
         '</div>' +
         '</div>' +
