@@ -1,12 +1,12 @@
 function addUser() {
-    return '<span class="title1"><b class="bold1">A</b>DD<b class="bold1">U</b>SER</span>\n' +
+    return '<span id="title" class="title1"><b class="bold1">A</b>DD<b class="bold1">U</b>SER</span>\n' +
         '\t    \t<form>\n' +
         '\t\t\t    <div class="col-md-9">\n' +
         '\t\t\t    \t<div class="col-md-3">\n' +
         '\t\t\t    \t\t<label class="col-form-label">Id</label>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input type="text" class="form-control" name="id" maxlength="11" disabled="true">\n' +
+        '\t\t\t    \t\t<input id="id" type="text" class="form-control" name="id" maxlength="11" disabled="true">\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t    </div>\n' +
@@ -100,7 +100,7 @@ function addUser() {
         '</div>\n' +
         ' <div class="col-md-3">' +
         '<label class="radio-inline">\n' +
-        ' <input value=2 type="radio" name="optradio" class="enable_d">Employee' +
+        ' <input value=2 id="emp" type="radio" name="optradio" class="enable_d">Employee' +
         '  </label>\n' +
         ' <select id="superiorList" disabled>\n' +
         '<option value="">Superior (Optional)</option>\n' +

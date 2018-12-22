@@ -16,7 +16,7 @@ function agetUserById(id){
             $('#position').val(data.position);
             $('#cnumber').val(parseInt(data.cnumber));
             $('#address').val(data.address);
-            if(data.role==1){$('input[name="optradio"]')[0].prop('checked',true)}
+            if(data.role==2){$('#emp').prop('checked',true)}
             if(data.superior!=null){
             $('#superiorList').val(data.superior.email);}
             agetAllSuperiors();
@@ -126,7 +126,7 @@ function agetAllSuperiors(){
     });
 }
 
-function aaddUser(){
+function aaddUser(type){
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var name = document.getElementById("name").value;
@@ -143,27 +143,54 @@ function aaddUser(){
         txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role +', "nik": "' + nik + '", "division": "' + division + '", "position": "' + position + '", "cnumber": "' + cnumber + '", "address": "' + address + '", "superior": { "id" : '+superior+'}}'
     }
     console.log(txt);
-    $.ajax({
-        type: 'POST',
-        url: 'http://localhost:8080/api/users',
-        data: txt,
-        headers: {
-            "Content-Type": "application/json", "Accept": "application/json"
-        },
-        dataType: "json", //to parse string into JSON object,
-        success: function (data) {
-            var msg = "Call Success. result: ";
-            if (data === false) {
-                msg += "There is already a user registered with the email provided"
+    if(type =="POST") {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/api/users',
+            data: txt,
+            headers: {
+                "Content-Type": "application/json", "Accept": "application/json"
+            },
+            dataType: "json", //to parse string into JSON object,
+            success: function (data) {
+                var msg = "Call Success. result: ";
+                if (data == null) {
+                    msg += "There is already a user registered with the email provided"
+                }
+                else {
+                    msg += "Successed to update user";
+                }
+                console.log(msg);
+                //alert("Success :"+data)
+            },
+            error: function (error) {
+                console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
             }
-            else {
-                msg += "Successed to save user";
+        });
+    }
+    else if (type=="PUT"){
+        $.ajax({
+            type: 'PUT',
+            url: 'http://localhost:8080/api/users'/+id,
+            data: txt,
+            headers: {
+                "Content-Type": "application/json", "Accept": "application/json"
+            },
+            dataType: "json", //to parse string into JSON object,
+            success: function (data) {
+                var msg = "Call Success. result: ";
+                if (data === false) {
+                    msg += "There is already a user registered with the email provided"
+                }
+                else {
+                    msg += "Successed to save user";
+                }
+                console.log(msg);
+                //alert("Success :"+data)
+            },
+            error: function (error) {
+                console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
             }
-            console.log(msg);
-            //alert("Success :"+data)
-        },
-        error: function (error) {
-            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-        }
-    });
+        });
+    }
 }
