@@ -29,6 +29,9 @@ public class UserService {
         else if(orderBy.equals("role") & sortBy.equals("desc")){
             return userRepository.findAllByOrderByRoleDesc();
         }
+        else if(orderBy.equals("name") & sortBy.equals("asc")){
+            return userRepository.findAllByOrderByNameAsc();
+        }
         else {
             return userRepository.findAll();
         }

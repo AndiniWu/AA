@@ -39,6 +39,7 @@ function editUser(userId){ //still working on
     $("#register").click(function () {
         aaddUser("PUT")
     });
+
 };
 function deleteUser(userId){
     // under construction
@@ -48,12 +49,23 @@ function deleteUser(userId){
 $('#getAllUsers').click(function(e){
     e.preventDefault();
     isi.innerHTML=getAllUsers();
-    agetAllUsers();
 
-    $("#myInput").on("keyup", function() {  //fungsi ini didapat dari w3schools
+    agetAllUsers(); // untuk mengisi tabel dengan data user
+
+    $("#myInput").on("keyup", function() {  //fungsi search ini didapat dari w3schools
         var value = $(this).val().toLowerCase();
         $("#userList tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    $('#addNewUser').click(function(e){
+        e.preventDefault();
+
+        isi.innerHTML=addUser(); //mengubah isi konten dengan halaman adduser
+        agetAllSuperiors();
+        superiorList();
+        $("#register").click(function () {
+            aaddUser("POST")
         });
     });
 });

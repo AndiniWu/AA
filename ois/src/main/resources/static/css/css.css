@@ -261,8 +261,8 @@
     float: right;
 }
 
-.thead-light{
-    text-align: center;
+th,tr:nth-child(even){
+    background-color: rgba(137,207,240,0.2);
 }
 
 .action1 button{
@@ -274,3 +274,22 @@
     background-color: #489DD0;
     color: #FFFFFF;
 }
+t
+table {
+    table-layout: fixed;
+    word-wrap:break-word;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    /*padding: 8px;*/
+}
+kecil {
+    width: 8%;
+}
+besar{
+    width: 12%;
+}
+
+

@@ -19,7 +19,9 @@ function agetUserById(id){
             $('#address').val(data.address);
             if(data.role==2){
                 $('#emp').prop('checked',true);
-                $('#superiorList').val(data.superior.id);
+                if(data.superior!=null) {
+                    $('#superiorList').val(data.superior.id);
+                }
             }},
         error: function (error) {
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
@@ -52,12 +54,12 @@ function agetAllUsers(){
                                             \t\t\t\t<td>${data[i].division}</td>\n 
                                             \t\t\t\t<td>${data[i].position}</td>\n 
                                             \t\t\t\t<td>${data[i].cnumber}</td>\n 
-                                            \t\t\t\t<td>${data[i].address}</td>\n 
+                                            \t\t\t\t<td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
                                             \t\t\t\t<td>${data[i].superior.name}</td>\n 
                                             \t\t\t\t<td>${data[i].picture}</td>\n 
                                             \t\t\t\t<td class="action1">\n 
-                                            \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>\n
-                                            \t\t\t\t\t<button onclick="deleteUser(${data[i].id})" class="btn btn-danger">Delete</button>\n 
+                                            \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                            \t\t\t\t\<button onclick="deleteUser(${data[i].id})" class="btn btn-danger">Delete</button></>\n 
                                             \t\t\t\t</td>\n
                                             \t\t\t</tr>`;
                         }
@@ -70,11 +72,11 @@ function agetAllUsers(){
                                             \t\t\t\t<td>${data[i].division}</td>\n
                                             \t\t\t\t<td>${data[i].position}</td>\n
                                             \t\t\t\t<td>${data[i].cnumber}</td>\n
-                                            \t\t\t\t<td>${data[i].address}</td>\n
+                                            \t\t\t\t<td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
                                             \t\t\t\t<td></td>\n
                                             \t\t\t\t<td>${data[i].picture}</td>\n
                                             \t\t\t\t<td class="action1">\n
-                                            \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>\n
+                                            \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
                                             \t\t\t\t\t<button onclick="deleteUser(${data[i].id})" class="btn btn-danger">Delete</button>\n
                                             \t\t\t\t</td>\n
                                             \t\t\t</tr>`;
@@ -116,7 +118,7 @@ function agetAllSuperiors(){
                     if(txt != ""){
                         $("#superiorList").append(txt);
                     }
-                    alert("Success :"+data);
+                    // alert("Success :"+data);
                 }
             }
         },
@@ -143,7 +145,7 @@ function aaddUser(type){
         txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role +', "nik": "' + nik + '", "division": "' + division + '", "position": "' + position + '", "cnumber": "' + cnumber + '", "address": "' + address + '", "superior": { "id" : '+superior+'}}'
     }
     console.log(txt);
-    if(type =="POST") {
+    if(type ==="POST") {
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/users',
@@ -154,21 +156,21 @@ function aaddUser(type){
             dataType: "json", //to parse string into JSON object,
             success: function (data) {
                 var msg = "Call Success. result: ";
-                if (data == null) {
+                if (data == false) {
                     msg += "There is already a user registered with the email provided"
                 }
                 else {
-                    msg += "Successed to update user";
+                    msg += "Successed to SAVE user";
                 }
                 console.log(msg);
                 //alert("Success :"+data)
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-            }
+                alert(`Error: ${error.status}\n\nPlease fill in the *`);            }
         });
     }
-    else if (type=="PUT"){
+    else if (type==="PUT"){
         var id=$('#id').val();
         console.log(`http://localhost:8080/api/users/${id}`)
         $.ajax({
@@ -180,13 +182,14 @@ function aaddUser(type){
             },
             dataType: "json", //to parse string into JSON object,
             success: function (data) {
-                var msg = `Call Success. result: ${data}`;
+               if(data){
+                   console.log("User updated : sucess")
+               }
 
-                console.log(msg);
-                //alert("Success :"+data)
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+                alert(`Error: ${error.status}\n\nPlease fill in the *`);
             }
         });
     }
