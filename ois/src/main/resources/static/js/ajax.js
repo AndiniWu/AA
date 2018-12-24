@@ -7,7 +7,7 @@ function agetUserById(id){
         },
         dataType:"json",
         success: function (data) {
-            console.log("yes. data: " + data)
+            console.log("yes. data: " + data) // meng isi input field dengan value yg sdh ada
             $('#id').val(data.id);
             $("#nik").val(parseInt(data.nik));
             $('#name').val(data.name);
@@ -31,9 +31,10 @@ function agetUserById(id){
 
 
 function agetAllUsers(){
+    console.log(`http://localhost:8080/api/users?orderBy=${$('#orderBy').val()}`)
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/api/users?orderBy=role&sortBy=asc',
+        url: `http://localhost:8080/api/users?orderBy=${$('#orderBy').val()}`,
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },
@@ -49,7 +50,7 @@ function agetAllUsers(){
                             txt += `<tr>\n 
                                           \t\t\t\t<td id=${data[i].id}>${data[i].id}</td>\n 
                                             \t\t\t\t<td id=${data[i].email}>${data[i].email}</td>\n 
-                                            \t\t\t\t<td>${data[i].nik}</td>\n 
+                                            \t\t\t\t<td style="width: 6%">${data[i].nik}</td>\n 
                                             \t\t\t\t<td>${data[i].name}</td>\n 
                                             \t\t\t\t<td>${data[i].division}</td>\n 
                                             \t\t\t\t<td>${data[i].position}</td>\n 
@@ -67,7 +68,7 @@ function agetAllUsers(){
                             txt += `<tr>\n
                                           \t\t\t\t<td id=${data[i].id}>${data[i].id}</td>\n 
                                             \t\t\t\t<td id=${data[i].email}>${data[i].email}</td>\n 
-                                            \t\t\t\t<td>${data[i].nik}</td>\n
+                                            \t\t\t\t<td style="width: 6%">${data[i].nik}</td>\n
                                             \t\t\t\t<td>${data[i].name}</td>\n
                                             \t\t\t\t<td>${data[i].division}</td>\n
                                             \t\t\t\t<td>${data[i].position}</td>\n
@@ -83,7 +84,7 @@ function agetAllUsers(){
                         }
                     }
                     if(txt){
-                        $("#userList").append(txt);
+                        $("#userList").html(txt);
                     }
                     // alert("Success :"+data);
                     console.log(data);
@@ -112,7 +113,7 @@ function agetAllSuperiors(){
                 if (len > 0) {
                     for(var i=0;i<len;i++){
                         if(data[i].name && data[i].email){
-                            txt += '<option value='+data[i].id+'>'+data[i].email+'</option>'
+                            txt += `<option value=${data[i].id}>${data[i].email}</option>`
                         }
                     }
                     if(txt != ""){
@@ -129,33 +130,45 @@ function agetAllSuperiors(){
 }
 
 function aaddUser(type){
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
-    var name = document.getElementById("name").value;
-    var role = document.querySelector('input[name="optradio"]:checked').value;
-    var superior = document.getElementById("superiorList").value;
-    var nik = document.getElementById("nik").value;
-    var division= document.getElementById("division").value;
-    var position = document.getElementById("position").value;
-    var cnumber = document.getElementById("cnumber").value;
-    var address = document.getElementById("address").value;
-
-    var txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role + ', "nik": "' + nik + '", "division": "' + division + '", "position": "' + position + '", "cnumber": "' + cnumber + '", "address": "' + address + '"}';
-    if(superior!=""){
-        txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role +', "nik": "' + nik + '", "division": "' + division + '", "position": "' + position + '", "cnumber": "' + cnumber + '", "address": "' + address + '", "superior": { "id" : '+superior+'}}'
+    // var email = document.getElementById("email").value;
+    // var password = document.getElementById("password").value;
+    // var name = document.getElementById("name").value;
+    // var role = document.querySelector('input[name="optradio"]:checked').value;
+    // var superior = document.getElementById("superiorList").value;
+    // var nik = document.getElementById("nik").value;
+    // var division= document.getElementById("division").value;
+    // var position = document.getElementById("position").value;
+    // var cnumber = document.getElementById("cnumber").value;
+    // var address = document.getElementById("address").value;
+    var user = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        name: document.getElementById("name").value,
+        role: document.querySelector('input[name="optradio"]:checked').value,
+        nik: document.getElementById("nik").value,
+        division: document.getElementById("division").value,
+        position: document.getElementById("position").value,
+        cnumber: document.getElementById("cnumber").value,
+        address: document.getElementById("address").value
     }
-    console.log(txt);
+    if($('#superiorList').val()!=""){user.superior = {id : parseInt($('#superiorList').val())}}
+    // var txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role + ', "nik": "' + nik + '", "division": "' + division + '", "position": "' + position + '", "cnumber": "' + cnumber + '", "address": "' + address + '"}';
+    // if(superior!=""){
+    //     txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role +', "nik": "' + nik + '", "division": "' + division + '", "position": "' + position + '", "cnumber": "' + cnumber + '", "address": "' + address + '", "superior": { "id" : '+superior+'}}'
+    // }
+    var userJson = JSON.stringify(user);
+    console.log(userJson);
     if(type ==="POST") {
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/users',
-            data: txt,
+            data: userJson,
             headers: {
                 "Content-Type": "application/json", "Accept": "application/json"
             },
             dataType: "json", //to parse string into JSON object,
             success: function (data) {
-                var msg = "Call Success. result: ";
+                var msg="";
                 if (data == false) {
                     msg += "There is already a user registered with the email provided"
                 }
@@ -163,11 +176,12 @@ function aaddUser(type){
                     msg += "Successed to SAVE user";
                 }
                 console.log(msg);
-                //alert("Success :"+data)
+                alert(`Result : \n\n ${msg}`);
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-                alert(`Error: ${error.status}\n\nPlease fill in the *`);            }
+                alert(`Error: ${error.status}\n\nPlease fill in the *`);
+            }
         });
     }
     else if (type==="PUT"){
@@ -176,7 +190,7 @@ function aaddUser(type){
         $.ajax({
             type: 'PUT',
             url: `http://localhost:8080/api/users/${id}`,
-            data: txt,
+            data: userJson,
             headers: {
                 "Content-Type": "application/json", "Accept": "application/json"
             },
@@ -184,8 +198,8 @@ function aaddUser(type){
             success: function (data) {
                if(data){
                    console.log("User updated : sucess")
+                   alert("Successed to update user")
                }
-
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);

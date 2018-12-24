@@ -12,23 +12,29 @@ function getAllUsers(){
         "            </div>\n" +
         "            <div class=\"col-md-2\"></div>\n" +
         "            <div class=\"col-md-6 col11\">\n" +
-        "            \t<button id='addNewUser' type='button' class=\"btn btn-success btn2 fa fa-plus\"> Add New User</button>\n" +
+        "            \t     <label for=\"sel1\">Order By:</label>\n" +
+        "            <select style='width: 50%' id='orderBy'>\n" +
+        "                <option value='role'>Role</option>\n" +
+        "                <option value='email'>Email</option>\n" +
+        "                <option value='name'>Name</option>\n" +
+        "                <option value='id'>Id</option>\n" +
+        "            </select>\n" +
         "            </div>\n" +
         "            <div class='table-responsive'>\n" +
         "            \t<table class='table table-sm table-hover table-bordered'>\n" +
         "            \t\t<thead>\n" +
         "            \t\t\t<tr>\n" +
-        "            \t\t\t\t<th scope='col'>ID</th>\n" +
-        "            \t\t\t\t<th scope='col'>Email</th>\n" +
-        "            \t\t\t\t<th scope='col'>NIK</th>\n" +
-        "            \t\t\t\t<th scope='col'>Name</th>\n" +
-        "            \t\t\t\t<th scope='col'>Division</th>\n" +
-        "            \t\t\t\t<th scope='col'>Position</th>\n" +
-        "            \t\t\t\t<th scope='col'>ContactNum</th>\n" +
-        "            \t\t\t\t<th scope='col'>Address</th>\n" +
-        "            \t\t\t\t<th scope='col'>Superior</th>\n" +
-        "            \t\t\t\t<th scope='col'>Picture</th>\n" +
-        "            \t\t\t\t<th scope='col'>Action</th>\n" +
+        "            \t\t\t\t<th>ID</th>\n" +
+        "            \t\t\t\t<th>Email</th>\n" +
+        "            \t\t\t\t<th>NIK</th>\n" +
+        "            \t\t\t\t<th>Name</th>\n" +
+        "            \t\t\t\t<th>Division</th>\n" +
+        "            \t\t\t\t<th>Position</th>\n" +
+        "            \t\t\t\t<th>ContactNum</th>\n" +
+        "            \t\t\t\t<th>Address</th>\n" +
+        "            \t\t\t\t<th>Superior</th>\n" +
+        "            \t\t\t\t<th>Picture</th>\n" +
+        "            \t\t\t\t<th>Action</th>\n" +
         "            \t\t\t</tr>\n" +
         "            \t\t</thead>\n" +
         "            \t\t<tbody id='userList'>\n" +

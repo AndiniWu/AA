@@ -2,14 +2,19 @@
 // $(document).ready(function() {
 
 $("#login").click(function () {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+    var loginModel = {
+        email: document.getElementById("email").value,
+        password : document.getElementById("password").value
+    }
+    var json=JSON.stringify(loginModel);
+
     console.log('{"email": "' + email + '", "password": "' + password + '"}');
     $.ajax({
         type: 'POST',
         url: 'http://localhost:8080/api/login',
         data:
-            '{"email": "' + email + '", "password": "' + password + '"}',
+            // '{"email": "' + email + '", "password": "' + password + '"}',
+            json,
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },

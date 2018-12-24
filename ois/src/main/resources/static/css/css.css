@@ -19,7 +19,7 @@
 }
 
 .bg{
-    background-image: url("../img/bg.png");
+    /*background-image: url("../img/bg.png");*/
     background-attachment: fixed;
     background-size: 100% 100%;
     background-position: center;
@@ -27,7 +27,7 @@
 
 .LoginPage{
     width: 100%;
-    background-color: var(--white);
+    /*background-color: var(--white);*/
     font-family: verdana;
 }
 
@@ -274,22 +274,11 @@ th,tr:nth-child(even){
     background-color: #489DD0;
     color: #FFFFFF;
 }
-t
-table {
-    table-layout: fixed;
-    word-wrap:break-word;
-    width: 100%;
-}
 
 th, td {
     text-align: left;
     /*padding: 8px;*/
 }
-kecil {
-    width: 8%;
-}
-besar{
-    width: 12%;
-}
+
 
 

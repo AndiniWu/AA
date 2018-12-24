@@ -14,6 +14,7 @@ function superiorList(){
     $('input:radio[name="optradio"]').click(function() {
         $("#superiorList").prop("disabled",false);
         if($(this).hasClass('enable_d')) {
+            $("#superiorList").val("");
             $("#superiorList").prop("disabled",true);
         }
     });
@@ -28,6 +29,9 @@ $('#addUser').click(function(e){
     $("#register").click(function () {
         aaddUser("POST")
     });
+});
+$("#reset").click(function () {
+    $(".form1").reset();
 });
 
 function editUser(userId){ //still working on
@@ -49,8 +53,11 @@ function deleteUser(userId){
 $('#getAllUsers').click(function(e){
     e.preventDefault();
     isi.innerHTML=getAllUsers();
+    agetAllUsers();
+    $("#orderBy").change(function () {
+        agetAllUsers();
 
-    agetAllUsers(); // untuk mengisi tabel dengan data user
+    });
 
     $("#myInput").on("keyup", function() {  //fungsi search ini didapat dari w3schools
         var value = $(this).val().toLowerCase();
@@ -58,16 +65,18 @@ $('#getAllUsers').click(function(e){
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
-    $('#addNewUser').click(function(e){
-        e.preventDefault();
 
-        isi.innerHTML=addUser(); //mengubah isi konten dengan halaman adduser
-        agetAllSuperiors();
-        superiorList();
-        $("#register").click(function () {
-            aaddUser("POST")
-        });
-    });
+    // $('#addNewUser').click(function(e){
+    //     e.preventDefault();
+    //
+    //     isi.innerHTML=addUser(); //mengubah isi konten dengan halaman adduser
+    //     agetAllSuperiors();
+    //     superiorList();
+    //     $("#register").click(function () {
+    //         aaddUser("POST")
+    //     });
+    // });
+
 });
 
 

@@ -20,20 +20,20 @@ public class UserService {
     public UserService(UserRepository userRepository){
         this.userRepository=userRepository;
     }
-    public List<User> findBy(String orderBy, String sortBy) {
+    public List<User> findBy(String orderBy) {
 
-        if(orderBy.equals("role") & sortBy.equals("asc")){
-            System.out.println(userRepository.findAllByOrderByRoleAsc());
-            return userRepository.findAllByOrderByRoleAsc();
+        if(orderBy.equals("role")){
+            System.out.println(userRepository.findAllByOrderByRoleAscEmailAsc());
+            return userRepository.findAllByOrderByRoleAscEmailAsc();
         }
-        else if(orderBy.equals("role") & sortBy.equals("desc")){
-            return userRepository.findAllByOrderByRoleDesc();
+        else if(orderBy.equals("email")){
+            return userRepository.findAllByOrderByEmailAsc();
         }
-        else if(orderBy.equals("name") & sortBy.equals("asc")){
+        else if(orderBy.equals("name")){
             return userRepository.findAllByOrderByNameAsc();
         }
         else {
-            return userRepository.findAll();
+            return userRepository.findAllByOrderByIdAsc();
         }
     }
     public User findUserById(int id) throws ResourceNotFoundException {

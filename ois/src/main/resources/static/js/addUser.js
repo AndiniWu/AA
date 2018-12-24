@@ -1,6 +1,5 @@
 function addUser() {
     return '<span id="title" class="title1"><b class="bold1">A</b>DD<b class="bold1">U</b>SER</span>\n' +
-        '\t    \t<form>\n' +
         '\t\t\t    <div class="col-md-9">\n' +
         '\t\t\t    \t<div class="col-md-3">\n' +
         '\t\t\t    \t\t<label class="col-form-label">Id</label>\n' +
@@ -10,6 +9,7 @@ function addUser() {
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t    </div>\n' +
+        '\t    \t<form class="form1">\n' +
         '\t\t\t    <div class="col-md-9"></div>\n' +
         '\t\t\t    <div class="col-md-9">\n' +
         '\t\t\t    \t<div class="col-md-3">\n' +
@@ -102,7 +102,7 @@ function addUser() {
         '<label class="radio-inline">\n' +
         ' <input value=2 id="emp" type="radio" name="optradio" >Employee' +
         '  </label>\n' +
-        ' <select id="superiorList">\n' +
+        ' <select id="superiorList" disabled>\n' +
         '<option value="">Optional</option>\n' +
         '</select>' +
         '</div>' +
@@ -120,8 +120,8 @@ function addUser() {
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t\t    <div class="col-md-6" style="margin-top: 7%;">\n' +
         '\t\t\t\t    \t<button id="register" type="submit" class="btn btn-success">SUBMIT</button>\n' +
-        '\t\t\t\t    \t<button type="reset" class="btn btn-warning">RESET</button>\n' +
-        '\t\t\t\t    \t<button class="btn btn-primary" onclick="window.location.href=\'dash_admin.html\'">BACK</button>\n' +
+        '\t\t\t\t    \t<button id="reset" type="reset" class="btn btn-warning">RESET</button>\n' +
+        '\t\t\t\t    \t<button class="btn btn-primary" onclick="window.location.href=\'index\'">BACK</button>\n' +
         '\t\t\t\t    </div>\n' +
         '\t\t\t\t    <div class="col-md-3"></div>\n' +
         '\t\t\t    </div>\n' +
