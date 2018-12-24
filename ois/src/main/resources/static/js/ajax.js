@@ -208,3 +208,24 @@ function aaddUser(type){
         });
     }
 }
+
+function adeleteUser(id){
+    $.ajax({
+        type: 'PUT',
+        url: `http://localhost:8080/api/users/delete/${id}`,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType: "json", //to parse string into JSON object,
+        success: function (data) {
+            if(data==true){
+                console.log("User DELETED : sucess")
+                alert("Successed to delete user")
+            }
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+            alert(`Error: ${error.status}\n\nFailed to delete user with id : ${id}`);
+        }
+    });
+}

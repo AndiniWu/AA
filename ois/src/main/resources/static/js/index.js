@@ -46,7 +46,10 @@ function editUser(userId){ //still working on
 
 };
 function deleteUser(userId){
-    // under construction
+    var r = confirm("Are you sure?")
+    if(r==true){
+        adeleteUser(userId);
+    }
 };
 
 

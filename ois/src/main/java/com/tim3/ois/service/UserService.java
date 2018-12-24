@@ -23,17 +23,17 @@ public class UserService {
     public List<User> findBy(String orderBy) {
 
         if(orderBy.equals("role")){
-            System.out.println(userRepository.findAllByOrderByRoleAscEmailAsc());
-            return userRepository.findAllByOrderByRoleAscEmailAsc();
+            System.out.println(userRepository.findAllByEnabledOrderByRoleAscEmailAsc(true));
+            return userRepository.findAllByEnabledOrderByRoleAscEmailAsc(true);
         }
         else if(orderBy.equals("email")){
-            return userRepository.findAllByOrderByEmailAsc();
+            return userRepository.findAllByEnabledOrderByEmailAsc(true);
         }
         else if(orderBy.equals("name")){
-            return userRepository.findAllByOrderByNameAsc();
+            return userRepository.findAllByEnabledOrderByNameAsc(true);
         }
         else {
-            return userRepository.findAllByOrderByIdAsc();
+            return userRepository.findAllByEnabledOrderByIdAsc(true);
         }
     }
     public User findUserById(int id) throws ResourceNotFoundException {
@@ -41,7 +41,7 @@ public class UserService {
         if(user==null){throw new ResourceNotFoundException("User","id",id);}
         return user;
     }
-    public List<User> findUsersByRole(int role) {return userRepository.findAllByRole(role);}
+    public List<User> findUsersByRole(int role) {return userRepository.findAllByRoleAndEnabled(role,true);}
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -82,12 +82,19 @@ public class UserService {
             return false;
         }
         else {
-          userRepository.save(u);
-          return true;
+            u.setEnabled(true);
+            userRepository.save(u);
+            return true;
         }
     }
 
-    public void deleteUser(User user){
-        userRepository.delete(user);
+    public Boolean deleteUser(int id){
+        User user = userRepository.findById(id);
+        if(user==null){
+            return false;
+        }
+        user.setEnabled(false);
+        userRepository.save(user);
+        return true;
     }
 }

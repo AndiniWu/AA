@@ -58,12 +58,15 @@ public class User {
     @Column(name = "cnumber")
     private String cnumber;
 
-
     //    @JoinColumn(name = "superior")
 //    private String superior;
 //
     @ManyToOne
     @JoinColumn(name = "superior_id")
     private User superior;
+
+    @NotNull
+    @Column(name = "enabled")
+    private boolean enabled;
 
 }

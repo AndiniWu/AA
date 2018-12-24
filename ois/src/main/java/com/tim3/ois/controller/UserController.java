@@ -62,12 +62,9 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/users/{id}")
+    @PutMapping("/users/delete/{id}")
     public Boolean deleteUser(@PathVariable(value = "id")int userId){
-        User user = userService.findUserById(userId);
-//        if(user==null){throw new ResourceNotFoundException("User","id",userId);}
-        userService.deleteUser(user);
-        return true;
+        return userService.deleteUser(userId);
     }
 
 }

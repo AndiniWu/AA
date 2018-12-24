@@ -4,7 +4,7 @@ function getAllUsers(){
         "\t    \t</div>\n" +
         "            <div class=\"col-md-4 form-group\">\n" +
         "                <div class=\"input-group\">\n" +
-        "                    <input id='myInput' type=\"text\" class=\"form-control\" placeholder=\"Find by email...\">\n" +
+        "                    <input id='myInput' type=\"text\" class=\"form-control\" placeholder=\"Find by any...\">\n" +
         "                    <span class=\"input-group-append\">\n" +
         "                      \t<button class=\"btn1 fa fa-search\"></button>\n" +
         "                    </span>\n" +
