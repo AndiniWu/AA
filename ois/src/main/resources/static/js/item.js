@@ -61,14 +61,15 @@ function agetAvailableItems(){
                         if(data[i].quantity>0) {
                             txt += `<tr id="${data[i].id}" >\n                                            
                                             \t\t\t\t<td class ="rem">${data[i].picture}</td>\n 
-                                            <td>${data[i].id}</td>
-                                            \t\t\t\t<td>${data[i].name}</td>\n 
-                                            \t\t\t\t<td>${data[i].detail}. Stock left: ${data[i].quantity}</td>\n
-                                            <td ><input class="qty" style="width: 100%  ;" type="number"min="1" max="${data[i].quantity}" placeholder="Max:${data[i].quantity}"></td>
+                                            <td class="id">${data[i].id}</td>
+                                            <td>${data[i].name}</td>\n 
+                                            <td>${data[i].detail}. Stock left: ${data[i].quantity}</td>\n
+                                            <td class="qty"><input class="quantity" style="width: 100%;"type="number" min="1" max="${data[i].quantity}" oninput="minMaxCheck(this)"
+  placeholder="Max:${data[i].quantity}"></td>
                                             <td align="center" class="rem action1">
-                                            \t\t\t\t<button onclick="add(${data[i].id})" class="ad btn btn-success"><span style="font-family:verdana;color:whitesmoke">&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;</span></button>
-                                             \t\t\t\t</td>\n
-                                            \t\t\t</tr>`;
+                                            <button onclick="add(${data[i].id})" class="ad btn btn-success"><span style="font-family:verdana;color:whitesmoke">&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;</span></button>
+                                            </td>\n
+                                            </tr>`;
                         }
                     }
                     if(txt){
@@ -165,6 +166,67 @@ function agetItemById(id){
         },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+}
+
+
+
+
+function submitRequest(){
+    var myCart=[];
+    var cartTable= $('#cartItems')
+    $('#cartItems tr').each(function() {
+        var customerId = $(this).find("td").eq(2).html();
+        var cart= {
+            item : {id: parseInt($(this).find("td").eq(0).html())},
+            qty : parseInt($(this).find("td .quantity").val())
+        }
+        myCart.push(cart);
+    });
+    console.log(myCart);
+    var request = {
+        user: {id: user[0]},
+        message: $('#reqMessage').val(),
+        reqDetail: myCart
+    };
+    var containNull = hasNull(request);
+    console.log(containNull);
+    if(containNull) {
+        var requestJson = JSON.stringify(request);
+        console.log(requestJson);
+        aaddRequest(requestJson);
+    }
+    else if(containNull==false){
+        alert("ERROR : \n\nPlease fill the input field*")
+    }
+    // return requestJson;
+    // aaddRequest(requestJson);
+}
+
+function aaddRequest(requestJson){
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8080/api/requests',
+        data: requestJson,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType: "json", //to parse string into JSON object,
+        success: function (data) {
+            var msg="";
+            if (data.status!=null) {
+                msg += "Successed to add request:\n\nRequest status : "+data.status;
+            }
+            else {
+                msg += "Failed to add request";
+            }
+            console.log(msg);
+            alert(`${msg}`);
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+            alert(`Error: ${error.status}\n\nField must not be null`);
         }
     });
 }

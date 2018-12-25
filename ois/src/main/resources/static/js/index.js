@@ -9,8 +9,30 @@ $('#logout').click(function(e){
     deleteCookie("user");
     window.location = "login";
 });
+//===================================== V A L I D A T I O N =====================================
+function hasNull(obj) {
+    for (var i in obj) {
+        if (obj[i] == null)
+            return true;
+    }
+    return false;
+}
+
+function minMaxCheck(obj){
+    var v = obj.value.replace(/\D/g,'') //regex filter for integer only
+    if(v>parseInt(obj.max)){
+        v=parseInt(obj.max)
+    }
+    else if(v<parseInt(obj.min)){
+       v=parseInt(obj.min)
+    }
+    obj.value=v;
+}
 
 //===================================== U S E R =====================================
+
+
+
 
 function superiorList(){
     $('input:radio[name="optradio"]').click(function() {
@@ -116,13 +138,15 @@ function deleteItem(itemId,itemName){
 };
 
 var itemCount =0;
-
+var cart;
+//tidak dapat dibuat eventlistener karena kemungkinan button add itu dibuat melalui string yang di append ke tabel sehingga ada kemungkinan class button tidak terbaca ketika javascript dijalankan.
 function add(btnId){
     itemCount ++;
     console.log(itemCount);
     $('#itemCount').text(itemCount).css('display', 'block');
-    $(`#${btnId}`).clone().appendTo('#cartItems').append('<button class="removeItem btn btn-danger">Remove Item</button>');
+    $(`#${btnId}`).clone().appendTo('#cartItems').append('<button class="removeItem btn btn-danger" style="color:whitesmoke;">Remove Item</button>');
     $('#cartItems .rem').remove();
+    $('#cartTotal').text("Total Items: " + itemCount)
 };
 
 $('#getAvailableItems').click(function (e) {
@@ -142,18 +166,6 @@ $('#getAvailableItems').click(function (e) {
     });
 
 
-// Add Item to Cart
-//     function add(){
-//         itemCount ++;
-//         console.log(itemCount);
-//         $('#itemCount').text(itemCount).css('display', 'block');
-//         $(this).siblings().clone().appendTo('#cartItems').append('<button class="removeItem">Remove Item</button>');
-//
-//         // Calculate Total Price
-//         $('#cartTotal').text("Total: €" + priceTotal);
-//     };
-
-
 // Hide and Show Cart Items
     $('.openCloseCart').click(function(){
         $('#shoppingCart').toggle();
@@ -163,29 +175,28 @@ $('#getAvailableItems').click(function (e) {
 // Empty Cart
     $('#emptyCart').click(function() {
         itemCount = 0;
-
         $('#itemCount').css('display', 'none');
         $('#cartItems').text('');
-        $('#cartTotal').text("Total: €" + priceTotal);
     });
-
-
 
 // Remove Item From Cart
     $('#shoppingCart').on('click', '.removeItem', function(){
         $(this).parent().remove();
         itemCount --;
         $('#itemCount').text(itemCount);
-
-        // Remove Cost of Deleted Item from Total Price
+        $('#cartTotal').text("Total Items: " + itemCount)
         if (itemCount == 0) {
             $('#itemCount').css('display', 'none');
         }
     });
 
+    $('#submit').click(function () {
+        submitRequest();
 
 
-})
+    });
+
+}); //=============================== A V A I L A B L E    I T E M S     E N D S     H E R E ===============================
 
 
 

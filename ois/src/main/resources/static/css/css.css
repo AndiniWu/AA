@@ -264,6 +264,10 @@
 th,tr:nth-child(even){
     background-color: rgba(137,207,240,0.2);
 }
+/*td:last-child{*/
+    /*background-color: transparent;*/
+    /*border: none;*/
+/*}*/
 
 .action1 button{
     font-size: 8pt;

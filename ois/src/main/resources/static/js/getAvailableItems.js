@@ -49,7 +49,6 @@ function getAvailableItems(){
         "\t\t      <div class='table-responsive'>" +
         "              <table class='table table-hover'>" +
         " <thead>"+
-        "            \t\t\t\t<th>Picture</th>\n" +
         "            \t\t\t\t<th>Id</th>\n" +
         "            \t\t\t\t<th>Name</th>\n" +
         "            \t\t\t\t<th>Detail</th>\n" +
@@ -60,9 +59,11 @@ function getAvailableItems(){
         "            \t\t</tbody>\n" +
         "              </table>" +
         "          </div>\n" +
-        "\t\t      <span id='cartTotal'></span>\n" +
-        "\t\t  \t</div>\n" +
-        "\t\t  </div></th>\n" +
+        "\t\t      <div id='cartTotal'></div>" +
+        "<div><input type='text' style='width: 100%;padding: 8px;' id='reqMessage' placeholder='Enter your request message/note here'></div>"+
+        "           <button style='float:right;' id='submit' type='submit' class='btn btn-info'><b style='color:whitesmoke'>SUBMIT</b></button>\n" +
+        "\t\t       </div>\n" +
+        "\t\t       </div></th>\n" +
         "            \t\t\t</tr>\n" +
         "            \t\t</thead>\n" +
         "            \t\t<tbody id='itemList'>\n" +

@@ -47,6 +47,7 @@ public class RequestService {
 
     public Request saveRequest(Request request){
         request.setCreatedAt(new Date().getTime());
+        request.setStatus("pending/waiting to be approved");
         requestRepository.save(request);
         System.out.println(request);
         return request;
