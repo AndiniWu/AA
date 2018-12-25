@@ -18,13 +18,16 @@ function hasNull(obj) {
     return false;
 }
 
-function minMaxCheck(obj){
+function minMaxCheck(obj){ // user tetap bisa melakukan input ',' tpi ketika msk ke backend tetap akan diambil angka pertama saja
     var v = obj.value.replace(/\D/g,'') //regex filter for integer only
     if(v>parseInt(obj.max)){
         v=parseInt(obj.max)
     }
     else if(v<parseInt(obj.min)){
        v=parseInt(obj.min)
+    }
+    else if(v > parseInt(obj.maxLength)) {
+            v = v.slice(0, obj.maxLength);
     }
     obj.value=v;
 }

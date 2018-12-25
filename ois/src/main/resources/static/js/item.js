@@ -53,23 +53,26 @@ function agetAvailableItems(){
         dataType:"json",
         success: function (data) {
             console.log("yes. data: " + data)
+
             if (data) {
                 var len = data.length;
                 var txt = ``;
+                var maxL;
                 if (len > 0) {
                     for (var i = 0; i < len; i++) {
                         if(data[i].quantity>0) {
+                            maxL= `${data[i].quantity}`;
+                            maxL = maxL.length;
                             txt += `<tr id="${data[i].id}" >\n                                            
-                                            \t\t\t\t<td class ="rem">${data[i].picture}</td>\n 
-                                            <td class="id">${data[i].id}</td>
-                                            <td>${data[i].name}</td>\n 
-                                            <td>${data[i].detail}. Stock left: ${data[i].quantity}</td>\n
-                                            <td class="qty"><input class="quantity" style="width: 100%;"type="number" min="1" max="${data[i].quantity}" oninput="minMaxCheck(this)"
-  placeholder="Max:${data[i].quantity}"></td>
-                                            <td align="center" class="rem action1">
-                                            <button onclick="add(${data[i].id})" class="ad btn btn-success"><span style="font-family:verdana;color:whitesmoke">&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;</span></button>
-                                            </td>\n
-                                            </tr>`;
+                            \t\t\t\t<td class ="rem">${data[i].picture}</td>\n 
+                            <td class="id">${data[i].id}</td>
+                            <td>${data[i].name}</td>\n 
+                            <td>${data[i].detail}. Stock left: ${data[i].quantity}</td>\n
+                            <td class="qty"><input class="quantity" style="width: 100%;"type="number" maxlength="${maxL}" min="1" max="${data[i].quantity}" oninput="minMaxCheck(this)" placeholder="Max:${data[i].quantity}"></td>
+                            <td align="center" class="rem action1">
+                            <button onclick="add(${data[i].id})" class="ad btn btn-success"><span style="font-family:verdana;color:whitesmoke">&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;</span></button>
+                            </td>\n
+                            </tr>`;
                         }
                     }
                     if(txt){
@@ -77,6 +80,7 @@ function agetAvailableItems(){
                     }
                     // alert("Success :"+data);
                     console.log(data);
+                    console.log(maxL);
                 }
             }
         },

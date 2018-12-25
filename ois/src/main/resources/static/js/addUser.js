@@ -16,7 +16,7 @@ function addUser() {
         '\t\t\t    \t\t<label class="col-form-label">NIK*</label>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="nik" type="number" class="form-control" name="nik" maxlength="20" required>\n' +
+        '\t\t\t    \t\t<input id="nik" type="number" class="form-control"oninput="minMaxCheck(this)" name="nik" maxlength="20" required>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t    </div>\n' +
@@ -76,7 +76,7 @@ function addUser() {
         '\t\t\t    \t\t<label class="col-form-label">ContactNum*</label>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="cnumber" type="number" class="form-control" name="contact" maxlength="14" required>\n' +
+        '\t\t\t    \t\t<input id="cnumber" type="number" class="form-control" oninput="minMaxCheck(this)" name="contact" maxlength="14" required>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t    </div>\n' +
