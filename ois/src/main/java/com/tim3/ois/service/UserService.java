@@ -41,14 +41,14 @@ public class UserService {
         if(user==null){throw new ResourceNotFoundException("User","id",id);}
         return user;
     }
-    public List<User> findUsersByRole(int role) {return userRepository.findAllByRoleAndEnabled(role,true);}
+    public List<User> findUsersByRole(int role) {return userRepository.findAllByRoleAndEnabledOrderByEmailAsc(role,true);}
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     public User findUserByEmailAndPassword(String email,String password) throws ResourceNotFoundException{
-        User user = userRepository.findByEmailAndPassword(email,password);
+        User user = userRepository.findByEmailAndPasswordAndEnabled(email,password,true);
         if(user==null){
             throw new ResourceNotFoundException("User","email/password",email+ "/"+password);
         }

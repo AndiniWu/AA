@@ -4,15 +4,15 @@ function getAllUsers(){
         "\t    \t</div>\n" +
         "            <div class=\"col-md-4 form-group\">\n" +
         "                <div class=\"input-group\">\n" +
-        "                    <input id='myInput' type=\"text\" class=\"form-control\" placeholder=\"Find by any...\">\n" +
+        "                    <input id='myInput' type=\"text\" class=\"form-control\" placeholder=\"Search\">\n" +
         "                    <span class=\"input-group-append\">\n" +
         "                      \t<button class=\"btn1 fa fa-search\"></button>\n" +
         "                    </span>\n" +
         "                </div>\n" +
         "            </div>\n" +
         "            <div class=\"col-md-2\"></div>\n" +
-        "            <div class=\"col-md-6 col11\">\n" +
-        "            \t     <label for=\"sel1\">Order By:</label>\n" +
+        "            <div class=\"col-md-3 col11\">\n" +
+        "            \t     <label for=\"sel1\">OrderBy:</label>\n" +
         "            <select style='width: 50%' id='orderBy'>\n" +
         "                <option value='role'>Role</option>\n" +
         "                <option value='email'>Email</option>\n" +

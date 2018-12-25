@@ -35,12 +35,16 @@ public class Item {
     @NotNull(message = "*Please provide the price")
     private long price;
 
-    @Column(name="description")
+    @Column(name="detail")
     @NotEmpty(message = "*Please provide the description")
-    private String description;
+    private String detail;
 
     @Column(name="picture")
     private String picture;
+
+    @NotNull
+    @Column(name = "enabled")
+    private boolean enabled;
 }
 
 

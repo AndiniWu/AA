@@ -22,10 +22,10 @@ public class ItemController {
     private ItemService itemService;
 
     @GetMapping("/items")
-    public List<Item> getAllItems(){
-        return itemService.findAll();
+    public List<Item> getAllItems(@RequestParam(value = "orderBy",required = false,defaultValue = "role")String orderBy,
+                                  @RequestParam(value = "sortBy",required = false,defaultValue = "asc")String sortBy){
+        return itemService.findBy(orderBy,sortBy);
     }
-
     @GetMapping("/items/{id}")
     public Item getItem(@PathVariable(value = "id") int itemId){
         return itemService.findItemById(itemId);

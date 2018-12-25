@@ -30,17 +30,47 @@ public class ItemService {
     public Item updateItem(int id,Item itemNow){
         Item item = itemRepository.findById(id);
         item.setQuantity(itemNow.getQuantity());
-        item.setDescription(itemNow.getDescription());
+        item.setDetail(itemNow.getDetail());
         item.setPrice(itemNow.getPrice());
         item.setName(itemNow.getName());
         Item updatedItem = itemRepository.save(item);
         return updatedItem;
     }
-
-    public Item findItemByName(String name) {
+    public Item findItemByName(String name){
         return itemRepository.findByName(name);
     }
+
+    public List<Item> findBy(String orderBy, String sortBy) {
+        if(orderBy.equals("name") && sortBy.equals("asc")){
+            System.out.println(itemRepository.findAllByEnabledOrderByNameAsc(true));
+            return itemRepository.findAllByEnabledOrderByNameAsc(true);
+        }
+        else if(orderBy.equals("price") && sortBy.equals("asc")){
+            return itemRepository.findAllByEnabledOrderByPriceAsc(true);
+        }
+        else if(orderBy.equals("price") && sortBy.equals("desc")){
+            return itemRepository.findAllByEnabledOrderByPriceDesc(true);
+        }
+        else if(orderBy.equals("id") && sortBy.equals("asc")){
+            return itemRepository.findAllByEnabledOrderByIdAsc(true);
+        }
+        else if(orderBy.equals("quantity") && sortBy.equals("asc")){
+            return itemRepository.findAllByEnabledOrderByQuantityAsc(true);
+        }
+        else if(orderBy.equals("quantity") && sortBy.equals("desc")){
+            return itemRepository.findAllByEnabledOrderByQuantityDesc(true);
+        }
+        else {
+            return itemRepository.findAllByEnabledOrderByIdDesc(true);
+        }
+    }
+
+//    public List<Item> findAvailableItems(){
+//        return itemRepository.findAvailableItems();
+//    }
+
     public Item saveItem(Item item){
+        item.setEnabled(true);
         return itemRepository.save(item);
     }
     public void deleteItem(Item item){

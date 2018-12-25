@@ -58,9 +58,9 @@ function agetAllUsers(){
                                             \t\t\t\t<td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
                                             \t\t\t\t<td>${data[i].superior.name}</td>\n 
                                             \t\t\t\t<td>${data[i].picture}</td>\n 
-                                            \t\t\t\t<td class="action1">\n 
+                                            \t\t\t\t<td align="center"  class="action1">\n 
                                             \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                                            \t\t\t\t\<button onclick="deleteUser(${data[i].id})" class="btn btn-danger">Delete</button></>\n 
+                                            \t\t\t\t\<button onclick="deleteUser(${data[i].id},'${data[i].email}')" class="btn btn-danger">Delete</button></>\n 
                                             \t\t\t\t</td>\n
                                             \t\t\t</tr>`;
                         }
@@ -76,9 +76,9 @@ function agetAllUsers(){
                                             \t\t\t\t<td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
                                             \t\t\t\t<td></td>\n
                                             \t\t\t\t<td>${data[i].picture}</td>\n
-                                            \t\t\t\t<td class="action1">\n
+                                            \t\t\t\t<td align="center"  class="action1">\n
                                             \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                                            \t\t\t\t\t<button onclick="deleteUser(${data[i].id})" class="btn btn-danger">Delete</button>\n
+                                            \t\t\t\t\t<button onclick="deleteUser(${data[i].id},'${data[i].email}')" class="btn btn-danger">Delete</button>\n
                                             \t\t\t\t</td>\n
                                             \t\t\t</tr>`;
                         }
@@ -130,16 +130,6 @@ function agetAllSuperiors(){
 }
 
 function aaddUser(type){
-    // var email = document.getElementById("email").value;
-    // var password = document.getElementById("password").value;
-    // var name = document.getElementById("name").value;
-    // var role = document.querySelector('input[name="optradio"]:checked').value;
-    // var superior = document.getElementById("superiorList").value;
-    // var nik = document.getElementById("nik").value;
-    // var division= document.getElementById("division").value;
-    // var position = document.getElementById("position").value;
-    // var cnumber = document.getElementById("cnumber").value;
-    // var address = document.getElementById("address").value;
     var user = {
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
@@ -152,10 +142,6 @@ function aaddUser(type){
         address: document.getElementById("address").value
     }
     if($('#superiorList').val()!=""){user.superior = {id : parseInt($('#superiorList').val())}}
-    // var txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role + ', "nik": "' + nik + '", "division": "' + division + '", "position": "' + position + '", "cnumber": "' + cnumber + '", "address": "' + address + '"}';
-    // if(superior!=""){
-    //     txt = '{"name": "' + name + '", "email": "' + email + '", "password": "' + password + '", "role": ' + role +', "nik": "' + nik + '", "division": "' + division + '", "position": "' + position + '", "cnumber": "' + cnumber + '", "address": "' + address + '", "superior": { "id" : '+superior+'}}'
-    // }
     var userJson = JSON.stringify(user);
     console.log(userJson);
     if(type ==="POST") {

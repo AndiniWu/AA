@@ -8,9 +8,13 @@
   	<!-- <link rel="shortcut icon" href="https://www.codeply.com/images/cp_ico.png"> -->
 
   	<!-- <link rel="stylesheet" href="../css/custom.scss"> -->
-  	<link rel="stylesheet" href="/css/css.css">
+	<link rel="stylesheet" href="/css/cart.css">
+	<link rel="stylesheet" href="/css/css.css">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" />
   	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<!-- Bootstrap NavBar -->
@@ -52,7 +56,7 @@
 			            <a class="dropdown-item nav-link dropdown-toggle navbar1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Item</a>
 			            	<div class="dropdown-menu">
 					            <a class="dropdown-item" href="#">All Items</a>
-					            <a class="dropdown-item" href="#">Available Item</a>
+					            <a class="dropdown-item" href="#">Available Items</a>
 					            <a class="dropdown-item" href="#">Add New Item</a>
 					        </div>
 			            <a class="dropdown-item nav-link dropdown-toggle navbar1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Loan</a>
@@ -110,13 +114,13 @@
 	            </a>
 	            <!-- Submenu content -->
 	            <div id='submenu2' class="collapse sidebar-submenu">
-	                <a onclick="getAllItems()" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a id="getAllItems" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">All Items</span>
 	                </a>
-	                <a onclick="getAvailableItem()" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a id="getAvailableItems" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">Available Item</span>
 	                </a>
-	                <a onclick="addItem()" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a id="addItem" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">Add New Item</span>
 	                </a>
 	            </div> 
@@ -129,13 +133,13 @@
 	            </a>
 	            <!-- Submenu content -->
 	            <div id='submenu3' class="collapse sidebar-submenu">
-	                <a onclick="getAllLoan()"	href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a 	href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">All Loan List</span>
 	                </a>
-	                <a onclick="getLoan()" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a  href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">My Loan Lists</span>
 	                </a>
-	                <a  onclick="addLoan()" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a   href="#" class="list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">Add New Loan</span>
 	                </a>
 
@@ -180,14 +184,18 @@
 	</div>
     </div><!-- body-row END -->
       <!--scripts loaded here-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+
 	<script src="/js/1.js"></script>
     <script src="/js/cookies.js"></script>
 	<script src="/js/index.js"></script>
 	<script src="/js/addUser.js"></script>
 	<script src="/js/getAllUsers.js"></script>
-	<script src="/js/ajax.js"></script>
+	<script src="/js/getAllItems.js"></script>
+	<script src="/js/addItem.js"></script>
+
+	<script src="/js/getAvailableItems.js"></script>
+	<script src="/js/user.js"></script>
+	<script src="/js/item.js"></script>
+
 </body>
 </html>
