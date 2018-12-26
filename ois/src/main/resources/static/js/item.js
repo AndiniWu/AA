@@ -174,38 +174,40 @@ function agetItemById(id){
     });
 }
 
-
-
-
 function submitRequest(){
     var myCart=[];
-    var cartTable= $('#cartItems')
+    var cek = true;
+    var list=``;
     $('#cartItems tr').each(function() {
-        var customerId = $(this).find("td").eq(2).html();
         var cart= {
-            item : {id: parseInt($(this).find("td").eq(0).html())},
+            item : {
+                id: parseInt($(this).find("td").eq(0).html()),
+                name : $(this).find("td").eq(1).html().toString()
+            },
             qty : parseInt($(this).find("td .quantity").val())
         }
+        if(cart.qty==0||cart.qty===null||cart.qty===undefined||isNaN(cart.qty)){
+            alert("Quantity must be filled!");
+            cek=false;
+            return cek;
+        }
+        list+=`${cart.item.name} : ${cart.qty}\n`;
         myCart.push(cart);
     });
-    console.log(myCart);
-    var request = {
-        user: {id: user[0]},
-        message: $('#reqMessage').val(),
-        reqDetail: myCart
-    };
-    var containNull = hasNull(request);
-    console.log(containNull);
-    if(containNull) {
-        var requestJson = JSON.stringify(request);
-        console.log(requestJson);
-        aaddRequest(requestJson);
+    // console.log(myCart);
+    if(cek) {
+        var r = confirm(`Are you sure?\nItem you requested:\n${list}`)
+        if(r==true) {
+            var request = {
+                user: {id: user[0]},
+                message: $('#reqMessage').val(),
+                reqDetail: myCart
+            };
+            var requestJson = JSON.stringify(request);
+            console.log(requestJson);
+            aaddRequest(requestJson);
+        }
     }
-    else if(containNull==false){
-        alert("ERROR : \n\nPlease fill the input field*")
-    }
-    // return requestJson;
-    // aaddRequest(requestJson);
 }
 
 function aaddRequest(requestJson){

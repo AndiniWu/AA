@@ -10,13 +10,6 @@ $('#logout').click(function(e){
     window.location = "login";
 });
 //===================================== V A L I D A T I O N =====================================
-function hasNull(obj) {
-    for (var i in obj) {
-        if (obj[i] == null)
-            return true;
-    }
-    return false;
-}
 
 function minMaxCheck(obj){ // user tetap bisa melakukan input ',' tpi ketika msk ke backend tetap akan diambil angka pertama saja
     var v = obj.value.replace(/\D/g,'') //regex filter for integer only
@@ -141,7 +134,6 @@ function deleteItem(itemId,itemName){
 };
 
 var itemCount =0;
-var cart;
 //tidak dapat dibuat eventlistener karena kemungkinan button add itu dibuat melalui string yang di append ke tabel sehingga ada kemungkinan class button tidak terbaca ketika javascript dijalankan.
 function add(btnId){
     itemCount ++;
@@ -180,6 +172,7 @@ $('#getAvailableItems').click(function (e) {
         itemCount = 0;
         $('#itemCount').css('display', 'none');
         $('#cartItems').text('');
+        $('.quantity').reset();
     });
 
 // Remove Item From Cart
@@ -195,8 +188,6 @@ $('#getAvailableItems').click(function (e) {
 
     $('#submit').click(function () {
         submitRequest();
-
-
     });
 
 }); //=============================== A V A I L A B L E    I T E M S     E N D S     H E R E ===============================
