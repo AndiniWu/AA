@@ -32,7 +32,6 @@ public class RequestDetailService {
                 System.out.println("updatedItem: " + item.getQuantity() + " +/- " + i.getQty());
                 Item tes = itemService.saveItem(item);
                 System.out.println(tes);
-
         }
     }
 

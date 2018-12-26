@@ -9,6 +9,25 @@ $('#logout').click(function(e){
     deleteCookie("user");
     window.location = "login";
 });
+
+//===================================== T O P    B U T T O N =====================================
+
+var btn = $('#button');
+
+$(window).scroll(function() {
+    if ($(window).scrollTop() > 200) {
+        btn.addClass('show');
+    } else {
+        btn.removeClass('show');
+    }
+});
+
+btn.on('click', function(e) {
+    e.preventDefault();
+    $('html, body').animate({scrollTop:0}, '300');
+});
+
+
 //===================================== V A L I D A T I O N =====================================
 
 function minMaxCheck(obj){ // user tetap bisa melakukan input ',' tpi ketika msk ke backend tetap akan diambil angka pertama saja
@@ -135,13 +154,15 @@ function deleteItem(itemId,itemName){
 
 var itemCount =0;
 //tidak dapat dibuat eventlistener karena kemungkinan button add itu dibuat melalui string yang di append ke tabel sehingga ada kemungkinan class button tidak terbaca ketika javascript dijalankan.
+
 function add(btnId){
     itemCount ++;
     console.log(itemCount);
     $('#itemCount').text(itemCount).css('display', 'block');
-    $(`#${btnId}`).clone().appendTo('#cartItems').append('<button class="removeItem btn btn-danger" style="color:whitesmoke;">Remove Item</button>');
+    $(`#${btnId}`).clone().appendTo('#cartItems').append('<button class="removeItem btn btn-danger" style="color:whitesmoke;width:100%;font-size: small;margin:3px;padding:5px;">Remove</button>');
     $('#cartItems .rem').remove();
     $('#cartTotal').text("Total Items: " + itemCount)
+    $(`.${btnId}`).prop('disabled',true);
 };
 
 $('#getAvailableItems').click(function (e) {
@@ -169,21 +190,28 @@ $('#getAvailableItems').click(function (e) {
 
 // Empty Cart
     $('#emptyCart').click(function() {
-        itemCount = 0;
-        $('#itemCount').css('display', 'none');
-        $('#cartItems').text('');
-        $('.quantity').reset();
+        var r = confirm("Are you sure to empty your cart?")
+        if (r==true) {
+            itemCount = 0;
+            $('#itemCount').css('display', 'none');
+            $('#cartItems').text('');
+            $('.quantity').val('');
+            $('.ad').prop('disabled', false);
+            $('#cartTotal').text("Total Items: " + itemCount);
+        }
     });
 
 // Remove Item From Cart
     $('#shoppingCart').on('click', '.removeItem', function(){
         $(this).parent().remove();
+        btnId =  $(this).parent().prop('id');
         itemCount --;
         $('#itemCount').text(itemCount);
         $('#cartTotal').text("Total Items: " + itemCount)
         if (itemCount == 0) {
             $('#itemCount').css('display', 'none');
         }
+        $(`.${btnId}`).prop('disabled',false);
     });
 
     $('#submit').click(function () {
