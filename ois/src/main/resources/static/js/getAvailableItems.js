@@ -25,7 +25,7 @@ function getAvailableItems(){
         "            </select>" +
         "            </div>"+
         "            <div class='table-responsive'>\n" +
-        "            \t<table class='tabel table-sm table-hover table-bordered'>\n" +
+        "            \t<table class='tabel table-sm table-bordered'>\n" +
         "            \t\t<thead>\n" +
         "            \t\t\t<tr>\n" +
         "            \t\t\t\t<th>Picture</th>\n" +

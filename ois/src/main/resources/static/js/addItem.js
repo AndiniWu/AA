@@ -16,7 +16,7 @@ function addItem(){
 			    		<label class="col-form-label">Name*</label>
 			    	</div>
 			    	<div class="col-md-6">
-			    		<input id="name" type="text" class="form-control" name="name" maxlength="20" required>
+			    		<input id="name" type="text" class="form-control" name="name" maxlength="50" required>
 			    	</div>
 			    	<div class="col-md-3"></div>
 			    </div>

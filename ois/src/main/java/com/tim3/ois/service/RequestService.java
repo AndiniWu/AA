@@ -47,7 +47,7 @@ public class RequestService {
 
     public Request saveRequest(Request request){
         request.setCreatedAt(new Date().getTime());
-        request.setStatus("pending/waiting to be approved");
+        request.setStatus("Pending/waiting to be approved");
         requestRepository.save(request);
         System.out.println(request);
         return request;
@@ -57,11 +57,11 @@ public class RequestService {
 //    }
 
     //UPDATE REQUEST STATUS REJECTED 0
-    public Request updateRequest(int id,String status,String rejectNote) {
+    public Request updateRequest(int id,String status,String feedback) {
         Request request= requestRepository.findById(id);
 //        request.setApprovedBy(email);
         request.setStatus(status);
-        request.setRejectNote(rejectNote);
+        request.setFeedback(feedback);
         request.setRejectedAt(new Date().getTime());
         Request updatedRequest = requestRepository.save(request);
         return updatedRequest;
@@ -95,7 +95,7 @@ public class RequestService {
         return updatedRequest;
     }
 
-    //UPDATE REQUEST STATUS ITEM RETURNED 4
+    //UPDATE REQUEST STATUS ITEM RETURNED 5
     public Request updateRequest(int id,Request req,String EXTRA) {
         Request request= requestRepository.findById(id);
         request.setStatus("Item(s) had been returned by requester");

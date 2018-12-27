@@ -73,7 +73,16 @@ public class ItemService {
         item.setEnabled(true);
         return itemRepository.save(item);
     }
-    public void deleteItem(Item item){
-        itemRepository.delete(item);
+//    public void deleteItem(Item item){
+//        itemRepository.delete(item);
+//    }
+    public Boolean deleteItem(int id){
+        Item item = itemRepository.findById(id);
+        if(item==null){
+            return false;
+        }
+        item.setEnabled(false);
+        itemRepository.save(item);
+        return true;
     }
 }

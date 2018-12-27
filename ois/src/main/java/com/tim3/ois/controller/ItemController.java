@@ -49,13 +49,16 @@ public class ItemController {
                            @Valid @RequestBody Item itemNow) {
         return itemService.updateItem(itemId,itemNow);
     }
-
-    @DeleteMapping("/items/{id}")
-    public Boolean deleteUser(@PathVariable(value = "id")int itemId){
-        Item item = itemService.findItemById(itemId);
-        if(item==null){return false;}
-        itemService.deleteItem(item);
-        return true;
+    @PutMapping("/items/delete/{id}")
+    public Boolean deleteItem(@PathVariable(value = "id")int itemId){
+        return itemService.deleteItem(itemId);
     }
+//    @DeleteMapping("/items/{id}")
+//    public Boolean deleteItem(@PathVariable(value = "id")int itemId){
+//        Item item = itemService.findItemById(itemId);
+//        if(item==null){return false;}
+//        itemService.deleteItem(item);
+//        return true;
+//    }
 
 }

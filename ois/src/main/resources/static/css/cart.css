@@ -29,6 +29,9 @@ i:hover {
     vertical-align: middle;
     border-bottom: 2px solid #dee2e6;
 }
+.tabel{
+    width:100%;
+}
 .btn {
     border: none;
     color: white;

@@ -284,5 +284,9 @@ th, td {
     /*padding: 8px;*/
 }
 
+.hov {
+    cursor: pointer;
+}
+
 
 

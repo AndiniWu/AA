@@ -1,8 +1,9 @@
 var user = getCookie("user");
 user = user.split(',');
 document.getElementById("profile").innerText = user[2];
-
-var isi= document.getElementById("isi") //sebagai tempat pergantian konten halaman
+console.log(user);
+var myRole = user[3];
+var isi= document.getElementById("isi"); //sebagai tempat pergantian konten halaman
 
 $('#logout').click(function(e){
     e.preventDefault();
@@ -30,18 +31,18 @@ btn.on('click', function(e) {
 
 //===================================== V A L I D A T I O N =====================================
 
-function minMaxCheck(obj){ // user tetap bisa melakukan input ',' tpi ketika msk ke backend tetap akan diambil angka pertama saja
-    var v = obj.value.replace(/\D/g,'') //regex filter for integer only
-    if(v>parseInt(obj.max)){
-        v=parseInt(obj.max)
+function minMaxCheck(obj) { // user tetap bisa melakukan input ',' tpi ketika msk ke backend tetap akan diambil angka pertama saja
+    var v = obj.value.replace(/\D/g, ''); //regex filter for integer only
+    if (v > parseInt(obj.max)) {
+        v = parseInt(obj.max)
     }
-    else if(v<parseInt(obj.min)){
-       v=parseInt(obj.min)
+    else if (v < parseInt(obj.min)) {
+        v = parseInt(obj.min)
     }
-    else if(v > parseInt(obj.maxLength)) {
-            v = v.slice(0, obj.maxLength);
+    else if (v > parseInt(obj.maxLength)) {
+        v = v.slice(0, obj.maxLength);
     }
-    obj.value=v;
+    obj.value = v;
 }
 
 //===================================== U S E R =====================================
@@ -80,19 +81,22 @@ function editUser(userId){ //still working on
     agetAllSuperiors();
     superiorList();
     $("#saveUser").click(function () {
-        var r = confirm("Are you sure?")
+        var r = confirm("Are you sure?");
         if(r==true){
             aaddUser("PUT");
         }
     });
-};
+}
 function deleteUser(userId,userName){
     var r = confirm(`You are going to delete user :\nId      : ${userId}\nemail : ${userName}\n\nAre you sure? `);
     if(r==true){
         adeleteUser(userId);//user tidak benar-benar di delete, melainkan hanya menganti value dari field enabled menjadi false.
         //ketika yang didelete adalah user dengan role superior(1), dan memiliki hubungan foreignkey ke user lain, maka tidak akan terjadi error dan id user ini tetap menjadi foreignkey di user lain, sehingga perlu dilakukan update manual dari user lain utk mengganti superior_id nya.
+        $(`#${userId}`).parent().remove()
     }
-};
+}
+
+
 
 $('#getAllUsers').click(function(e){
     e.preventDefault();
@@ -110,14 +114,14 @@ $('#getAllUsers').click(function(e){
     });
 });
 
-//===================================== I T E M =====================================
+//===================================== I T E M S =====================================
 
 $('#getAllItems').click(function (e) {
     e.preventDefault();
     isi.innerHTML=getAllItems();
     agetAllItems();
     $("#orderBy, #sortBy").change(function () {
-        agetAllItems('all');
+        agetAllItems();
     });
 
     $("#myInput").on("keyup", function() {  //fungsi search ini didapat dari w3schools
@@ -126,31 +130,32 @@ $('#getAllItems').click(function (e) {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
-})
+});
 
 $('#addItem').click(function (e) {
     e.preventDefault();
     isi.innerHTML=addItem();
-    $('#saveItem').click(function (e){
+    $('#saveItem').click(function (){
         aaddItem("POST");
     });
-})
+});
 
 function editItem(itemId){ //still working on
     isi.innerHTML=addItem();
     $('#title').html('<b class=\"bold1\">E</b>DIT<b class=\"bold1\">&nbsp;I</b>TEM');
     agetItemById(itemId);
-    $('#saveItem').click(function (e){
+    $('#saveItem').click(function (){
         aaddItem("PUT");
     });
-};
+}
 function deleteItem(itemId,itemName){
     var r = confirm(`You are going to delete user :\nId      : ${itemId}\nemail : ${itemName}\n\nAre you sure? `);
     if(r==true){
         adeleteItem(itemId);//user tidak benar-benar di delete, melainkan hanya menganti value dari field enabled menjadi false.
         //ketika yang didelete adalah user dengan role superior(1), dan memiliki hubungan foreignkey ke user lain, maka tidak akan terjadi error dan id user ini tetap menjadi foreignkey di user lain, sehingga perlu dilakukan update manual dari user lain utk mengganti superior_id nya.
+        $(`#${itemId}`).parent().remove()
     }
-};
+}
 
 var itemCount =0;
 //tidak dapat dibuat eventlistener karena kemungkinan button add itu dibuat melalui string yang di append ke tabel sehingga ada kemungkinan class button tidak terbaca ketika javascript dijalankan.
@@ -161,9 +166,9 @@ function add(btnId){
     $('#itemCount').text(itemCount).css('display', 'block');
     $(`#${btnId}`).clone().appendTo('#cartItems').append('<button class="removeItem btn btn-danger" style="color:whitesmoke;width:100%;font-size: small;margin:3px;padding:5px;">Remove</button>');
     $('#cartItems .rem').remove();
-    $('#cartTotal').text("Total Items: " + itemCount)
+    $('#cartTotal').text("Total Items: " + itemCount);
     $(`.${btnId}`).prop('disabled',true);
-};
+}
 
 $('#getAvailableItems').click(function (e) {
     e.preventDefault();
@@ -190,7 +195,7 @@ $('#getAvailableItems').click(function (e) {
 
 // Empty Cart
     $('#emptyCart').click(function() {
-        var r = confirm("Are you sure to empty your cart?")
+        var r = confirm("Are you sure to empty your cart?");
         if (r==true) {
             itemCount = 0;
             $('#itemCount').css('display', 'none');
@@ -207,7 +212,7 @@ $('#getAvailableItems').click(function (e) {
         btnId =  $(this).parent().prop('id');
         itemCount --;
         $('#itemCount').text(itemCount);
-        $('#cartTotal').text("Total Items: " + itemCount)
+        $('#cartTotal').text("Total Items: " + itemCount);
         if (itemCount == 0) {
             $('#itemCount').css('display', 'none');
         }
@@ -220,5 +225,29 @@ $('#getAvailableItems').click(function (e) {
 
 }); //=============================== A V A I L A B L E    I T E M S     E N D S     H E R E ===============================
 
+//=============================== R E Q U E S T S    S T A R T S    H E R E ===============================
+$('#getAllRequests').click(function (e) {
+    e.preventDefault();
+    isi.innerHTML=getAllRequests();
+    agetAllRequests();
+    $("#orderBy, #sortBy").change(function () {
+        agetAllRequests();
+    });
 
+    $("#myInput").on("keyup", function() {  //fungsi search ini didapat dari w3schools
+        var value = $(this).val().toLowerCase();
+        $("#requestList tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+});
+
+
+
+
+
+
+
+//=============================== R E Q U E S T S     E N D S     H E R E ===============================
 

@@ -7,7 +7,7 @@ function agetUserById(id){
         },
         dataType:"json",
         success: function (data) {
-            console.log("yes. data: " + data) // meng isi input field dengan value yg sdh ada
+            console.log("yes. data: " + data); // meng isi input field dengan value yg sdh ada
             $('#id').val(data.id);
             $("#nik").val(parseInt(data.nik));
             $('#name').val(data.name);
@@ -31,7 +31,6 @@ function agetUserById(id){
 
 
 function agetAllUsers(){
-    console.log(`http://localhost:8080/api/users?orderBy=${$('#orderBy').val()}`)
     $.ajax({
         type: 'GET',
         url: `http://localhost:8080/api/users?orderBy=${$('#orderBy').val()}`,
@@ -40,7 +39,7 @@ function agetAllUsers(){
         },
         dataType:"json",
         success: function (data) {
-            console.log("yes. data: " + data)
+            console.log("yes. data: " + data);
             if (data) {
                 var len = data.length;
                 var txt = ``;
@@ -97,26 +96,26 @@ function agetAllUsers(){
     });
 }
 
-function agetAllSuperiors(){
+function agetAllSuperiors() {
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8080/api/users/superiors',
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },
-        dataType:"json",
+        dataType: "json",
         success: function (data) {
-            console.log("yes. data: " + data)
+            console.log("yes. data: " + data);
             if (data) {
                 var len = data.length;
                 var txt = "";
                 if (len > 0) {
-                    for(var i=0;i<len;i++){
-                        if(data[i].name && data[i].email){
+                    for (var i = 0; i < len; i++) {
+                        if (data[i].name && data[i].email) {
                             txt += `<option value=${data[i].id}>${data[i].email}</option>`
                         }
                     }
-                    if(txt != ""){
+                    if (txt != "") {
                         $("#superiorList").append(txt);
                     }
                     // alert("Success :"+data);
@@ -140,7 +139,7 @@ function aaddUser(type){
         position: document.getElementById("position").value,
         cnumber: document.getElementById("cnumber").value,
         address: document.getElementById("address").value
-    }
+    };
     if($('#superiorList').val()!=""){user.superior = {id : parseInt($('#superiorList').val())}}
     var userJson = JSON.stringify(user);
     console.log(userJson);
@@ -172,7 +171,7 @@ function aaddUser(type){
     }
     else if (type==="PUT"){
         var id=$('#id').val();
-        console.log(`http://localhost:8080/api/users/${id}`)
+        console.log(`http://localhost:8080/api/users/${id}`);
         $.ajax({
             type: 'PUT',
             url: `http://localhost:8080/api/users/${id}`,
@@ -183,7 +182,7 @@ function aaddUser(type){
             dataType: "json", //to parse string into JSON object,
             success: function (data) {
                if(data){
-                   console.log("User updated : sucess")
+                   console.log("User updated : sucess");
                    alert("Successed to update user")
                }
             },
@@ -205,7 +204,7 @@ function adeleteUser(id){
         dataType: "json", //to parse string into JSON object,
         success: function (data) {
             if(data==true){
-                console.log("User DELETED : sucess")
+                console.log("User DELETED : sucess");
                 alert("Successed to delete user")
             }
         },

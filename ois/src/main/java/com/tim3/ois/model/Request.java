@@ -9,10 +9,12 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Target;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.util.*;
 
 @Data
@@ -32,8 +34,10 @@ public class Request {
     @JoinColumn(name = "request_by",referencedColumnName = "id")
     private User user;
 
+    @Value("")
     @Column(name = "message")
     private String message;
+
 
     @Column(name = "status")
     private String status;
@@ -66,8 +70,8 @@ public class Request {
     @Column(name = "handed_by")
     private String handedBy;
 
-    @Column(name = "reject_note")
-    private String rejectNote;
+    @Column(name = "feedback")
+    private String feedback;
 
     @Column(name = "rejected_date")
     private Long rejectedAt;
@@ -76,6 +80,6 @@ public class Request {
     private Long returnedAt;
 
     @Column(name = "return_received_by")
-    private String receivedBy;
+    private String receivedBy;// ketika item dikembalikan diterima oleh admin siapa
 }
 
