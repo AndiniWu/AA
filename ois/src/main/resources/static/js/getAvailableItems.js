@@ -14,7 +14,10 @@ function getAvailableItems(){
         "            <div class=\"col-md-3 col11\">\n" +
         "            <label for=\"orderBy\">OrderBy:</label>\n" +
         "            <select style='width: 36%' id='orderBy'>\n" +
+        "                <option value='id'>Qty</option>\n" +
+        "                <option value='qty'>Qty</option>\n" +
         "                <option value='name'>Name</option>\n" +
+        "                <option value='price'>Price</option>\n" +
         "            </select>\n" +
         "            </div>\n" +
         "            <div  class=\"col-md-3 col11\"> "+

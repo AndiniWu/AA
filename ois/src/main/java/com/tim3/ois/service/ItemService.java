@@ -54,10 +54,10 @@ public class ItemService {
         else if(orderBy.equals("id") && sortBy.equals("asc")){
             return itemRepository.findAllByEnabledOrderByIdAsc(true);
         }
-        else if(orderBy.equals("quantity") && sortBy.equals("asc")){
+        else if(orderBy.equals("qty") && sortBy.equals("asc")){
             return itemRepository.findAllByEnabledOrderByQuantityAsc(true);
         }
-        else if(orderBy.equals("quantity") && sortBy.equals("desc")){
+        else if(orderBy.equals("qty") && sortBy.equals("desc")){
             return itemRepository.findAllByEnabledOrderByQuantityDesc(true);
         }
         else {

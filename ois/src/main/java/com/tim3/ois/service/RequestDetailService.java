@@ -13,12 +13,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 
 @Service("assigmentService")
-public class RequestDetailService {
+public class RequestDetailService{
     @Autowired
     private ItemService itemService;
     @Autowired
     private RequestService requestService;
-    private void updateRequestDetail(Request request,int status) {
+    public void updateRequestDetail(Request request,int status) {
         Item item;
             for (RequestDetail i : request.getReqDetail()) {
                 item = itemService.findItemById(i.getItem().getId());
@@ -41,14 +41,12 @@ public class RequestDetailService {
             throw new ResourceNotFoundException("Request", "id", id);
         }
 //        if(request.getStatus()<status) {
-        if (status == 1) {                          //ITEM REQUESTED
+        if (status == 1) {                          //REQUEST APPROVED
             updateRequestDetail(request, status);
-            return requestService.updateRequest(id, "Approved/Item(s) waiting to be picked");
-        } else if (status == 2) {                   // REQUEST APPROVED FOR ROLLBACK
-            return requestService.updateRequest(id, "Approved/Item(s) waiting to be picked", 2);
-        } else if (status == 3) {                   // REQUEST HAD BEEN TAKEN or ITEM HANDED BY
+            return requestService.updateRequest(id, req.getFeedback());
+        } else if (status == 2) {                   // REQUEST HAD BEEN TAKEN or ITEM HANDED BY
             return requestService.updateRequest(id, req);
-        } else if (status == 4) {                   // REQUEST HAD BEEN RETURNED
+        } else if (status == 3) {                   // REQUEST HAD BEEN RETURNED
             updateRequestDetail(request, status);
             return requestService.updateRequest(id, req, "EXTRA");
         } else {                    // REQUEST REJECTED

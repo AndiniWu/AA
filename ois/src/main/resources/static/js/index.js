@@ -1,9 +1,10 @@
 var user = getCookie("user");
 user = user.split(',');
-document.getElementById("profile").innerText = user[2];
+// document.getElementById("profile").innerText = user[2];
+$('#profile').text(user[2]);
 console.log(user);
 var myRole = user[3];
-var isi= document.getElementById("isi"); //sebagai tempat pergantian konten halaman
+var isi= $("#isi"); //sebagai tempat pergantian konten halaman
 
 $('#logout').click(function(e){
     e.preventDefault();
@@ -63,7 +64,7 @@ function superiorList(){
 $('#addUser').click(function(e){
     e.preventDefault();
 
-    isi.innerHTML=addUser(); //mengubah isi konten dengan halaman adduser
+    isi.html(addUser()); //mengubah isi konten dengan halaman adduser
     agetAllSuperiors();
     superiorList();
     $("#saveUser").click(function () {
@@ -75,7 +76,7 @@ $("#reset").click(function () {
 });
 
 function editUser(userId){ //still working on
-    isi.innerHTML=addUser();
+    isi.html(addUser());
     $('#title').html('<b class=\"bold1\">E</b>DIT<b class=\"bold1\">&nbsp;U</b>SER');
     agetUserById(userId);
     agetAllSuperiors();
@@ -100,7 +101,7 @@ function deleteUser(userId,userName){
 
 $('#getAllUsers').click(function(e){
     e.preventDefault();
-    isi.innerHTML=getAllUsers();
+    isi.html(getAllUsers());
     agetAllUsers();
     $("#orderBy").change(function () {
         agetAllUsers();
@@ -118,7 +119,7 @@ $('#getAllUsers').click(function(e){
 
 $('#getAllItems').click(function (e) {
     e.preventDefault();
-    isi.innerHTML=getAllItems();
+    isi.html(getAllItems());
     agetAllItems();
     $("#orderBy, #sortBy").change(function () {
         agetAllItems();
@@ -134,14 +135,14 @@ $('#getAllItems').click(function (e) {
 
 $('#addItem').click(function (e) {
     e.preventDefault();
-    isi.innerHTML=addItem();
+    isi.html(addItem());
     $('#saveItem').click(function (){
         aaddItem("POST");
     });
 });
 
 function editItem(itemId){ //still working on
-    isi.innerHTML=addItem();
+    isi.html(addItem());
     $('#title').html('<b class=\"bold1\">E</b>DIT<b class=\"bold1\">&nbsp;I</b>TEM');
     agetItemById(itemId);
     $('#saveItem').click(function (){
@@ -172,7 +173,7 @@ function add(btnId){
 
 $('#getAvailableItems').click(function (e) {
     e.preventDefault();
-    isi.innerHTML=getAvailableItems();
+    isi.html(getAvailableItems());
     $('#title').html('<b class=\"bold1\">A</b>VAILABLE<b class=\"bold1\">&nbsp;I</b>TEMS');
     agetAvailableItems();
     $("#orderBy, #sortBy").change(function () {
@@ -228,7 +229,7 @@ $('#getAvailableItems').click(function (e) {
 //=============================== R E Q U E S T S    S T A R T S    H E R E ===============================
 $('#getAllRequests').click(function (e) {
     e.preventDefault();
-    isi.innerHTML=getAllRequests();
+    isi.html(getAllRequests());
     agetAllRequests();
     $("#orderBy, #sortBy").change(function () {
         agetAllRequests();
