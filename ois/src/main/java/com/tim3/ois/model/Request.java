@@ -79,6 +79,9 @@ public class Request {
     @Column(name = "return_date")
     private Long returnedAt;
 
+    @Column(name = "status_code")
+    private Integer statusCode;
+
     @Column(name = "return_received_by")
     private String receivedBy;// ketika item dikembalikan diterima oleh admin siapa
 }

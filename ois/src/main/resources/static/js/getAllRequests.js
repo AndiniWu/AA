@@ -28,7 +28,7 @@ function getAllRequests(){
                     </select>
                     </div>           
             <div class='table-responsive'>
-            	<table class='table table-sm table-hover table-bordered'>
+            	<table class='table table-hover table-bordered'>
             		<thead>
             			<tr>
             				<th>RequestId</th>

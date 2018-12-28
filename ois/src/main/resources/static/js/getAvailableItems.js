@@ -14,7 +14,7 @@ function getAvailableItems(){
         "            <div class=\"col-md-3 col11\">\n" +
         "            <label for=\"orderBy\">OrderBy:</label>\n" +
         "            <select style='width: 36%' id='orderBy'>\n" +
-        "                <option value='id'>Qty</option>\n" +
+        "                <option value='id'>Id</option>\n" +
         "                <option value='qty'>Qty</option>\n" +
         "                <option value='name'>Name</option>\n" +
         "                <option value='price'>Price</option>\n" +
@@ -63,7 +63,7 @@ function getAvailableItems(){
         "              </table>" +
         "          </div>\n" +
         "\t\t      <div id='cartTotal'></div>" +
-        "<div><input type='text' style='width: 100%;padding: 8px;' id='reqMessage' placeholder='Enter your request message/note here'></div>"+
+        "<div><textarea  style='width: 100%;padding: 8px;height:80px;' id='reqMessage' placeholder='Enter your request note here'></textarea></div>"+
         "           <button style='float:right;' id='submit' type='submit' class='btn btn-default'><span style=\"color:white\">SUBMIT</span></button>\n" +
         "\t\t       </div>\n" +
         "\t\t       </div></th>\n" +

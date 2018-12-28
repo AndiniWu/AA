@@ -45,26 +45,14 @@ public class RequestController {
     public Request createNewRequest(
             @Valid
             @RequestBody
-                    Request request,
-            BindingResult bindingResult) {
-//        Request requestExists= requestService.findRequestById(request.getId());
-//
-//        if (requestExists != null) {
-//            //bindingResult.rejectValue("request", "There is already a request registered with the name provided");
-//           return false;
-//        }
+                    Request request) {
         requestService.saveRequest(request);
-//        RequestDetail requestDetail = new RequestDetail(request,item,item.getQuantity());
-//        requestService.saveRequestDetail(requestDetail); // terakhir sampai sini
         return request;
     }
 
     @DeleteMapping("/requests/{id}")
     public Boolean deleteRequest(@PathVariable(value = "id")int reqId){
-        Request request = requestService.findRequestById(reqId);
-        if(request==null){return false;}
-        requestService.deleteRequest(request);
-        return true;
+        return requestService.deleteRequest(reqId);
     }
 //
 

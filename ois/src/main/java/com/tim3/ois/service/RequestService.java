@@ -49,9 +49,10 @@ public class RequestService {
     }
 
 
-    public Request saveRequest(Request request){
+    public Request saveRequest(Request request){ //STATUS CODE = 4 ITEM IS REQUESTED WAITING FOR APPROVAL
         request.setCreatedAt(new Date().getTime());
         request.setStatus("Pending/waiting to be approved");
+        request.setStatusCode(4);
         requestRepository.save(request);
         requestDetailService.updateRequestDetail(request,1);
         System.out.println(request);
@@ -68,6 +69,7 @@ public class RequestService {
         request.setStatus(status);
         request.setFeedback(feedback);
         request.setRejectedAt(new Date().getTime());
+        request.setStatusCode(0);
         Request updatedRequest = requestRepository.save(request);
         return updatedRequest;
     }
@@ -76,34 +78,43 @@ public class RequestService {
     public Request updateRequest(int id,String feedback) {
         Request request= requestRepository.findById(id);
         request.setFeedback(feedback);
+        request.setStatusCode(1);
         request.setApprovedAt(new Date().getTime());
         request.setStatus("Approved/Item(s) waiting to be picked");
         Request updatedRequest = requestRepository.save(request);
         return updatedRequest;
     }
 
-    //UPDATE HANDEDBY ADMIN ITEM TAKEN 3
+    //UPDATE HANDEDBY ADMIN ITEM TAKEN 2
     public Request updateRequest(int id, Request req) {
         Request request= requestRepository.findById(id);
         request.setHandedBy(req.getHandedBy());
         request.setHandedAt(new Date().getTime());
         request.setStatus("Item(s) had been taken by requester");
+        request.setStatusCode(2);
         Request updatedRequest = requestRepository.save(request);
         return updatedRequest;
     }
-    //UPDATE REQUEST STATUS ITEM RETURNED 5
+    //UPDATE REQUEST STATUS ITEM RETURNED 3
     public Request updateRequest(int id,Request req,String EXTRA) {
         Request request= requestRepository.findById(id);
         request.setStatus("Item(s) had been returned by requester");
         request.setReturnedAt(new Date().getTime());
+        request.setStatusCode(3);
         request.setReceivedBy(req.getReceivedBy());
         Request updatedRequest = requestRepository.save(request);
 
         return updatedRequest;
     }
 
-    public void deleteRequest(Request request){
+    public boolean deleteRequest(int reqId){
+        Request request = requestRepository.findById(reqId);
+        if(request==null){
+            return false;
+        }
+        requestDetailService.updateRequestDetail(request,0);
         requestRepository.delete(request);
+        return true;
     }
 
 //    public void deleteRequestDetail(RequestDetail reqDetail){

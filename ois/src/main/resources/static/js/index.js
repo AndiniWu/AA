@@ -11,7 +11,9 @@ $('#logout').click(function(e){
     deleteCookie("user");
     window.location = "login";
 });
-
+function refresh(ref){
+    isi.html(ref());
+}
 //===================================== T O P    B U T T O N =====================================
 
 var btn = $('#button');
@@ -63,8 +65,7 @@ function superiorList(){
 
 $('#addUser').click(function(e){
     e.preventDefault();
-
-    isi.html(addUser()); //mengubah isi konten dengan halaman adduser
+    refresh(addUser);
     agetAllSuperiors();
     superiorList();
     $("#saveUser").click(function () {

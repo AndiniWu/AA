@@ -16,7 +16,7 @@ function getAllItems(){
         "            <select style='width: 36%' id='orderBy'>\n" +
         "                <option value='name'>Name</option>\n" +
         "                <option value='id'>Id</option>\n" +
-        "                <option value='quantity'>Qty</option>\n" +
+        "                <option value='qty'>Qty</option>\n" +
         "                <option value='price'>Price</option>\n" +
         "            </select>\n" +
         "            </div>\n" +

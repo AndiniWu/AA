@@ -174,51 +174,6 @@ function agetItemById(id){
     });
 }
 
-function submitRequest(){
-    var myCart=[];var cart={};
-    var cek = $('#cartItems').children().length > 0 ;
-    var list=``;
-    if(cek==false){
-        alert(`You added nothing to your cart!`);
-    }
-    if ( cek ) {
-        var i=1;
-        $('#cartItems tr').each(function () {
-            cart = {
-                item: {
-                    id: parseInt($(this).find("td").eq(0).html()),
-                    name: $(this).find("td").eq(1).html().toString()
-                },
-                qty: parseInt($(this).find("td .quantity").val())
-            };
-            if (cart.qty == 0 || cart.qty === null || cart.qty === undefined || isNaN(cart.qty)) {
-                alert("Quantity must be filled!");
-                cek = false;
-                return cek;
-            }
-            list += ` ${i}. ${cart.item.name} : ${cart.qty}\n`;
-            myCart.push(cart);
-            i++;
-        });
-    }
-    // console.log(myCart);
-    if(cek) {
-        var r = confirm(`Are you sure?\nItem you requested:\n${list}\nMessage :\n  ${$('#reqMessage').val()}`);
-        if(r==true) {
-            var request = {
-                user: {id: user[0]},
-                message: $('#reqMessage').val(),
-                reqDetail: myCart
-            };
-            var requestJson = JSON.stringify(request);
-            console.log(requestJson);
-            aaddRequest(requestJson);
-        }
-    }
-
-}
-
-
 
 function adeleteItem(id){
     $.ajax({
@@ -240,3 +195,4 @@ function adeleteItem(id){
         }
     });
 }
+

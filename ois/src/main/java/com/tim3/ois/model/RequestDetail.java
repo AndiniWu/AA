@@ -48,30 +48,4 @@ public class RequestDetail {
     @Column(name = "quantity")
     private int qty;
 
-//    public RequestDetail(Request request, Item item) {
-//        reqDetId= new RequestDetail.RequestDetailId();
-//        reqDetId.reqId = request.getId();
-//        reqDetId.itemId= item.getId();
-//        qty = item.getQuantity();
-//    }
-//    @Embeddable
-//    public static class RequestDetailId implements Serializable{
-//        public int reqId;
-//        public int itemId;
-//
-//        @Override
-//        public boolean equals(Object o){
-//            if(this == o) return true;
-//            if(o == null || getClass() != o.getClass())return false;
-//
-//            RequestDetailId requestDetailId= (RequestDetailId) o;
-//            return Objects.equals(reqId,requestDetailId.reqId) && Objects.equals(itemId,requestDetailId.itemId);
-//        }
-//
-//        @Override
-//        public int hashCode() {return Objects.hash(reqId,itemId);}
-//    }
-//
-
-
 }

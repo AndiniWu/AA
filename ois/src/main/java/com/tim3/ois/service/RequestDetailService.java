@@ -26,7 +26,7 @@ public class RequestDetailService{
                 if(status == 1) {     //kurangkan item di stok dengan item yang di request
                     item.setQuantity(item.getQuantity() - i.getQty());
                 }
-                else if(status == 0 || status == 4){              //tambahkan kembali item yang dikembalikan ke stok
+                else if(status == 0 || status == 3){              //tambahkan kembali item yang dikembalikan ke stok
                     item.setQuantity(item.getQuantity() + i.getQty());
                 }
                 System.out.println("updatedItem: " + item.getQuantity() + " +/- " + i.getQty());
@@ -42,7 +42,6 @@ public class RequestDetailService{
         }
 //        if(request.getStatus()<status) {
         if (status == 1) {                          //REQUEST APPROVED
-            updateRequestDetail(request, status);
             return requestService.updateRequest(id, req.getFeedback());
         } else if (status == 2) {                   // REQUEST HAD BEEN TAKEN or ITEM HANDED BY
             return requestService.updateRequest(id, req);
