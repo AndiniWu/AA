@@ -27,19 +27,22 @@ public class RequestController {
     @Autowired
     private RequestDetailService requestDetailService;
 
-    @GetMapping("/requests")
-    public List<Request> getAllRequest(){
-        return requestService.findAll();
-    }
-
-    @GetMapping("/requests/{id}")
-    public Request getRequest(@PathVariable(value = "id") int reqId){
-        return requestService.findRequestById(reqId);
-    }
-//    @GetMapping("/request/detail")
-//    public List<RequestDetail> getAllRequestDetail(){
-//        return requestService.findAllRequestDetail();
+//    @GetMapping("/requests")
+//    public List<Request> getAllRequest(){
+//        return requestService.findAll();
 //    }
+
+//    @GetMapping("/requests/{id}")
+//    public Request getRequest(@PathVariable(value = "id") int reqId){
+//        return requestService.findRequestById(reqId);
+//    }
+    @GetMapping("/requests")
+    public List<Request> getAllRequest(
+            @RequestParam(value = "superiorId",required = false)Integer id,
+            @RequestParam(value = "sortBy",required = false,defaultValue = "createdAt")String sortBy,
+            @RequestParam(value = "orderBy",required = false,defaultValue = "asc")String orderBy){
+        return requestService.findAllBy(id,sortBy,orderBy);
+    }
 
     @PostMapping(value = "/requests", produces = MediaType.APPLICATION_JSON_VALUE)
     public Request createNewRequest(

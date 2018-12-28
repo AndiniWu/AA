@@ -2,7 +2,7 @@ function agetAllItems(){
     // console.log(`http://localhost:8080/api/items?orderBy=${sort[0]}&sortBy=${sort[0]}`)
     $.ajax({
         type: 'GET',
-        url: `http://localhost:8080/api/items?orderBy=${$('#orderBy').val()}&sortBy=${$('#sortBy').val()}`,
+        url: `http://localhost:8080/api/items?sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },
@@ -46,7 +46,7 @@ function agetAllItems(){
 function agetAvailableItems(){
     $.ajax({
         type: 'GET',
-        url: `http://localhost:8080/api/items?orderBy=${$('#orderBy').val()}&sortBy=${$('#sortBy').val()}`,
+        url: `http://localhost:8080/api/items?sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },

@@ -5,6 +5,7 @@ import com.tim3.ois.repository.ItemRepository;
 
 import com.tim3.ois.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,29 +41,12 @@ public class ItemService {
         return itemRepository.findByName(name);
     }
 
-    public List<Item> findBy(String orderBy, String sortBy) {
-        if(orderBy.equals("name") && sortBy.equals("asc")){
-            System.out.println(itemRepository.findAllByEnabledOrderByNameAsc(true));
-            return itemRepository.findAllByEnabledOrderByNameAsc(true);
-        }
-        else if(orderBy.equals("price") && sortBy.equals("asc")){
-            return itemRepository.findAllByEnabledOrderByPriceAsc(true);
-        }
-        else if(orderBy.equals("price") && sortBy.equals("desc")){
-            return itemRepository.findAllByEnabledOrderByPriceDesc(true);
-        }
-        else if(orderBy.equals("id") && sortBy.equals("asc")){
-            return itemRepository.findAllByEnabledOrderByIdAsc(true);
-        }
-        else if(orderBy.equals("qty") && sortBy.equals("asc")){
-            return itemRepository.findAllByEnabledOrderByQuantityAsc(true);
-        }
-        else if(orderBy.equals("qty") && sortBy.equals("desc")){
-            return itemRepository.findAllByEnabledOrderByQuantityDesc(true);
-        }
-        else {
-            return itemRepository.findAllByEnabledOrderByIdDesc(true);
-        }
+    public List<Item> findBy(String sortBy, String orderBy) {
+        if(orderBy.toLowerCase().equals("asc")) return itemRepository.findAllBy(true, Sort.by(sortBy,"id").ascending());
+
+        else if(orderBy.toLowerCase().equals("desc")) return itemRepository.findAllBy(true, Sort.by(sortBy,"id").descending());
+
+        else return itemRepository.findAll();
     }
 
 //    public List<Item> findAvailableItems(){

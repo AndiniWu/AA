@@ -33,7 +33,7 @@ function agetUserById(id){
 function agetAllUsers(){
     $.ajax({
         type: 'GET',
-        url: `http://localhost:8080/api/users?orderBy=${$('#orderBy').val()}`,
+        url: `http://localhost:8080/api/users?sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },

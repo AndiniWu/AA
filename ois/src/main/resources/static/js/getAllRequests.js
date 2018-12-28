@@ -12,17 +12,17 @@ function getAllRequests(){
                   </div>
             <div class="col-md-2"></div>
             <div class="col-md-3 col11">
-            <label for="orderBy">OrderBy:</label>
-                    <select style='width: 36%' id='orderBy'>
-                        <option value='name'>Name</option>
+            <label for="sortBy">SortBy:</label>
+                    <select style='width: 36%' id='sortBy'>
+                        <option value='statusCode'>status</option>
                         <option value='id'>Id</option>
-                        <option value='quantity'>Qty</option>
-                        <option value='price'>Price</option>
+                        <option value='createdAt'>RequestDate</option>
+                        <option value='user'>RequestBy</option>
                     </select>
                     </div>
                    <div  class="col-md-3 col11">
-                   <label for="sortBy">SortBy:</label>
-                  <select style='width: 36%' id='sortBy'>
+                   <label for="orderBy">OrderBy:</label>
+                  <select style='width: 36%' id='orderBy'>
                        <option value='asc'>Asc</option>
                         <option value='desc'>Desc</option>
                     </select>

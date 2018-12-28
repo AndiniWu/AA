@@ -4,6 +4,7 @@ import com.tim3.ois.exception.ResourceNotFoundException;
 import com.tim3.ois.model.User;
 import com.tim3.ois.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,21 +21,12 @@ public class UserService {
     public UserService(UserRepository userRepository){
         this.userRepository=userRepository;
     }
-    public List<User> findBy(String orderBy) {
+    public List<User> findBy(String sortBy, String orderBy) {
+        if(orderBy.toLowerCase().equals("asc")) return userRepository.findAllBy(true, Sort.by(sortBy,"id").ascending());
 
-        if(orderBy.equals("role")){
-            System.out.println(userRepository.findAllByEnabledOrderByRoleAscEmailAsc(true));
-            return userRepository.findAllByEnabledOrderByRoleAscEmailAsc(true);
-        }
-        else if(orderBy.equals("email")){
-            return userRepository.findAllByEnabledOrderByEmailAsc(true);
-        }
-        else if(orderBy.equals("name")){
-            return userRepository.findAllByEnabledOrderByNameAsc(true);
-        }
-        else {
-            return userRepository.findAllByEnabledOrderByIdAsc(true);
-        }
+        else if(orderBy.toLowerCase().equals("desc")) return userRepository.findAllBy(true, Sort.by(sortBy,"id").descending());
+
+        else return userRepository.findAll();
     }
     public User findUserById(int id) throws ResourceNotFoundException {
         User user = userRepository.findById(id);

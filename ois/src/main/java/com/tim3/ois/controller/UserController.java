@@ -23,8 +23,9 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/users")
-    public List<User> getAllUsers(@RequestParam(value = "orderBy",required = false,defaultValue = "role")String orderBy){
-        return userService.findBy(orderBy);
+    public List<User> getAllUsers(@RequestParam(value = "sortBy",required = false,defaultValue = "role")String sortBy,
+                                  @RequestParam(value = "orderBy",required = false,defaultValue = "asc")String orderBy){
+        return userService.findBy(sortBy,orderBy);
     }
 
     @GetMapping(value = "/users/superiors",produces = MediaType.APPLICATION_JSON_VALUE)

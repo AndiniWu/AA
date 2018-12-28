@@ -22,9 +22,9 @@ public class ItemController {
     private ItemService itemService;
 
     @GetMapping("/items")
-    public List<Item> getAllItems(@RequestParam(value = "orderBy",required = false,defaultValue = "role")String orderBy,
-                                  @RequestParam(value = "sortBy",required = false,defaultValue = "asc")String sortBy){
-        return itemService.findBy(orderBy,sortBy);
+    public List<Item> getAllItems(@RequestParam(value = "sortBy",required = false,defaultValue = "role")String sortBy,
+                                  @RequestParam(value = "orderBy",required = false,defaultValue = "asc")String orderBy){
+        return itemService.findBy(sortBy,orderBy);
     }
     @GetMapping("/items/{id}")
     public Item getItem(@PathVariable(value = "id") int itemId){

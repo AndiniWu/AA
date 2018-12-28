@@ -11,15 +11,22 @@ function getAllUsers(){
         "                </div>\n" +
         "            </div>\n" +
         "            <div class=\"col-md-2\"></div>\n" +
-        "            <div class=\"col-md-3 col11\">\n" +
-        "            \t     <label for=\"sel1\">OrderBy:</label>\n" +
-        "            <select style='width: 50%' id='orderBy'>\n" +
-        "                <option value='role'>Role</option>\n" +
-        "                <option value='email'>Email</option>\n" +
-        "                <option value='name'>Name</option>\n" +
-        "                <option value='id'>Id</option>\n" +
-        "            </select>\n" +
-        "            </div>\n" +
+        "<div class=\"col-md-3 col11\">\n            " +
+        "   <label for=\"sortBy\">SortBy:</label>\n                    " +
+        "        <select style='width: 36%' id='sortBy'>\n                       " +
+        "            <option value='role'>Role</option>\n                        " +
+        "            <option value='id'>Id</option>\n                      " +
+        "            <option value='email'>email</option>\n                        " +
+        "            <option value='superior'>superior</option>\n                    " +
+        "        </select>\n                    " +
+        "</div>\n                   " +
+        "<div  class=\"col-md-3 col11\">\n                   " +
+        "   <label for=\"orderBy\">OrderBy::</label>\n                  " +
+        "       <select style='width: 36%' id='orderBy'>\n                       " +
+        "           <option value='asc'>Asc</option>\n                        " +
+        "           <option value='desc'>Desc</option>\n                    " +
+        "       </select>\n                    " +
+        "</div>    "+
         "            <div class='table-responsive'>\n" +
         "            \t<table class='table table-sm table-hover table-bordered'>\n" +
         "            \t\t<thead>\n" +

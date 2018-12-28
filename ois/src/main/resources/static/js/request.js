@@ -17,6 +17,9 @@ function aaddRequest(requestJson){
             }
             console.log(msg);
             alert(`${msg}`);
+            refresh(getAvailableItems);
+            agetAvailableItems();
+            itemCount=0;
         },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
@@ -25,11 +28,10 @@ function aaddRequest(requestJson){
     });
 }
 
-function agetAllRequests(){
+function agetAllRequests(){ // TERAKHIR SAMPAI SINI, BUAT TAMPILAN REQUEST BERDASARKAN REQUEST DARI BAWAHANNYA
     $.ajax({
         type: 'GET',
-        url: `http://localhost:8080/api/requests`,
-        // ?orderBy=${$('#orderBy').val()}&sortBy=${$('#sortBy').val()}
+        url: `http://localhost:8080/api/requests?superiorId=${myId}&sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },
@@ -138,11 +140,11 @@ function getReqDetails(request) {
         $("#note").prop('disabled', true).val(request.message);
         $("#feedback").val(request.feedback);
         var buttons = {
-            approveBtn: $("<button>").addClass("btn btn-success").text("Approve Request").on('click', request, approveRequest), // kedua request sebagai parameter
-            rejectBtn: $("<button>").addClass("btn btn-danger").text(" Reject Request").click(rejectRequest.bind(null, request)),
-            giveBtn: $("<button>").addClass("btn btn-success").text("Give").on('click', request, giveItem), // kedua fungsi .on()/.bind()bisa dijalankan
-            returnBtn: $("<button>").addClass("btn btn-danger").text("Return Item").on('click', request, returnItem),
-            cancelRequestBtn: $("<button>").addClass("btn btn-danger").text("Cancel Request").on('click', request.id, cancelRequest)
+            approveBtn: $("<button>").addClass("btn btn-success").attr("data-dismiss","modal").text("Approve Request").on('click', request, approveRequest), // kedua request sebagai parameter
+            rejectBtn: $("<button>").addClass("btn btn-danger").attr("data-dismiss","modal").text(" Reject Request").click(rejectRequest.bind(null, request)),
+            giveBtn: $("<button>").addClass("btn btn-success").attr("data-dismiss","modal").text("Give").on('click', request, giveItem), // kedua fungsi .on()/.bind()bisa dijalankan
+            returnBtn: $("<button>").addClass("btn btn-danger").attr("data-dismiss","modal").text("Return Item").on('click', request, returnItem),
+            cancelRequestBtn: $("<button>").attr("data-dismiss","modal").addClass("btn btn-danger").text("Cancel Request").on('click', request.id, cancelRequest)
         };
         //STATUS CODE == 4 ARTINYA ITEM BARU DI REQUEST, BELUM DI APPROVE ATAUPUN REJECT
         if (myRole == 1 && request.statusCode == 4) { //ROLE 1 == SUPERIOR
@@ -173,7 +175,7 @@ function approveRequest(request){
     aupdateRequest(request.data,1);
 }
 function rejectRequest(request){
-    aupdateRequest(request,0)
+    aupdateRequest(request,4)
 }
 
 
@@ -227,6 +229,7 @@ function adeleteRequest(id){
             }
             console.log(msg);
             alert(`${msg}`);
+            refresh(agetAllRequests);
         },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' .Error Message: ' + error.responseText);

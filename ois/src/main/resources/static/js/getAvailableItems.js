@@ -12,17 +12,17 @@ function getAvailableItems(){
         "            </div>\n" +
         "            <div class=\"col-md-2\"></div>\n" +
         "            <div class=\"col-md-3 col11\">\n" +
-        "            <label for=\"orderBy\">OrderBy:</label>\n" +
-        "            <select style='width: 36%' id='orderBy'>\n" +
-        "                <option value='id'>Id</option>\n" +
-        "                <option value='qty'>Qty</option>\n" +
+        "            <label for=\"sortBy\">SortBy:</label>\n" +
+        "            <select style='width: 36%' id='sortBy'>\n" +
         "                <option value='name'>Name</option>\n" +
+        "                <option value='id'>Id</option>\n" +
+        "                <option value='quantity'>Qty</option>\n" +
         "                <option value='price'>Price</option>\n" +
         "            </select>\n" +
         "            </div>\n" +
         "            <div  class=\"col-md-3 col11\"> "+
-        "           <label for=\"sortBy\">SortBy:</label>" +
-        "           <select style='width: 36%' id='sortBy'>\n" +
+        "           <label for=\"orderBy\">OrderBy:</label>" +
+        "           <select style='width: 36%' id='orderBy'>\n" +
         "                <option value='asc'>Asc</option>\n" +
         "                <option value='desc'>Desc</option>\n" +
         "            </select>" +
