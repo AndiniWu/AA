@@ -23,9 +23,11 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/users")
-    public List<User> getAllUsers(@RequestParam(value = "sortBy",required = false,defaultValue = "role")String sortBy,
-                                  @RequestParam(value = "orderBy",required = false,defaultValue = "asc")String orderBy){
-        return userService.findBy(sortBy,orderBy);
+    public List<User> getAllUsers(
+            @RequestParam(value = "sId",required = false,defaultValue = "-1")Integer sId,
+            @RequestParam(value = "sortBy",required = false,defaultValue = "role")String sortBy,
+            @RequestParam(value = "orderBy",required = false,defaultValue = "asc")String orderBy){
+        return userService.findBy(sId,sortBy,orderBy);
     }
 
     @GetMapping(value = "/users/superiors",produces = MediaType.APPLICATION_JSON_VALUE)

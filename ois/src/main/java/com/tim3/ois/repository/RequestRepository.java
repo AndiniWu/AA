@@ -16,10 +16,18 @@ import java.util.List;
 @Repository("requestRepository")
 public interface RequestRepository extends JpaRepository<Request, Integer> {
     Request findById(int id);
+
     @Query(value = "SELECT r FROM Request r WHERE r.user.id IN (SELECT u.id FROM User u WHERE u.enabled = :bool) ")
     List<Request> findAllBy(
             @Param("bool") boolean bool,
             Sort sort);
+
+    @Query(value = "SELECT r FROM Request r WHERE r.user.id = (SELECT u.id FROM User u WHERE u.enabled = :bool AND u.id = :id)  ")
+    List<Request> findAllByUser(
+            @Param("id") Integer id,
+            @Param("bool") boolean bool,
+            Sort sort);
+
     @Query(value = "SELECT r FROM Request r WHERE r.user.id IN (SELECT u.id FROM User u WHERE u.superior.id = :id AND u.enabled = :bool) ")
     List<Request> findAllBySuperior(
             @Param("id") Integer id,

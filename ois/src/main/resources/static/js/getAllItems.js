@@ -28,7 +28,7 @@ function getAllItems(){
         "            </select>" +
         "            </div>"+
         "            <div class='table-responsive'>\n" +
-        "            \t<table class='table table-sm table-hover table-bordered'>\n" +
+        "            \t<table class='table odd table-sm table-hover table-bordered'>\n" +
         "            \t\t<thead>\n" +
         "            \t\t\t<tr>\n" +
         "            \t\t\t\t<th>ID</th>\n" +

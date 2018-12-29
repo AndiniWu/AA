@@ -4,8 +4,11 @@ user = user.split(',');
 $('#profile').text(user[2]);
 console.log(user);
 var myId = user[0];
+var myEmail = user[1];
 var myRole = user[3];
+var mySup = user[4];
 var isi= $("#isi"); //sebagai tempat pergantian konten halaman
+checkCookie("user");
 
 $('#logout').click(function(e){
     e.preventDefault();
@@ -53,7 +56,6 @@ function minMaxCheck(obj) { // user tetap bisa melakukan input ',' tpi ketika ms
 
 
 
-
 function superiorList(){
     $('input:radio[name="optradio"]').click(function() {
         $("#superiorList").prop("disabled",false);
@@ -77,8 +79,8 @@ $("#reset").click(function () {
     $(".form1").reset();
 });
 
-function editUser(userId){ //still working on
-    isi.html(addUser());
+function editUser(userId){ // edit user by admin
+    refresh(addUser);
     $('#title').html('<b class=\"bold1\">E</b>DIT<b class=\"bold1\">&nbsp;U</b>SER');
     agetUserById(userId);
     agetAllSuperiors();
@@ -90,6 +92,18 @@ function editUser(userId){ //still working on
         }
     });
 }
+
+$("#editProfile").click(function () { //edit user by user
+    refresh(addUser);
+    $("#title").html('<b class="bold1">E</b>DIT<b class="bold1">&nbsp;U</b>SER');
+    if(mySup) $("#mySup").html(`<b class="bold1">M</b>YSUPERIOR:<b class="bold1">&nbsp;${mySup}</b>`);
+    $(".rm").remove();
+    $(".dis").prop("disabled",true);
+
+    agetUserById(myId);
+
+});
+
 function deleteUser(userId,userName){
     var r = confirm(`You are going to delete user :\nId      : ${userId}\nemail : ${userName}\n\nAre you sure? `);
     if(r==true){
@@ -104,7 +118,8 @@ function deleteUser(userId,userName){
 $('#getAllUsers').click(function(e){
     e.preventDefault();
     refresh(getAllUsers);
-    agetAllUsers();
+    if(myRole==0) agetAllUsers();
+    else if(myRole==1) agetAllUsersBySuperior();
     $("#orderBy, #sortBy").change(function () {
         agetAllUsers();
     });
@@ -192,7 +207,9 @@ $('#getAvailableItems').click(function (e) {
 
 // Hide and Show Cart Items
     $('.openCloseCart').click(function(){
-        $('#shoppingCart').toggle();
+        $('#shoppingCart').modal("show");
+        // $("#myModal").modal();
+
     });
 
 
@@ -203,6 +220,7 @@ $('#getAvailableItems').click(function (e) {
             itemCount = 0;
             $('#itemCount').css('display', 'none');
             $('#cartItems').text('');
+            $('#reqMessage').text('');
             $('.quantity').val('');
             $('.ad').prop('disabled', false);
             $('#cartTotal').text("Total Items: " + itemCount);
@@ -232,20 +250,50 @@ $('#getAvailableItems').click(function (e) {
 $('#getAllRequests').click(function (e) {
     e.preventDefault();
     refresh(getAllRequests);
-    agetAllRequests();
-    $("#orderBy, #sortBy").change(function () {
-        agetAllRequests();
-    });
+    if(myRole==0)
+    {
+        agetAllRequestsAdmin();
+        $("#orderBy, #sortBy").change(function () {
+            agetAllRequestsAdmin();
+        });
+    }
+    else if(myRole==1) {
+        agetAllRequestsSuperior();
+        $("#orderBy, #sortBy").change(function () {
+            agetAllRequestsSuperior();
+        });
+    }
+    else if(myRole==2)
+    {
+        agetAllRequestsUser();
+        $("#orderBy, #sortBy").change(function () {
+            agetAllRequestsUser();
+        });
+    }
     $("#myInput").on("keyup", function() {  //fungsi search ini didapat dari w3schools
         var value = $(this).val().toLowerCase();
         $("#requestList tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
-
 });
 
+$('#getMyRequests').click(function (e) {
+    e.preventDefault();
+    refresh(getAllRequests);
+    $('#title').html('<b class=\"bold1\">M</b>Y<b class=\"bold1\">&nbsp;R</b>SEQUEST');
+    agetAllRequestsUser();
+    $("#orderBy, #sortBy").change(function () {
+        agetAllRequestsUser();
+    });
 
+    $("#myInput").on("keyup", function() {  //fungsi search ini didapat dari w3schools
+        var value = $(this).val().toLowerCase();
+        $("#requestList tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
 
 
 

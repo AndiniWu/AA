@@ -1,5 +1,6 @@
 function addUser() {
     return '<span id="title" class="title1"><b class="bold1">A</b>DD<b class="bold1">U</b>SER</span>\n' +
+        '<span id="mySup" style="float: right;"></span>'+
         '\t\t\t    <div class="col-md-9">\n' +
         '\t\t\t    \t<div class="col-md-3">\n' +
         '\t\t\t    \t\t<label class="col-form-label">Id</label>\n' +
@@ -16,7 +17,7 @@ function addUser() {
         '\t\t\t    \t\t<label class="col-form-label">NIK*</label>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="nik" type="number" class="form-control"oninput="minMaxCheck(this)" name="nik" maxlength="20" required>\n' +
+        '\t\t\t    \t\t<input id="nik" type="number" class="form-control dis" oninput="minMaxCheck(this)" name="nik" maxlength="20" required>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t    </div>\n' +
@@ -26,17 +27,17 @@ function addUser() {
         '\t\t\t    \t\t<label class="col-form-label">Name*</label>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="name" type="text" class="form-control" name="name" required>\n' +
+        '\t\t\t    \t\t<input id="name" type="text" class="form-control dis" name="name" required>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t    </div>\n' +
         '\t\t\t    <div class="col-md-9"></div>\n' +
         '\t\t\t    <div class="col-md-9">\n' +
         '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label">Email*</label>\n' +
+        '\t\t\t    \t\t<label class="col-form-label ">Email*</label>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="email" type="email" class="form-control" name="email" required>\n' +
+        '\t\t\t    \t\t<input id="email" type="email" class="form-control dis" name="email" required>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t    </div>\n' +
@@ -53,10 +54,10 @@ function addUser() {
         '\t\t\t    <div class="col-md-9"></div>\n' +
         '\t\t\t    <div class="col-md-9">\n' +
         '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label">Division*</label>\n' +
+        '\t\t\t    \t\t<label class="col-form-label ">Division*</label>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="division" type="text" class="form-control" name="division" required>\n' +
+        '\t\t\t    \t\t<input id="division" type="text" class="form-control dis" name="division" required>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t    </div>\n' +
@@ -66,7 +67,7 @@ function addUser() {
         '\t\t\t    \t\t<label class="col-form-label">Position*</label>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="position" type="text" class="form-control" name="position" required>\n' +
+        '\t\t\t    \t\t<input id="position" type="text" class="form-control dis" name="position" required>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t    </div>\n' +
@@ -90,8 +91,8 @@ function addUser() {
         '\t\t\t    \t</div>\n' +
         '\t\t\t    </div>\n' +
         '\t\t\t    <div class="col-md-9"></div>\n' +
-        '<div class="col-md-9">\n' +
-        ' <div class="col-md-3">' +
+        '<div class="col-md-9 rm">\n' +
+        ' <div class="col-md-3 ">' +
         '       <label class="col-form-label">Role*</label>\n' +
         '   </div>' +
         ' <div class="col-md-3"><label class="radio-inline">\n' +
@@ -107,16 +108,16 @@ function addUser() {
         '</select>' +
         '</div>' +
         '</div>' +
-        '\t\t\t    <div class="col-md-9 wrap" style="margin-top: 7%;">\n' +
-        '\t\t\t    \t<div class="col-md-3">\n' +
+        '\t\t\t    <div class="col-md-9 wrap rm" style="margin-top: 7%;">\n' +
+        '\t\t\t    \t<div class="col-md-3 ">\n' +
         '\t\t\t    \t\t<label class="col-form-label">Picture*</label>\n' +
         '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6">\n' +
+        '\t\t\t    \t<div class="col-md-6 rm">\n' +
         '\t\t\t    \t\t<input id="picture" type="file" name="picture" required>\n' +
         '\t\t\t    \t</div>\n' +
         '\t\t\t    \t\n' +
         '\t\t\t    </div>\n' +
-        '\t\t\t    <div class="col-md-9">\n' +
+        '\t\t\t    <div class="col-md-9" >\n' +
         '\t\t\t    \t<div class="col-md-3"></div>\n' +
         '\t\t\t\t    <div class="col-md-6" style="margin-top: 7%;">\n' +
         '\t\t\t\t    \t<button id="saveUser" type="submit" class="btn btn-success">SUBMIT</button>\n' +

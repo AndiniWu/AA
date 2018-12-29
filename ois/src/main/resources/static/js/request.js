@@ -17,7 +17,6 @@ function aaddRequest(requestJson){
             }
             console.log(msg);
             alert(`${msg}`);
-            refresh(getAvailableItems);
             agetAvailableItems();
             itemCount=0;
         },
@@ -27,11 +26,10 @@ function aaddRequest(requestJson){
         }
     });
 }
-
-function agetAllRequests(){ // TERAKHIR SAMPAI SINI, BUAT TAMPILAN REQUEST BERDASARKAN REQUEST DARI BAWAHANNYA
+function agetAllRequestsAdmin(){
     $.ajax({
         type: 'GET',
-        url: `http://localhost:8080/api/requests?superiorId=${myId}&sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
+        url: `http://localhost:8080/api/requests?&sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },
@@ -46,13 +44,47 @@ function agetAllRequests(){ // TERAKHIR SAMPAI SINI, BUAT TAMPILAN REQUEST BERDA
                 if(!request) continue;
                 console.log(request);
                 // Use jQuery methods to add the content and bind a click handler
-
                 $("#requestList").append(
-                    $("<tr>").addClass("hov").append(
+                    $("<tr>").addClass("hov").addClass(`s${request.statusCode}`).append(
                         $("<td>").text(request.id),
                         $("<td>").text(request.status),
                         $("<td>").text(request.user.email),
-                        $("<td>").text(request.message),
+                        $("<td>").text(new Date(request.createdAt).toLocaleString()),
+                        $("<td>").text(request.returnedAt > 0 ? new Date(request.returnedAt).toLocaleString() : "")
+                    ).click(getReqDetails.bind(null, request)) // <-- click handler for TR
+                    // click(getReqDetails.bind(null, request))
+                );
+            }
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+}
+
+function agetAllRequestsSuperior(){ // TERAKHIR SAMPAI SINI, BUAT TAMPILAN REQUEST BERDASARKAN REQUEST DARI BAWAHANNYA
+    $.ajax({
+        type: 'GET',
+        url: `http://localhost:8080/api/requests?sId=${myId}&sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType:"json",
+        success: function (data) {      // FROM TRINCOT STACKOVERFLOW
+            console.log("yes. data: " + data);
+            if (!data || !data.length) return;
+            $("#requestList").empty();// Clear whatever content there was before
+            var len= data.length;
+            for (var i = 0; i < len; i++) {
+                var request = data[i]; // Use a local variable to avoid repetition
+                if(!request) continue;
+                console.log(request);
+                // Use jQuery methods to add the content and bind a click handler
+                $("#requestList").append(
+                    $("<tr>").addClass("hov").addClass(`s${request.statusCode}`).append(
+                        $("<td>").text(request.id),
+                        $("<td>").text(request.status),
+                        $("<td>").text(request.user.email),
                         $("<td>").text(new Date(request.createdAt).toLocaleString()),
                         $("<td>").text(request.returnedAt > 0 ? new Date(request.returnedAt).toLocaleString() : "")
             ).click(getReqDetails.bind(null, request)) // <-- click handler for TR
@@ -66,6 +98,41 @@ function agetAllRequests(){ // TERAKHIR SAMPAI SINI, BUAT TAMPILAN REQUEST BERDA
     });
 }
 
+function agetAllRequestsUser(){ //terakhir sampai sini
+    $.ajax({
+        type: 'GET',
+        url: `http://localhost:8080/api/requests?eId=${myId}&sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType:"json",
+        success: function (data) {      // FROM TRINCOT STACKOVERFLOW
+            console.log("yes. data: " + data);
+            if (!data || !data.length) return;
+            $("#requestList").empty();// Clear whatever content there was before
+            var len= data.length;
+            for (var i = 0; i < len; i++) {
+                var request = data[i]; // Use a local variable to avoid repetition
+                if(!request) continue;
+                console.log(request);
+                // Use jQuery methods to add the content and bind a click handler
+                $("#requestList").append(
+                    $("<tr>").addClass("hov").addClass(`s${request.statusCode}`).append(
+                        $("<td>").text(request.id),
+                        $("<td>").text(request.status),
+                        $("<td>").text(request.user.email),
+                        $("<td>").text(new Date(request.createdAt).toLocaleString()),
+                        $("<td>").text(request.returnedAt > 0 ? new Date(request.returnedAt).toLocaleString() : "")
+                    ).click(getReqDetails.bind(null, request)) // <-- click handler for TR
+                    // click(getReqDetails.bind(null, request))
+                );
+            }
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+}
 
 function submitRequest(){
     var myCart=[];var cart={};
@@ -99,12 +166,15 @@ function submitRequest(){
         var r = confirm(`Are you sure?\nItem you requested:\n${list}\nMessage :\n  ${$('#reqMessage').val()}`);
         if(r==true) {
             var request = {
-                user: {id: user[0]},
+                user: {
+                    id: user[0],
+                    role: myRole
+                },
                 message: $('#reqMessage').val(),
                 reqDetail: myCart
             };
             var requestJson = JSON.stringify(request);
-            console.log(requestJson);
+            console.log(request);
             aaddRequest(requestJson);
         }
     }
@@ -114,9 +184,10 @@ function submitRequest(){
 function getReqDetails(request) {
     if (request) {
         var reqDet = request.reqDetail;
-        var date = request.status.length <= 8 ? request.rejectedAt : request.approvedAt;
+        var date = request.statusCode < 4   ? request.approvedAt: request.rejectedAt;
         var dt = date > 0 ? new Date(date).toLocaleString() : "";
-        $("#thead, #tbody, .modal-footer").empty();
+        var total =0,count=reqDet.length;
+        $("#thead, #tbody,#mFooter").empty();
         $('.modal-title').text(`Request Id : ${request.id}`);
         $("#thead").append(
             $("<tr>").append(
@@ -124,7 +195,6 @@ function getReqDetails(request) {
                 $("<th>").text("Id"),
                 $("<th>").text("ItemName"),
                 $("<th>").text("Qty"),
-                $("<th>").text("Approved/RejectedDate"),
             )
         );
         for (var i = 0; i < reqDet.length; i++) {
@@ -133,10 +203,43 @@ function getReqDetails(request) {
                     $("<td>").text(reqDet[i].item.picture),
                     $("<td>").text(reqDet[i].item.id),
                     $("<td>").text(reqDet[i].item.name),
-                    $("<td>").text(reqDet[i].qty),
-                    $("<td>").text(dt))
+                    $("<td>").text(reqDet[i].qty))
+            );
+            total+=parseInt(reqDet[i].qty);
+        }
+        $("#tbody").append(
+            $("<tr>").css({"background-color":"white"}).append(
+                $("<td>").html(`ItemCount :`).addClass("text-right"),
+                $("<td>").html(`<b>${count}</b>`),
+                $("<td>").html(`Total :`).addClass("text-right"),
+                $("<td>").html(`<b>${total}</b>`))
+        );
+        if (request.statusCode>=1 && request.statusCode<=3) $("#arDate").text(`ApprovedAt: ${dt}`);
+        if(request.statusCode==2) {
+            $("#tbody").append(
+                $("<tr>").css("background-color","white").append(
+                    $("<td>").text("HandedBy :").addClass("text-right"),
+                    $("<td>").html(`<b>${request.handedBy}</b>`),
+                    $("<td>").html(`At <b>${new Date(request.handedAt).toLocaleString()}</b>`).addClass("text-left"),
+                    $("<td>").text(""))
             );
         }
+        else if(request.statusCode==3) {
+            $("#tbody").append(
+                $("<tr>").css("background-color","white").append(
+                    $("<td>").text("HandedBy :").addClass("text-right"),
+                    $("<td>").html(`<b>${request.handedBy}</b>`),
+                    $("<td>").html(`At <b>${new Date(request.handedAt).toLocaleString()}</b>`).addClass("text-left"),
+                    $("<td>").text("")),
+                $("<tr>").css("background-color","white").append(
+                    $("<td>").text("ReturnReceivedBy :").addClass("text-right"),
+                    $("<td>").html(`<b>${request.receivedBy}</b>`),
+                    $("<td>").html(`At <b>${new Date(request.returnedAt).toLocaleString()}</b>`).addClass("text-left"),
+                    $("<td>").text(""))
+            );
+        }
+        else if(request.statusCode==4) $("#arDate").html(`RejectedAt: ${dt}`);
+
         $("#note").prop('disabled', true).val(request.message);
         $("#feedback").val(request.feedback);
         var buttons = {
@@ -147,18 +250,18 @@ function getReqDetails(request) {
             cancelRequestBtn: $("<button>").attr("data-dismiss","modal").addClass("btn btn-danger").text("Cancel Request").on('click', request.id, cancelRequest)
         };
         //STATUS CODE == 4 ARTINYA ITEM BARU DI REQUEST, BELUM DI APPROVE ATAUPUN REJECT
-        if (myRole == 1 && request.statusCode == 4) { //ROLE 1 == SUPERIOR
-            $(".modal-footer").append(buttons.approveBtn, buttons.rejectBtn);
+        if (myRole == 1 && request.statusCode == 0) { //ROLE 1 == SUPERIOR
+            $("#mFooter").append(buttons.approveBtn, buttons.rejectBtn);
         } else if (myRole == 0) { //ROLE 0 == ADMIN
             $("#feedback").prop('disabled', true);
-            if (request.statusCode == 1) $(".modal-footer").append(buttons.giveBtn);
-            else if (request.statusCode == 2) $(".modal-footer").append(buttons.returnBtn);
+            if (request.statusCode == 1) $("#mFooter").append(buttons.giveBtn);
+            else if (request.statusCode == 2) $("#mFooter").append(buttons.returnBtn);
         }
         else if (myRole == 2) {  //ROLE 2 == EMPLOYEE
             $("#feedback").prop('disabled', true);
-            if (request.statusCode == 4) $(".modal-footer").append(buttons.cancelRequestBtn);
+            if (request.statusCode == 0) $("#mFooter").append(buttons.cancelRequestBtn);
         }
-        $("#myModal").modal();
+        $("#requestModal").modal();
     }
 }
 
@@ -166,9 +269,11 @@ function cancelRequest(requestId){
     adeleteRequest(requestId.data);
 }
 function returnItem(request){
+    request.data.receivedBy = myEmail;
     aupdateRequest(request.data,3);
 }
 function giveItem(request){
+    request.data.handedBy = myEmail;
     aupdateRequest(request.data,2);
 }
 function approveRequest(request){
@@ -178,10 +283,9 @@ function rejectRequest(request){
     aupdateRequest(request,4)
 }
 
-
 function aupdateRequest(request,code){
     request.feedback=$("#feedback").val();
-    request.statusCode=code; // 0 = rejected , 1 == approved , 2 == give item/item sudah diambil , 3 == return / item sudah dikembalikan
+    request.statusCode=code; // 0 = request made , 1 == approved , 2 == give item/item sudah diambil , 3 == return / item sudah dikembalikan, 4 == rejected
     var requestJSON=JSON.stringify(request);
     console.log(requestJSON)
     $.ajax({
@@ -202,8 +306,10 @@ function aupdateRequest(request,code){
             }
             console.log(msg);
             alert(`${msg}`);
-            refresh(agetAllRequests);
-        },
+            if(myRole==0) agetAllRequestsAdmin();
+            else if(myRole==1) agetAllRequestsSuperior();
+            else if(myRole==3) agetAllRequestsUser();
+            },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
             alert(`Error: ${error.status}\n\nField must not be null`);
@@ -229,7 +335,7 @@ function adeleteRequest(id){
             }
             console.log(msg);
             alert(`${msg}`);
-            refresh(agetAllRequests);
+            refresh(agetAllRequestsBySuperior);
         },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' .Error Message: ' + error.responseText);

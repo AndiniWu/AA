@@ -1,4 +1,4 @@
-function getAvailableItems(){
+function getAvailableItems() {
     return " <div class=\"col-md-3 title2\">\n" +
         "\t    \t\t<span class=\"title1\"><b class=\"bold1\">A</b>VAILABLE<b class=\"bold1\"></b></span>\n" +
         "\t    \t</div>\n" +
@@ -20,15 +20,15 @@ function getAvailableItems(){
         "                <option value='price'>Price</option>\n" +
         "            </select>\n" +
         "            </div>\n" +
-        "            <div  class=\"col-md-3 col11\"> "+
+        "            <div  class=\"col-md-3 col11\"> " +
         "           <label for=\"orderBy\">OrderBy:</label>" +
         "           <select style='width: 36%' id='orderBy'>\n" +
         "                <option value='asc'>Asc</option>\n" +
         "                <option value='desc'>Desc</option>\n" +
         "            </select>" +
-        "            </div>"+
+        "            </div>" +
         "            <div class='table-responsive'>\n" +
-        "            \t<table class='tabel table-sm table-bordered'>\n" +
+        "            \t<table class='tabel odd table-sm table-bordered'>\n" +
         "            \t\t<thead>\n" +
         "            \t\t\t<tr>\n" +
         "            \t\t\t\t<th>Picture</th>\n" +
@@ -44,29 +44,7 @@ function getAvailableItems(){
         "\t\t      </div>\n" +
         "\t\t      <span id='itemCount'></span>\n" +
         "\t\t    </div>\n" +
-        "\t\t  </header>\n" +
-        "\t\t  <div id='shoppingCart'>\n" +
-        "\t\t    <div id='cartItemsContainer'>\n" +
-        "\t\t      <h2>Items in your cart</h2>\n" +
-        "\t\t      <i class='fa fa-times-circle-o fa-2x openCloseCart' aria-hidden='true'></i>\n" +
-        "\t\t      <div class='table-responsive' style='height:400px;overflow: auto;'>" +
-        "              <table class='table table-sm table-hover'>" +
-        " <thead>"+
-        "            \t\t\t\t<th>Id</th>\n" +
-        "            \t\t\t\t<th>Name</th>\n" +
-        "            \t\t\t\t<th>Detail</th>\n" +
-        "            \t\t\t\t<th style='padding-right: 1.5em'>Quantity</th>\n" +
-        "                     <th>&nbsp;</th>"+
-        "</thead>     " +
-        "            \t\t<tbody id='cartItems'>\n" +
-        "            \t\t</tbody>\n" +
-        "              </table>" +
-        "          </div>\n" +
-        "\t\t      <div id='cartTotal'></div>" +
-        "<div><textarea  style='width: 100%;padding: 8px;height:80px;' id='reqMessage' placeholder='Enter your request note here'></textarea></div>"+
-        "           <button style='float:right;' id='submit' type='submit' class='btn btn-default'><span style=\"color:white\">SUBMIT</span></button>\n" +
-        "\t\t       </div>\n" +
-        "\t\t       </div></th>\n" +
+        "</th>\n" +
         "            \t\t\t</tr>\n" +
         "            \t\t</thead>\n" +
         "            \t\t<tbody id='itemList'>\n" +
@@ -74,5 +52,28 @@ function getAvailableItems(){
         "            \t</table>\n" +
         "            </div>\n" +
         "        </div>\n" +
-        "\t</div>";
+        "</div>";
 }
+
+// "\t\t  <div class='modal-fade' id='shoppingCart'>\n" +
+// "\t\t    <div id='cartItemsContainer'>\n" +
+// "\t\t      <h2>Items in your cart</h2>\n" +
+// "\t\t      <i class='fa fa-times-circle-o fa-2x openCloseCart' aria-hidden='true'></i>\n" +
+// "\t\t      <div class='table-responsive' style='height:400px;overflow: auto;'>" +
+// "              <table class='table table-sm table-hover'>" +
+// " <thead>"+
+// "            \t\t\t\t<th>Id</th>\n" +
+// "            \t\t\t\t<th>Name</th>\n" +
+// "            \t\t\t\t<th>Detail</th>\n" +
+// "            \t\t\t\t<th style='padding-right: 1.5em'>Quantity</th>\n" +
+// "                     <th>&nbsp;</th>"+
+// "</thead>     " +
+// "            \t\t<tbody id='cartItems'>\n" +
+// "            \t\t</tbody>\n" +
+// "              </table>" +
+// "          </div>\n" +
+// "\t\t      <div id='cartTotal'></div>" +
+// "<div><textarea  style='width: 100%;padding: 8px;height:80px;' id='reqMessage' placeholder='Why do you request the items? Type here'></textarea></div>"+
+// "           <button style='float:right;' id='submit' type='submit' class='btn btn-default'><span style=\"color:white\">SUBMIT</span></button>\n" +
+// "\t\t       </div>\n" +
+// "\t\t       </div>

@@ -28,9 +28,10 @@ function getAllUsers(){
         "       </select>\n                    " +
         "</div>    "+
         "            <div class='table-responsive'>\n" +
-        "            \t<table class='table table-sm table-hover table-bordered'>\n" +
+        "            \t<table class='table odd table-sm table-hover table-bordered'>\n" +
         "            \t\t<thead>\n" +
         "            \t\t\t<tr>\n" +
+        "            \t\t\t\t<th>Picture</th>\n" +
         "            \t\t\t\t<th>ID</th>\n" +
         "            \t\t\t\t<th>Email</th>\n" +
         "            \t\t\t\t<th>NIK</th>\n" +
@@ -40,8 +41,7 @@ function getAllUsers(){
         "            \t\t\t\t<th>ContactNum</th>\n" +
         "            \t\t\t\t<th>Address</th>\n" +
         "            \t\t\t\t<th>Superior</th>\n" +
-        "            \t\t\t\t<th>Picture</th>\n" +
-        "            \t\t\t\t<th>Action</th>\n" +
+        "            \t\t\t\t<th class='action1' >Action</th>\n" +
         "            \t\t\t</tr>\n" +
         "            \t\t</thead>\n" +
         "            \t\t<tbody id='userList'>\n" +

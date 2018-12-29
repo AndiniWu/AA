@@ -29,9 +29,9 @@ i:hover {
     vertical-align: middle;
     border-bottom: 2px solid #dee2e6;
 }
-.tabel{
-    width:100%;
-}
+/*.tabel{*/
+    /*width:100%;*/
+/*}*/
 .btn {
     border: none;
     color: white;
@@ -42,57 +42,57 @@ i:hover {
     font-size: 16px;
 }
 
-#shoppingCart {
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    display: none;
-    position: absolute;
-    z-index: 9999;
-    background: rgba(0,0,0,0.01);
-}
+/*#shoppingCart {*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*display: none;*/
+    /*position: absolute;*/
+    /*z-index: 9999;*/
+    /*background: white;*/
+/*}*/
 
-#cartItemsContainer {
-    position: relative;
-    width: 800px;
-    left: 50%;
-    top: 0;
-    margin-left: -35%;
-    padding: 40px;
-    box-shadow: 0 0 10px black;
-    background: rgba(248,248,248,0.95);
-    overflow: auto;
-}
+/*#cartItemsContainer {*/
+    /*position: relative;*/
+    /*width: 800px;*/
+    /*left: 50%;*/
+    /*top: 0;*/
+    /*margin-left: -35%;*/
+    /*padding: 40px;*/
+    /*box-shadow: 0 0 10px black;*/
+    /*background: rgba(248,248,248,0.95);*/
+    /*overflow: auto;*/
+/*}*/
 
-#cartItemsContainer i {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
+/*#cartItemsContainer i {*/
+    /*position: absolute;*/
+    /*top: 20px;*/
+    /*right: 20px;*/
+/*}*/
 
-#cartItemsContainer .itemDetails {
-    overflow: auto;
-    width: 100%;
-    margin-bottom: 40px;
-}
+/*#cartItemsContainer .itemDetails {*/
+    /*overflow: auto;*/
+    /*width: 100%;*/
+    /*margin-bottom: 40px;*/
+/*}*/
 
-#cartItemsContainer .itemImage {
-    float: left;
-    width: 260px;
-    padding: 0 40px;
-}
+/*#cartItemsContainer .itemImage {*/
+    /*float: left;*/
+    /*width: 260px;*/
+    /*padding: 0 40px;*/
+/*}*/
 
-#cartItemsContainer .itemText {
-    float: right;
-    width: 260px;
-    padding: 0 40px;
-}
+/*#cartItemsContainer .itemText {*/
+    /*float: right;*/
+    /*width: 260px;*/
+    /*padding: 0 40px;*/
+/*}*/
 
-#cartItemsContainer .itemText .price-container {
-    margin-top: 0;
-}
+/*#cartItemsContainer .itemText .price-container {*/
+    /*margin-top: 0;*/
+/*}*/
 
-.removeItem {
-    margin-left: 50%;
-}
+/*.removeItem {*/
+    /*margin-left: 50%;*/
+/*}*/

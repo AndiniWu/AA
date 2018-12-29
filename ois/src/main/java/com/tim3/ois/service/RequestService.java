@@ -49,21 +49,33 @@ public class RequestService {
         return request;
     }
 
-    public List<Request> findAllBy(int id, String sortBy,String orderBy) {
-        if(id != 0) {
-            if (orderBy.toLowerCase().equals("asc")) return requestRepository.findAllBySuperior(id,true ,Sort.by(sortBy,"id").ascending());//parameter kedua adalah opsional, ketika
-            else return requestRepository.findAllBySuperior(id, true ,Sort.by(sortBy,"id").descending());
+    //sId == superior Id, eId == employee Id
+    public List<Request> findAllBy(int eId, int sId, String sortBy,String orderBy) {
+        if(sId != -1) { //superior view (approval page)
+            if (orderBy.toLowerCase().equals("asc")) return requestRepository.findAllBySuperior(sId,true ,Sort.by(sortBy,"id").ascending());// Sort by parameter kedua adalah opsional, ketika butuh 2 sort
+            else return requestRepository.findAllBySuperior(sId, true ,Sort.by(sortBy,"id").descending());
         }
-        else {
+        else if(eId != -1) {  //my request list view
+            if (orderBy.toLowerCase().equals("asc")) return requestRepository.findAllByUser(eId,true ,Sort.by(sortBy,"id").ascending());
+            else return requestRepository.findAllByUser(eId, true ,Sort.by(sortBy,"id").descending());
+        }
+        else if(eId == -1 && sId == -1) { //all request list view
             if (orderBy.toLowerCase().equals("asc")) return requestRepository.findAllBy(true,Sort.by(sortBy,"id").ascending());
             else return requestRepository.findAllBy(true,Sort.by(sortBy,"id").descending());
-            }
+        } else throw new ResourceNotFoundException("Request","Request with user eId & sId",eId+", "+sId);
         }
 
     public Request saveRequest(Request request){ //STATUS CODE = 0 ITEM IS REQUESTED WAITING FOR APPROVAL
         request.setCreatedAt(new Date().getTime());
-        request.setStatus("Pending/waiting to be approved");
-        request.setStatusCode(0);
+        if(request.getUser().getRole()==2) {
+            request.setStatus("Pending/waiting for superior approval ");
+            request.setStatusCode(0);
+        }
+        else if(request.getUser().getRole()<=1){
+            request.setStatus("Approved/Item(s) waiting to be picked");
+            request.setStatusCode(1);
+            request.setApprovedAt(new Date().getTime());
+        }
         requestRepository.save(request);
         requestDetailService.updateRequestDetail(request,1);
         System.out.println(request);
@@ -109,7 +121,6 @@ public class RequestService {
     //UPDATE REQUEST STATUS REJECTED 4
     public Request updateRequest(int id,String status,String feedback) {
         Request request= requestRepository.findById(id);
-//        request.setApprovedBy(email);
         request.setStatus(status);
         request.setFeedback(feedback);
         request.setRejectedAt(new Date().getTime());

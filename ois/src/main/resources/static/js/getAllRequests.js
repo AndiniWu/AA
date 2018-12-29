@@ -34,7 +34,6 @@ function getAllRequests(){
             				<th>RequestId</th>
             				<th>Status</th>
             				<th>RequestBy</th>
-            				<th>RequestNote</th> 
             				<th>RequestDate</th>
             				<th>ReturnDate</th>
             			</tr>

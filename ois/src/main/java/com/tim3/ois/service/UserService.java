@@ -21,8 +21,10 @@ public class UserService {
     public UserService(UserRepository userRepository){
         this.userRepository=userRepository;
     }
-    public List<User> findBy(String sortBy, String orderBy) {
-        if(orderBy.toLowerCase().equals("asc")) return userRepository.findAllBy(true, Sort.by(sortBy,"id").ascending());
+    public List<User> findBy(Integer sId,String sortBy, String orderBy) {
+        if(sId != -1 && orderBy.toLowerCase().equals("asc")) return userRepository.findAllBySuperiorId(true,sId,Sort.by(sortBy,"id").ascending());
+        else if(sId != -1 && orderBy.toLowerCase().equals("desc")) return userRepository.findAllBySuperiorId(true,sId,Sort.by(sortBy,"id").descending());
+        else if(orderBy.toLowerCase().equals("asc")) return userRepository.findAllBy(true, Sort.by(sortBy,"id").ascending());
 
         else if(orderBy.toLowerCase().equals("desc")) return userRepository.findAllBy(true, Sort.by(sortBy,"id").descending());
 

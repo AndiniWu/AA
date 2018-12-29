@@ -18,17 +18,21 @@ function getCookie(cname) {
     }
     return "";
 }
+
 function checkCookie(cname) {
-    var userId = getCookie(cname);
-    if (userId != "") {
-        console.log("Welcome again " + email);
-    // } else {
-    //     email = document.getElementById("email").value;
-    //     if (email != "" && email != null) {
-    //         setCookie("email", email, 1);
-    //     }
+    var cookie = getCookie(cname);
+    console.log(cookie);
+    if (cookie != "") {
+        console.log("Welcome again " + myEmail);
+        if(myRole==1){
+
+        }
+
+    } else {
+       alert("Please Login again");
+       window.location="login";
     }
-}
+}1
 
 function deleteCookie(cname){
     document.cookie = cname + " = deleted; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";

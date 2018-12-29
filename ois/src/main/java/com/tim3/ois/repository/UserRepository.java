@@ -20,5 +20,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             @Param("bool") boolean bool,
             Sort sort);
     List<User> findAllByRoleAndEnabledOrderByEmailAsc(int role, boolean bool);
+    @Query(value = "SELECT u FROM User u WHERE u.enabled = :bool AND u.superior.id =  :id")
+    List<User> findAllBySuperiorId(
+            @Param("bool") boolean bool,
+            @Param("id") Integer id,
+            Sort sort);
 
 }

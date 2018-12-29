@@ -261,7 +261,7 @@
     float: right;
 }
 
-th,tr:nth-child(even){
+thead tr:nth-child(even){
     background-color: rgba(137,207,240,0.2);
 }
 /*td:last-child{*/
@@ -284,9 +284,25 @@ th, td {
     /*padding: 8px;*/
 }
 
+.odd tr:nth-child(odd){
+    background-color: rgba(0,128,255,0.1);
+;
+}
 .hov {
     cursor: pointer;
 }
 
+.s1 {
+    background-color: rgba(127,255,0,0.2);
+}
+.s2 {
+    background-color: rgba(255,255,1,0.3);
+}
+.s3 {
+    background-color: rgba(0,128,255,0.35);
+}
+.s4 {
+    background-color: rgba(255,102,102,0.3);
+}
 
 

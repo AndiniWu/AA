@@ -29,7 +29,46 @@ function agetUserById(id){
     });
 }
 
-
+function agetAllUsersBySuperior(){
+    $.ajax({
+        type: 'GET',
+        url: `http://localhost:8080/api/users?sId=${myId}&sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType: "json",
+        success: function (data) {
+            console.log("yes. data: " + data);
+            if (!data || !data.length) return;
+            $("#userList").empty();// Clear whatever content there was before
+            var len = data.length;
+            $("th.action1").remove();
+            for (var i = 0; i < len; i++) {
+                var user = data[i]; // Use a local variable to avoid repetition
+                if (!user) continue;
+                console.log(user);
+                // Use jQuery methods to add the content and bind a click handler
+                $("#userList").append(
+                    $("<tr>").append(
+                        $("<td>").text(user.picture),
+                        $("<td>").text(user.id),
+                        $("<td>").text(user.email),
+                        $("<td>").text(user.nik),
+                        $("<td>").text(user.name),
+                        $("<td>").text(user.division),
+                        $("<td>").text(user.position),
+                        $("<td>").text(user.cnumber),
+                        $("<td>").text(user.address),
+                        $("<td>").text(user.superior.name)
+                        ),
+                    )
+                }
+            },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+}
 function agetAllUsers(){
     $.ajax({
         type: 'GET',
@@ -47,6 +86,7 @@ function agetAllUsers(){
                     for (var i = 0; i < len; i++) {
                         if(data[i].superior!=null) {
                             txt += `<tr>\n 
+                                            \\t\\t\\t\\t<td>${data[i].picture}</td>\\n 
                                           \t\t\t\t<td id=${data[i].id}>${data[i].id}</td>\n 
                                             \t\t\t\t<td id=${data[i].email}>${data[i].email}</td>\n 
                                             \t\t\t\t<td style="width: 6%">${data[i].nik}</td>\n 
@@ -56,7 +96,6 @@ function agetAllUsers(){
                                             \t\t\t\t<td>${data[i].cnumber}</td>\n 
                                             \t\t\t\t<td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
                                             \t\t\t\t<td>${data[i].superior.name}</td>\n 
-                                            \t\t\t\t<td>${data[i].picture}</td>\n 
                                             \t\t\t\t<td align="center"  class="action1">\n 
                                             \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
                                             \t\t\t\t\<button onclick="deleteUser(${data[i].id},'${data[i].email}')" class="btn btn-danger">Delete</button></>\n 
@@ -162,6 +201,7 @@ function aaddUser(type){
                 }
                 console.log(msg);
                 alert(`Result : \n\n ${msg}`);
+                $(".form1").reset();
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);

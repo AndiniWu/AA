@@ -2,19 +2,17 @@
 // $(document).ready(function() {
 
 $("#login").click(function () {
-    var loginModel = {
+    var login = {
         email: document.getElementById("email").value,
         password : document.getElementById("password").value
-    }
-    var json=JSON.stringify(loginModel);
+    };
+    var loginJSON=JSON.stringify(login);
 
-    console.log('{"email": "' + email + '", "password": "' + password + '"}');
+    console.log(loginJSON);
     $.ajax({
         type: 'POST',
         url: 'http://localhost:8080/api/login',
-        data:
-            // '{"email": "' + email + '", "password": "' + password + '"}',
-            json,
+        data: loginJSON,
         headers: {
             "Content-Type": "application/json", "Accept": "application/json"
         },
@@ -24,6 +22,7 @@ $("#login").click(function () {
             if (data!=null) {
                 msg += "Login succeed";
                 var cvalue = [data.id,data.email,data.name,data.role];
+                if(data.superior) cvalue.push(data.superior.email);
                 setCookie("user",cvalue,1);
                 console.log("cookies saved :\n" + getCookie("user"));
                 // window.location.replace("index");
