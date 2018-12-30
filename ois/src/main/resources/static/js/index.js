@@ -1,23 +1,32 @@
+
 var user = getCookie("user");
 user = user.split(',');
-// document.getElementById("profile").innerText = user[2];
-$('#profile').text(user[2]);
-console.log(user);
+
 var myId = user[0];
 var myEmail = user[1];
 var myRole = user[3];
-var mySup = user[4];
-var isi= $("#isi"); //sebagai tempat pergantian konten halaman
 checkCookie("user");
+var sup = getCookie("superior");
+var mySup;
+if(sup) mySup=JSON.parse(sup);
+
+console.log(user);
+console.log(mySup)
+var isi= $("#isi"); //sebagai tempat pergantian konten halaman
+function refresh(ref){
+    isi.html(ref());
+}
+
+$('#profile').text(user[2]);
+
 
 $('#logout').click(function(e){
     e.preventDefault();
     deleteCookie("user");
+    deleteCookie("superior");
     window.location = "login";
 });
-function refresh(ref){
-    isi.html(ref());
-}
+
 //===================================== T O P    B U T T O N =====================================
 
 var btn = $('#button');
@@ -96,7 +105,7 @@ function editUser(userId){ // edit user by admin
 $("#editProfile").click(function () { //edit user by user
     refresh(addUser);
     $("#title").html('<b class="bold1">E</b>DIT<b class="bold1">&nbsp;U</b>SER');
-    if(mySup) $("#mySup").html(`<b class="bold1">M</b>YSUPERIOR:<b class="bold1">&nbsp;${mySup}</b>`);
+    if(mySup) $("#mySup").html(`<b class="bold1">M</b>YSUPERIOR:<b class="bold1">&nbsp;${mySup.email}</b>`);
     $(".rm").remove();
     $(".dis").prop("disabled",true);
 
@@ -114,14 +123,19 @@ function deleteUser(userId,userName){
 }
 
 
-
 $('#getAllUsers').click(function(e){
     e.preventDefault();
     refresh(getAllUsers);
     if(myRole==0) agetAllUsers();
-    else if(myRole==1) agetAllUsersBySuperior();
+    else if(myRole==1) {
+        agetAllUsersBySuperior();
+    }
+    else if(myRole==2) {
+        getMySuperior();
+    }
     $("#orderBy, #sortBy").change(function () {
-        agetAllUsers();
+        if(myRole==0 ) agetAllUsers();
+        else if(myRole==1) agetAllUsersBySuperior();
     });
 
     $("#myInput").on("keyup", function() {  //fungsi search ini didapat dari w3schools
@@ -136,8 +150,9 @@ $('#getAllUsers').click(function(e){
 
 $('#getAllItems').click(function (e) {
     e.preventDefault();
-    isi.html(getAllItems());
+    refresh(getAllItems);
     agetAllItems();
+    if(myRole > 0) $("th:last-child").remove();
     $("#orderBy, #sortBy").change(function () {
         agetAllItems();
     });
@@ -187,7 +202,15 @@ function add(btnId){
     $('#cartTotal').text("Total Items: " + itemCount);
     $(`.${btnId}`).prop('disabled',true);
 }
-
+function emptyCart(){
+    itemCount = 0;
+    $('#itemCount').css('display', 'none');
+    $('#cartItems').text('');
+    $('#reqMessage').text('');
+    $('.quantity').val('');
+    $('.ad').prop('disabled', false);
+    $('#cartTotal').text("Total Items: " + itemCount);
+}
 $('#getAvailableItems').click(function (e) {
     e.preventDefault();
     refresh(getAvailableItems);
@@ -217,13 +240,7 @@ $('#getAvailableItems').click(function (e) {
     $('#emptyCart').click(function() {
         var r = confirm("Are you sure to empty your cart?");
         if (r==true) {
-            itemCount = 0;
-            $('#itemCount').css('display', 'none');
-            $('#cartItems').text('');
-            $('#reqMessage').text('');
-            $('.quantity').val('');
-            $('.ad').prop('disabled', false);
-            $('#cartTotal').text("Total Items: " + itemCount);
+            emptyCart();
         }
     });
 
@@ -295,7 +312,15 @@ $('#getMyRequests').click(function (e) {
     });
 });
 
-
+$("#addRequest").click(function (e) {
+    e.preventDefault();
+    refresh(getAvailableItems);
+    $('#title').html('<b class=\"bold1\">A</b>VAILABLE<b class=\"bold1\">&nbsp;I</b>TEMS');
+    agetAvailableItems();
+    $("#orderBy, #sortBy").change(function () {
+        agetAvailableItems();
+    });
+})
 
 
 

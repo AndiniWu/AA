@@ -31,12 +31,12 @@ function getAllItems(){
         "            \t<table class='table odd table-sm table-hover table-bordered'>\n" +
         "            \t\t<thead>\n" +
         "            \t\t\t<tr>\n" +
+        "            \t\t\t\t<th>Picture</th>\n" +
         "            \t\t\t\t<th>ID</th>\n" +
         "            \t\t\t\t<th>Name</th>\n" +
         "            \t\t\t\t<th>Quantity</th>\n" +
         "            \t\t\t\t<th>Price</th>\n" +
         "            \t\t\t\t<th>Detail</th>\n" +
-        "            \t\t\t\t<th>Picture</th>\n" +
         "            \t\t\t\t<th>Action</th>\n" +
         "            \t\t\t</tr>\n" +
         "            \t\t</thead>\n" +

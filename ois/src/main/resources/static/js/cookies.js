@@ -24,8 +24,10 @@ function checkCookie(cname) {
     console.log(cookie);
     if (cookie != "") {
         console.log("Welcome again " + myEmail);
-        if(myRole==1){
-
+        if(myRole!=0){
+            $("#addUser").remove();
+            $("#addItem").remove();
+            if(myRole==2) $("#getAllRequests").remove();
         }
 
     } else {

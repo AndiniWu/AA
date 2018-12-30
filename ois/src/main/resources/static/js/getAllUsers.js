@@ -11,7 +11,7 @@ function getAllUsers(){
         "                </div>\n" +
         "            </div>\n" +
         "            <div class=\"col-md-2\"></div>\n" +
-        "<div class=\"col-md-3 col11\">\n            " +
+        "<div class=\"col-md-3 col11 sort\">\n            " +
         "   <label for=\"sortBy\">SortBy:</label>\n                    " +
         "        <select style='width: 36%' id='sortBy'>\n                       " +
         "            <option value='role'>Role</option>\n                        " +
@@ -20,8 +20,8 @@ function getAllUsers(){
         "            <option value='superior'>superior</option>\n                    " +
         "        </select>\n                    " +
         "</div>\n                   " +
-        "<div  class=\"col-md-3 col11\">\n                   " +
-        "   <label for=\"orderBy\">OrderBy::</label>\n                  " +
+        "<div  class=\"col-md-3 col11 sort\">\n                   " +
+        "   <label for=\"orderBy\">OrderBy:</label>\n                  " +
         "       <select style='width: 36%' id='orderBy'>\n                       " +
         "           <option value='asc'>Asc</option>\n                        " +
         "           <option value='desc'>Desc</option>\n                    " +

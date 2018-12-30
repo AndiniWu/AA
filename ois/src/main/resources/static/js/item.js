@@ -13,25 +13,40 @@ function agetAllItems(){
                 var len = data.length;
                 var txt = ``;
                 if (len > 0) {
-                    for (var i = 0; i < len; i++) {
-                        if(data[i]) {
-                            txt += `<tr >\n 
-                                          \t\t\t\t<td id=${data[i].id}>${data[i].id}</td>\n 
-                                            \t\t\t\t<td>${data[i].name}</td>\n 
-                                            \t\t\t\t<td>${data[i].quantity}</td>\n 
-                                            \\t\\t\t<td>${data[i].price}</td>\n
-                                            \\\\t\\\<td>${data[i].detail}</td>\\n
-                                            \t\t\t\t<td>${data[i].picture}</td>\n 
-                                            \t\t\t\t<td align="center"  class="action1">\n 
-                                            \t\t\t\t<button   onclick="editItem(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                                            \t\t\t\t\<button onclick="deleteItem(${data[i].id},'${data[i].name}')" class="btn btn-danger">Delete</button></>\n 
-                                            \t\t\t\t</td>\n
-                                            \t\t\t</tr>`;
-                        } // ONCLICK onclick="deleteItem(${data[i].id},'${data[i].name}') jalan karena di javasript '2' di auto convert menjadi integer jika dibutuhkan.
+                    if(myRole==0) {
+                        for (var i = 0; i < len; i++) {
+                            if (data[i]) {
+                                txt += `<tr >\n 
+                                          <td>${data[i].picture}</td>                                      
+                                          <td id=${data[i].id}>${data[i].id}</td>
+                                          <td>${data[i].name}</td>
+                                          <td>${data[i].quantity}</td>
+                                          <td>${data[i].price}</td>
+                                          <td>${data[i].detail}</td>
+                                          <td align="center"  class="action1">
+                                             <button   onclick="editItem(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                             <button onclick="deleteItem(${data[i].id},'${data[i].name}')" class="btn btn-danger">Delete</button>
+                                          </td>
+                                   </tr>`;
+                            } //${variabel} atau template literals mengauto convert menjadi string ONCLICK onclick="deleteItem(${data[i].id},'${data[i].name}') jalan karena di javasript '2' di auto convert menjadi integer jika dibutuhkan.
+                        }
                     }
-                    if(txt){
-                        $("#itemList").html(txt);
+                    else{
+                        for (var i = 0; i < len; i++) {
+                            if (data[i]) {
+                                txt += `<tr>
+                                          <td>${data[i].picture}</td>
+                                          <td id=${data[i].id}>${data[i].id}</td>
+                                          <td>${data[i].name}</td>
+                                          <td>${data[i].quantity}</td>
+                                          <td>${data[i].price}</td>
+                                          <td>${data[i].detail}</td>
+                                        </tr>`;
+                            } //${variabel} atau template literals mengauto convert menjadi string ONCLICK onclick="deleteItem(${data[i].id},'${data[i].name}') jalan karena di javasript '2' di auto convert menjadi integer jika dibutuhkan.
+                        }
                     }
+                    if(txt) $("#itemList").html(txt);
+
                     // alert("Success :"+data);
                     console.log(data);
                 }

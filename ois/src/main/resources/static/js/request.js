@@ -18,7 +18,7 @@ function aaddRequest(requestJson){
             console.log(msg);
             alert(`${msg}`);
             agetAvailableItems();
-            itemCount=0;
+            emptyCart();
         },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);

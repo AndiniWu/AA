@@ -22,9 +22,16 @@ $("#login").click(function () {
             if (data!=null) {
                 msg += "Login succeed";
                 var cvalue = [data.id,data.email,data.name,data.role];
-                if(data.superior) cvalue.push(data.superior.email);
                 setCookie("user",cvalue,1);
-                console.log("cookies saved :\n" + getCookie("user"));
+                if(data.superior) {
+                    var superior=data.superior;
+                    delete superior.password;
+                    delete superior.superior;
+                    delete superior.enabled;
+                    var superiorJSON = JSON.stringify(superior)
+                    setCookie("superior",superiorJSON,1);
+                }
+                console.log("cookies saved :\n" + getCookie("user") + getCookie("superior"));
                 // window.location.replace("index");
                 window.location = "index";
                 // document.location= "/index";

@@ -1,3 +1,24 @@
+function getMySuperior(){
+    $("#title").html('<b class="bold1">M</b>Y<b class="bold1">&nbsp;S</b>UPERIOR');
+    $("#userList").empty();// Clear whatever content there was before
+    $("th.action1, .sort").remove();
+
+    $("#userList").append(
+        $("<tr>").append(
+            $("<td>").text(mySup.picture),
+            $("<td>").text(mySup.id),
+            $("<td>").text(mySup.email),
+            $("<td>").text(mySup.nik),
+            $("<td>").text(mySup.name),
+            $("<td>").text(mySup.division),
+            $("<td>").text(mySup.position),
+            $("<td>").text(mySup.cnumber),
+            $("<td>").text(mySup.address),
+            $("<td>").text("")
+        ),
+    )
+}
+
 function agetUserById(id){
     $.ajax({
         type: 'GET',
@@ -69,6 +90,7 @@ function agetAllUsersBySuperior(){
         }
     });
 }
+
 function agetAllUsers(){
     $.ajax({
         type: 'GET',

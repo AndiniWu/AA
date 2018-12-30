@@ -284,7 +284,7 @@ th, td {
     /*padding: 8px;*/
 }
 
-.odd tr:nth-child(odd){
+.odd tr:nth-child(even){
     background-color: rgba(0,128,255,0.1);
 ;
 }
