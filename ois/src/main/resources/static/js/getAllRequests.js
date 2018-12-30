@@ -14,17 +14,17 @@ function getAllRequests(){
             <div class="col-md-3 col11">
             <label for="sortBy">SortBy:</label>
                     <select style='width: 36%' id='sortBy'>
+                        <option value='createdAt'>RequestDate</option>
                         <option value='statusCode'>status</option>
                         <option value='id'>Id</option>
-                        <option value='createdAt'>RequestDate</option>
                         <option value='user'>RequestBy</option>
                     </select>
                     </div>
                    <div  class="col-md-3 col11">
                    <label for="orderBy">OrderBy:</label>
                   <select style='width: 36%' id='orderBy'>
+                       <option value='desc'>Desc</option>
                        <option value='asc'>Asc</option>
-                        <option value='desc'>Desc</option>
                     </select>
                     </div>           
             <div class='table-responsive'>

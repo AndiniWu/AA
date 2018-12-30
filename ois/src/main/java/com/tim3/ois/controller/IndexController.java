@@ -21,31 +21,23 @@ import java.util.List;
 @RestController
 public class IndexController {
 
-    @GetMapping("/users")
-    public ModelAndView getRegistration() {
-        ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
-        return modelAndView;
-    }
+
 
     @GetMapping("/index")
     public ModelAndView getIndex() {
         ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-        modelAndView.addObject("user", user);
         modelAndView.setViewName("index");
         return modelAndView;
     }
     @GetMapping("/login")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
-//        User user = new User();
-//        modelAndView.addObject("user", user);
+
         modelAndView.setViewName("login");
         return modelAndView;
     }
+
+
 //    @GetMapping("/users")
 //    public String getRegistration(){
 //        return "registration";

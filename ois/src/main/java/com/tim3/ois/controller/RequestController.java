@@ -4,6 +4,7 @@ import com.tim3.ois.model.Request;
 import com.tim3.ois.service.RequestDetailService;
 import com.tim3.ois.service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,17 @@ public class RequestController {
 //    public Request getRequest(@PathVariable(value = "id") int reqId){
 //        return requestService.findRequestById(reqId);
 //    }
+
+    @GetMapping("/requests/pageable") // api for get recent updates
+    public Page<Request> getRequestPage(
+            @RequestParam(value = "eId",required = false,defaultValue = "-1") Integer eId,
+            @RequestParam(value = "sId",required = false,defaultValue = "-1") Integer sId,
+            @RequestParam(value = "page",required = false,defaultValue = "0") Integer page,
+            @RequestParam(value = "size",required = false,defaultValue = "7") Integer size) {
+        return requestService.findAll(eId,sId,page,size);
+    }
+
+
     @GetMapping("/requests")
     public List<Request> getAllRequest(
             @RequestParam(value = "eId",required = false,defaultValue = "-1") Integer eId,

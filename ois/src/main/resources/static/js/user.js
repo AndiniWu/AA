@@ -1,5 +1,5 @@
 function getMySuperior(){
-    $("#title").html('<b class="bold1">M</b>Y<b class="bold1">&nbsp;S</b>UPERIOR');
+    $("#title1").html('<b class="bold1">M</b>Y<b class="bold1">&nbsp;S</b>UPERIOR');
     $("#userList").empty();// Clear whatever content there was before
     $("th.action1, .sort").remove();
 
@@ -108,39 +108,39 @@ function agetAllUsers(){
                     for (var i = 0; i < len; i++) {
                         if(data[i].superior!=null) {
                             txt += `<tr>\n 
-                                            \\t\\t\\t\\t<td>${data[i].picture}</td>\\n 
-                                          \t\t\t\t<td id=${data[i].id}>${data[i].id}</td>\n 
-                                            \t\t\t\t<td id=${data[i].email}>${data[i].email}</td>\n 
-                                            \t\t\t\t<td style="width: 6%">${data[i].nik}</td>\n 
-                                            \t\t\t\t<td>${data[i].name}</td>\n 
-                                            \t\t\t\t<td>${data[i].division}</td>\n 
-                                            \t\t\t\t<td>${data[i].position}</td>\n 
-                                            \t\t\t\t<td>${data[i].cnumber}</td>\n 
-                                            \t\t\t\t<td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
-                                            \t\t\t\t<td>${data[i].superior.name}</td>\n 
-                                            \t\t\t\t<td align="center"  class="action1">\n 
-                                            \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                                            \t\t\t\t\<button onclick="deleteUser(${data[i].id},'${data[i].email}')" class="btn btn-danger">Delete</button></>\n 
-                                            \t\t\t\t</td>\n
-                                            \t\t\t</tr>`;
+                                            <td>${data[i].picture}</td>\\n 
+                                            <td id=${data[i].id}>${data[i].id}</td>\n 
+                                            <td id=${data[i].email}>${data[i].email}</td>\n 
+                                            <td style="width: 6%">${data[i].nik}</td>\n 
+                                            <td>${data[i].name}</td>\n 
+                                            <td>${data[i].division}</td>\n 
+                                            <td>${data[i].position}</td>\n 
+                                            <td>${data[i].cnumber}</td>\n 
+                                            <td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
+                                            <td>${data[i].superior.name}</td>\n 
+                                            <td align="center"  class="action1">\n 
+                                            <button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                            <button onclick="deleteUser(${data[i].id},'${data[i].email}')" class="btn btn-danger">Delete</button></>\n 
+                                            </td>\n
+                                            </tr>`;
                         }
                         else if(data[i].superior==null){
                             txt += `<tr>\n
-                                          \t\t\t\t<td id=${data[i].id}>${data[i].id}</td>\n 
-                                            \t\t\t\t<td id=${data[i].email}>${data[i].email}</td>\n 
-                                            \t\t\t\t<td style="width: 6%">${data[i].nik}</td>\n
-                                            \t\t\t\t<td>${data[i].name}</td>\n
-                                            \t\t\t\t<td>${data[i].division}</td>\n
-                                            \t\t\t\t<td>${data[i].position}</td>\n
-                                            \t\t\t\t<td>${data[i].cnumber}</td>\n
-                                            \t\t\t\t<td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
-                                            \t\t\t\t<td></td>\n
-                                            \t\t\t\t<td>${data[i].picture}</td>\n
-                                            \t\t\t\t<td align="center"  class="action1">\n
-                                            \t\t\t\t\t<button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                                            \t\t\t\t\t<button onclick="deleteUser(${data[i].id},'${data[i].email}')" class="btn btn-danger">Delete</button>\n
-                                            \t\t\t\t</td>\n
-                                            \t\t\t</tr>`;
+                                             <td>${data[i].picture}</td>\\n
+                                            <td id=${data[i].id}>${data[i].id}</td>\n 
+                                            <td id=${data[i].email}>${data[i].email}</td>\n 
+                                            <td style="width: 6%">${data[i].nik}</td>\n
+                                            <td>${data[i].name}</td>\n
+                                            <td>${data[i].division}</td>\n
+                                            <td>${data[i].position}</td>\n
+                                            <td>${data[i].cnumber}</td>\n
+                                            <td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
+                                            <td></td>\n
+                                            <td align="center"  class="action1">\n
+                                            <button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                            <button onclick="deleteUser(${data[i].id},'${data[i].email}')" class="btn btn-danger">Delete</button>\n
+                                            </td>\n
+                                            </tr>`;
                         }
                     }
                     if(txt){
@@ -223,7 +223,7 @@ function aaddUser(type){
                 }
                 console.log(msg);
                 alert(`Result : \n\n ${msg}`);
-                $(".form1").reset();
+                // $(".form1").reset(); error
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);

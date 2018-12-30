@@ -11,11 +11,15 @@ var mySup;
 if(sup) mySup=JSON.parse(sup);
 
 console.log(user);
-console.log(mySup)
+console.log(mySup);
 var isi= $("#isi"); //sebagai tempat pergantian konten halaman
 function refresh(ref){
     isi.html(ref());
 }
+
+var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+
 
 $('#profile').text(user[2]);
 
@@ -26,6 +30,9 @@ $('#logout').click(function(e){
     deleteCookie("superior");
     window.location = "login";
 });
+
+agetRecentUpdates(0);
+
 
 //===================================== T O P    B U T T O N =====================================
 
@@ -320,7 +327,7 @@ $("#addRequest").click(function (e) {
     $("#orderBy, #sortBy").change(function () {
         agetAvailableItems();
     });
-})
+});
 
 
 

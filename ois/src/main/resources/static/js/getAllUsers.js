@@ -1,53 +1,53 @@
 function getAllUsers(){
-    return " <div class=\"col-md-3 title2\">\n" +
-        "\t    \t\t<span class=\"title1\"><b class=\"bold1\">U</b>SER<b class=\"bold1\">L</b>IST</span>\n" +
-        "\t    \t</div>\n" +
-        "            <div class=\"col-md-4 form-group\">\n" +
-        "                <div class=\"input-group\">\n" +
-        "                    <input id='myInput' type=\"text\" class=\"form-control\" placeholder=\"Search\">\n" +
-        "                    <span class=\"input-group-append\">\n" +
-        "                      \t<button class=\"btn1 fa fa-search\"></button>\n" +
-        "                    </span>\n" +
-        "                </div>\n" +
-        "            </div>\n" +
-        "            <div class=\"col-md-2\"></div>\n" +
-        "<div class=\"col-md-3 col11 sort\">\n            " +
-        "   <label for=\"sortBy\">SortBy:</label>\n                    " +
-        "        <select style='width: 36%' id='sortBy'>\n                       " +
-        "            <option value='role'>Role</option>\n                        " +
-        "            <option value='id'>Id</option>\n                      " +
-        "            <option value='email'>email</option>\n                        " +
-        "            <option value='superior'>superior</option>\n                    " +
-        "        </select>\n                    " +
-        "</div>\n                   " +
-        "<div  class=\"col-md-3 col11 sort\">\n                   " +
-        "   <label for=\"orderBy\">OrderBy:</label>\n                  " +
-        "       <select style='width: 36%' id='orderBy'>\n                       " +
-        "           <option value='asc'>Asc</option>\n                        " +
-        "           <option value='desc'>Desc</option>\n                    " +
-        "       </select>\n                    " +
+    return " <div class=\"col-md-3 title2\">" +
+        "    <span class=\"title1\"><b class=\"bold1\">U</b>SERS</span>" +
+        "    </div>" +
+        "            <div class=\"col-md-4 form-group\">" +
+        "                <div class=\"input-group\">" +
+        "                    <input id='myInput' type=\"text\" class=\"form-control\" placeholder=\"Search\">" +
+        "                    <span class=\"input-group-append\">" +
+        "                      <button class=\"btn1 fa fa-search\"></button>" +
+        "                    </span>" +
+        "                </div>" +
+        "            </div>" +
+        "            <div class=\"col-md-2\"></div>" +
+        "   <div class=\"col-md-3 col11 sort\">            " +
+        "   <label for=\"sortBy\">SortBy:</label>                    " +
+        "        <select style='width: 36%' id='sortBy'>                       " +
+        "            <option value='role'>Role</option>                        " +
+        "            <option value='id'>Id</option>                      " +
+        "            <option value='email'>email</option>                        " +
+        "            <option value='superior'>superior</option>                    " +
+        "        </select>                    " +
+        "</div>                   " +
+        "<div  class=\"col-md-3 col11 sort\">                   " +
+        "   <label for=\"orderBy\">OrderBy:</label>                  " +
+        "       <select style='width: 36%' id='orderBy'>                       " +
+        "           <option value='asc'>Asc</option>                        " +
+        "           <option value='desc'>Desc</option>                    " +
+        "       </select>                    " +
         "</div>    "+
-        "            <div class='table-responsive'>\n" +
-        "            \t<table class='table odd table-sm table-hover table-bordered'>\n" +
-        "            \t\t<thead>\n" +
-        "            \t\t\t<tr>\n" +
-        "            \t\t\t\t<th>Picture</th>\n" +
-        "            \t\t\t\t<th>ID</th>\n" +
-        "            \t\t\t\t<th>Email</th>\n" +
-        "            \t\t\t\t<th>NIK</th>\n" +
-        "            \t\t\t\t<th>Name</th>\n" +
-        "            \t\t\t\t<th>Division</th>\n" +
-        "            \t\t\t\t<th>Position</th>\n" +
-        "            \t\t\t\t<th>ContactNum</th>\n" +
-        "            \t\t\t\t<th>Address</th>\n" +
-        "            \t\t\t\t<th>Superior</th>\n" +
-        "            \t\t\t\t<th class='action1' >Action</th>\n" +
-        "            \t\t\t</tr>\n" +
-        "            \t\t</thead>\n" +
-        "            \t\t<tbody id='userList'>\n" +
-        "            \t\t</tbody>\n" +
-        "            \t</table>\n" +
-        "            </div>\n" +
-        "        </div>\n" +
-        "\t</div>";
+        "            <div class='table-responsive'>" +
+        "            <table class='table even table-sm table-hover table-bordered'>" +
+        "            <thead>" +
+        "            <tr>" +
+        "            <th>Picture</th>" +
+        "            <th>ID</th>" +
+        "            <th>Email</th>" +
+        "            <th>NIK</th>" +
+        "            <th>Name</th>" +
+        "            <th>Division</th>" +
+        "            <th>Position</th>" +
+        "            <th>ContactNum</th>" +
+        "            <th>Address</th>" +
+        "            <th>Superior</th>" +
+        "            <th class='action1' >Action</th>" +
+        "            </tr>" +
+        "            </thead>" +
+        "            <tbody id='userList'>" +
+        "            </tbody>" +
+        "            </table>" +
+        "            </div>" +
+        "        </div>" +
+        "</div>";
 }

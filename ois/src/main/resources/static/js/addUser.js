@@ -1,130 +1,128 @@
 function addUser() {
-    return '<span id="title" class="title1"><b class="bold1">A</b>DD<b class="bold1">U</b>SER</span>\n' +
+    return '<span id="title" class="title1"><b class="bold1">A</b>DD<b class="bold1">U</b>SER</span>' +
         '<span id="mySup" style="float: right;"></span>'+
-        '\t\t\t    <div class="col-md-9">\n' +
-        '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label">Id</label>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="id" type="text" class="form-control" name="id" maxlength="11" disabled="true">\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-3"></div>\n' +
-        '\t\t\t    </div>\n' +
-        '\t    \t<form class="form1">\n' +
-        '\t\t\t    <div class="col-md-9"></div>\n' +
-        '\t\t\t    <div class="col-md-9">\n' +
-        '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label">NIK*</label>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="nik" type="number" class="form-control dis" oninput="minMaxCheck(this)" name="nik" maxlength="20" required>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-3"></div>\n' +
-        '\t\t\t    </div>\n' +
-        '\t\t\t    <div class="col-md-9"></div>\n' +
-        '\t\t\t    <div class="col-md-9">\n' +
-        '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label">Name*</label>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="name" type="text" class="form-control dis" name="name" required>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-3"></div>\n' +
-        '\t\t\t    </div>\n' +
-        '\t\t\t    <div class="col-md-9"></div>\n' +
-        '\t\t\t    <div class="col-md-9">\n' +
-        '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label ">Email*</label>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="email" type="email" class="form-control dis" name="email" required>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-3"></div>\n' +
-        '\t\t\t    </div>\n' +
-        '\t\t\t    <div class="col-md-9"></div>\n' +
-        '\t\t\t    <div class="col-md-9">\n' +
-        '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label">Password*</label>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="password" type="password" class="form-control" name="password" required>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-3"></div>\n' +
-        '\t\t\t    </div>\n' +
-        '\t\t\t    <div class="col-md-9"></div>\n' +
-        '\t\t\t    <div class="col-md-9">\n' +
-        '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label ">Division*</label>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="division" type="text" class="form-control dis" name="division" required>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-3"></div>\n' +
-        '\t\t\t    </div>\n' +
-        '\t\t\t    <div class="col-md-9"></div>\n' +
-        '\t\t\t    <div class="col-md-9">\n' +
-        '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label">Position*</label>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="position" type="text" class="form-control dis" name="position" required>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-3"></div>\n' +
-        '\t\t\t    </div>\n' +
-        '\t\t\t    <div class="col-md-9"></div>\n' +
-        '\t\t\t    <div class="col-md-9">\n' +
-        '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label">ContactNum*</label>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6">\n' +
-        '\t\t\t    \t\t<input id="cnumber" type="number" class="form-control" oninput="minMaxCheck(this)" name="contact" maxlength="14" required>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-3"></div>\n' +
-        '\t\t\t    </div>\n' +
-        '\t\t\t    <div class="col-md-9"></div>\n' +
-        '\t\t\t    <div class="col-md-9">\n' +
-        '\t\t\t    \t<div class="col-md-3">\n' +
-        '\t\t\t    \t\t<label class="col-form-label">Address*</label>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6" style="float: left;">\n' +
-        '\t\t\t    \t\t<textarea id="address" class="form-control" name="address" required></textarea>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    </div>\n' +
-        '\t\t\t    <div class="col-md-9"></div>\n' +
-        '<div class="col-md-9 rm">\n' +
-        ' <div class="col-md-3 ">' +
-        '       <label class="col-form-label">Role*</label>\n' +
-        '   </div>' +
-        ' <div class="col-md-3"><label class="radio-inline">\n' +
-        ' <input value=1 type="radio" name="optradio" class="enable_d" checked> &nbsp;Superior Employee' +
-        ' </label>' +
-        '</div>\n' +
-        ' <div class="col-md-3">' +
-        '<label class="radio-inline">\n' +
-        ' <input value=2 id="emp" type="radio" name="optradio" >Employee' +
-        '  </label>\n' +
-        ' <select id="superiorList" disabled>\n' +
-        '<option value="">Optional</option>\n' +
-        '</select>' +
-        '</div>' +
-        '</div>' +
-        '\t\t\t    <div class="col-md-9 wrap rm" style="margin-top: 7%;">\n' +
-        '\t\t\t    \t<div class="col-md-3 ">\n' +
-        '\t\t\t    \t\t<label class="col-form-label">Picture*</label>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t<div class="col-md-6 rm">\n' +
-        '\t\t\t    \t\t<input id="picture" type="file" name="picture" required>\n' +
-        '\t\t\t    \t</div>\n' +
-        '\t\t\t    \t\n' +
-        '\t\t\t    </div>\n' +
-        '\t\t\t    <div class="col-md-9" >\n' +
-        '\t\t\t    \t<div class="col-md-3"></div>\n' +
-        '\t\t\t\t    <div class="col-md-6" style="margin-top: 7%;">\n' +
-        '\t\t\t\t    \t<button id="saveUser" type="submit" class="btn btn-success">SUBMIT</button>\n' +
-        '\t\t\t\t    \t<button id="reset" type="reset" class="btn btn-warning">RESET</button>\n' +
-        '\t\t\t\t    \t<button class="btn btn-primary" onclick="window.location.href=\'index\'">BACK</button>\n' +
-        '\t\t\t\t    </div>\n' +
-        '\t\t\t\t    <div class="col-md-3"></div>\n' +
-        '\t\t\t    </div>\n' +
-        '\t\t\t</form>'
+        '    <div class="col-md-9">' +
+        '    <div class="col-md-3">' +
+        '    <label class="col-form-label">Id</label>' +
+        '    </div>' +
+        '    <div class="col-md-6">' +
+        '       <input id="id" type="text" class="form-control" name="id" maxlength="11" disabled="true">' +
+        '    </div>' +
+        '    <div class="col-md-3"></div>' +
+        '    </div>' +
+        '    <form class="form1">' +
+            '    <div class="col-md-9"></div>' +
+            '    <div class="col-md-9">' +
+            '    <div class="col-md-3">' +
+            '    <label class="col-form-label">NIK*</label>' +
+            '    </div>' +
+            '    <div class="col-md-6">' +
+            '    <input id="nik" type="number" class="form-control dis" oninput="minMaxCheck(this)" name="nik" maxlength="20" required>' +
+            '    </div>' +
+            '    <div class="col-md-3"></div>' +
+            '    </div>' +
+            '    <div class="col-md-9"></div>' +
+            '    <div class="col-md-9">' +
+            '    <div class="col-md-3">' +
+            '    <label class="col-form-label">Name*</label>' +
+            '    </div>' +
+            '    <div class="col-md-6">' +
+            '    <input id="name" type="text" class="form-control dis" name="name" required>' +
+            '    </div>' +
+            '    <div class="col-md-3"></div>' +
+            '    </div>' +
+            '    <div class="col-md-9"></div>' +
+            '    <div class="col-md-9">' +
+            '    <div class="col-md-3">' +
+            '    <label class="col-form-label ">Email*</label>' +
+            '    </div>' +
+            '    <div class="col-md-6">' +
+            '    <input id="email" type="email" class="form-control dis" name="email" required>' +
+            '    </div>' +
+            '    <div class="col-md-3"></div>' +
+            '    </div>' +
+            '    <div class="col-md-9"></div>' +
+            '    <div class="col-md-9">' +
+            '    <div class="col-md-3">' +
+            '    <label class="col-form-label">Password*</label>' +
+            '    </div>' +
+            '    <div class="col-md-6">' +
+            '    <input id="password" type="password" class="form-control" name="password" required>' +
+            '    </div>' +
+            '    <div class="col-md-3"></div>' +
+            '    </div>' +
+            '    <div class="col-md-9"></div>' +
+            '    <div class="col-md-9">' +
+            '    <div class="col-md-3">' +
+            '    <label class="col-form-label ">Division*</label>' +
+            '    </div>' +
+            '    <div class="col-md-6">' +
+            '    <input id="division" type="text" class="form-control dis" name="division" required>' +
+            '    </div>' +
+            '    <div class="col-md-3"></div>' +
+            '    </div>' +
+            '    <div class="col-md-9"></div>' +
+            '    <div class="col-md-9">' +
+            '    <div class="col-md-3">' +
+            '    <label class="col-form-label">Position*</label>' +
+            '    </div>' +
+            '    <div class="col-md-6">' +
+            '    <input id="position" type="text" class="form-control dis" name="position" required>' +
+            '    </div>' +
+            '    <div class="col-md-3"></div>' +
+            '    </div>' +
+            '    <div class="col-md-9"></div>' +
+            '    <div class="col-md-9">' +
+            '    <div class="col-md-3">' +
+            '    <label class="col-form-label">ContactNum*</label>' +
+            '    </div>' +
+            '    <div class="col-md-6">' +
+            '    <input id="cnumber" type="number" class="form-control" oninput="minMaxCheck(this)" name="contact" maxlength="14" required>' +
+            '    </div>' +
+            '    <div class="col-md-3"></div>' +
+            '    </div>' +
+            '    <div class="col-md-9"></div>' +
+            '    <div class="col-md-9">' +
+            '    <div class="col-md-3">' +
+            '    <label class="col-form-label">Address*</label>' +
+            '    </div>' +
+            '    <div class="col-md-6" style="float: left;">' +
+            '    <textarea id="address" class="form-control" name="address" required></textarea>' +
+            '    </div>' +
+            '    </div>' +
+            '    <div class="col-md-9"></div>' +
+            '<div class="col-md-9 rm">' +
+                '<div class="col-md-3 ">' +
+            '       <label class="col-form-label">Role*</label>' +
+                '</div>' +
+            '    <div class="col-md-3"><label class="radio-inline">' +
+                ' <input value=1 type="radio" name="optradio" class="enable_d" checked> &nbsp;Superior Employee' +
+                '</div>' +
+            ' <div class="col-md-3">' +
+                '<label class="radio-inline">' +
+                    ' <input value=2 id="emp" type="radio" name="optradio" >Employee' +
+                '</label>' +
+                '<select id="superiorList" disabled>' +
+                     '<option value="">Optional</option>' +
+                '</select>' +
+            '   </div>' +
+            '</div>' +
+        '    <div class="col-md-9 wrap rm" style="margin-top: 7%;">' +
+        '        <div class="col-md-3 ">' +
+        '             <label class="col-form-label">Picture*</label>' +
+        '        </div>' +
+        '        <div class="col-md-6 rm">' +
+        '               <input id="picture" type="file" name="picture" required>' +
+        '        </div>' +
+        '    </div>' +
+        '    <div class="col-md-9" >' +
+        '    <div class="col-md-3"></div>' +
+        '    <div class="col-md-6" style="margin-top: 7%;">' +
+            '    <button id="saveUser" type="submit" class="btn btn-success">SUBMIT</button>' +
+            '    <button id="reset" type="reset" class="btn btn-warning">RESET</button>' +
+            '    <button class="btn btn-primary" onclick="window.location.href=\'index\'">BACK</button>' +
+        '    </div>' +
+        '    <div class="col-md-3"></div>' +
+        '    </div>' +
+        '</form>'
 }

@@ -17,6 +17,7 @@ function aaddRequest(requestJson){
             }
             console.log(msg);
             alert(`${msg}`);
+            $("reqMessage").val('');
             agetAvailableItems();
             emptyCart();
         },
@@ -62,7 +63,7 @@ function agetAllRequestsAdmin(){
     });
 }
 
-function agetAllRequestsSuperior(){ // TERAKHIR SAMPAI SINI, BUAT TAMPILAN REQUEST BERDASARKAN REQUEST DARI BAWAHANNYA
+function agetAllRequestsSuperior(){
     $.ajax({
         type: 'GET',
         url: `http://localhost:8080/api/requests?sId=${myId}&sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
@@ -252,14 +253,18 @@ function getReqDetails(request) {
         //STATUS CODE == 4 ARTINYA ITEM BARU DI REQUEST, BELUM DI APPROVE ATAUPUN REJECT
         if (myRole == 1 && request.statusCode == 0) { //ROLE 1 == SUPERIOR
             $("#mFooter").append(buttons.approveBtn, buttons.rejectBtn);
-        } else if (myRole == 0) { //ROLE 0 == ADMIN
-            $("#feedback").prop('disabled', true);
-            if (request.statusCode == 1) $("#mFooter").append(buttons.giveBtn);
-            else if (request.statusCode == 2) $("#mFooter").append(buttons.returnBtn);
         }
-        else if (myRole == 2) {  //ROLE 2 == EMPLOYEE
+         else if (myRole == 0 && request.statusCode == 1) { //ROLE 0 == ADMIN
             $("#feedback").prop('disabled', true);
-            if (request.statusCode == 0) $("#mFooter").append(buttons.cancelRequestBtn);
+            $("#mFooter").append(buttons.giveBtn);
+        }
+        else if (myRole == 0 && request.statusCode == 2){
+            $("#feedback").prop('disabled', true);
+            $("#mFooter").append(buttons.returnBtn);
+        }
+        else if ((myRole == 2 || myRole == 1 || myRole == 0) && (request.statusCode == 0 || request.statusCode == 1)) {  //ROLE 2 == EMPLOYEE
+            $("#feedback").prop('disabled', true);
+            $("#mFooter").append(buttons.cancelRequestBtn);
         }
         $("#requestModal").modal();
     }
@@ -308,7 +313,7 @@ function aupdateRequest(request,code){
             alert(`${msg}`);
             if(myRole==0) agetAllRequestsAdmin();
             else if(myRole==1) agetAllRequestsSuperior();
-            else if(myRole==3) agetAllRequestsUser();
+            else if(myRole==2) agetAllRequestsUser();
             },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
@@ -335,11 +340,82 @@ function adeleteRequest(id){
             }
             console.log(msg);
             alert(`${msg}`);
-            refresh(agetAllRequestsBySuperior);
+            if(myRole==0) agetAllRequestsAdmin();
+            else if(myRole==1) agetAllRequestsSuperior();
+            else if(myRole==2) agetAllRequestsUser();
         },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' .Error Message: ' + error.responseText);
             alert(`Error: ${error.status}\n\nFailed to delete request with id: ${id}`);
+        }
+    });
+}
+var currentPage =0;
+function prevPage(){
+    currentPage--;
+    agetRecentUpdates(currentPage);
+}
+function nextPage(){
+    currentPage++;
+    agetRecentUpdates(currentPage);
+}
+
+function agetRecentUpdates(currentPage){;
+    var url;
+    if(myRole==0) url=`http://localhost:8080/api/requests/pageable?page=`+currentPage+ `&size=7`;
+    else if(myRole==1) url = `http://localhost:8080/api/requests/pageable?sId=${myId}&page=`+currentPage+ `&size=7`;
+    else if(myRole==2) url = `http://localhost:8080/api/requests/pageable?eId=${myId}&page=`+currentPage+ `&size=7`;
+    console.log(url);
+    $.ajax({
+        type: 'GET',
+        url: url,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType:"json",
+        success: function (data) {
+            console.log("yes. data: " + data.content);
+            if (data.empty || !data.content.length) return;
+            $("#recent,#nextPrev").empty();// Clear whatever content there was before
+            var len= data.content.length;
+            for (var i = 0; i < len; i++) {
+                var request = data.content[i]; // Use a local variable to avoid repetition
+                if(!request) continue;
+                console.log(request);
+                // Use jQuery methods to add the content and bind a click handler
+                $("#recent").append(
+                    $("<tr>").addClass("hov").addClass(`s${request.statusCode}`).attr('title', 'Click for details').append(
+                        $("<td>").html(`&nbsp;    Mr/Mrs. <b>${request.user.email}</b> `),
+                        $("<td>").html(`&nbsp;    just made a request! (<b>${request.id}</b>) at ${new Date(request.createdAt).toLocaleString()} `)
+                    ).click(getReqDetails.bind(null, request)) // <-- click handler for TR
+                );
+            }
+            var totalPage = data.totalPages-1;
+            console.log(totalPage);
+            console.log(currentPage);;
+            console.log(totalPage-currentPage);
+            var hasNext = totalPage - currentPage > 0 ? true : false;
+            var hasPrev = currentPage > 0 ? true : false;
+            if(hasPrev) {
+                $("#nextPrev").append(
+                    $("<a>").css({"background-color": "whitesmoke",
+                        "color": "#4CAF50,border-radius:20%","border-color": "#4CAF50"}).attr("href","#").addClass("previous round").html("&#8249;").click(
+                        prevPage
+                    )
+                );
+            }
+            if(hasNext) {
+                $("#nextPrev").append(
+                    $("<a>").css({"background-color": "#4CAF50",
+                "color": "whitesmoke","border-radius":"20%"}).attr("href","#").addClass("next round").html("&#8250;").click(
+                        nextPage
+                    )
+                );
+            }
+
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
         }
     });
 }

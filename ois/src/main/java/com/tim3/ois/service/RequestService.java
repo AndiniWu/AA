@@ -9,6 +9,9 @@ import com.tim3.ois.model.User;
 //import com.tim3.ois.model.UserEmail;
 import com.tim3.ois.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
@@ -35,18 +38,28 @@ public class RequestService {
     @Autowired
     public RequestDetailService requestDetailService;
 
-    public List<Request> findAll(){
-        return requestRepository.findAll();
-    }
-//
+
 //    public List<RequestDetail> findAllRequestDetail(){
 //        return requestDetailRepository.findAll();
 //    }
-
     public Request findRequestById(int id) throws ResourceNotFoundException {
         Request request = requestRepository.findById(id);
         if(request==null){throw new ResourceNotFoundException("Request","id" ,id);}
         return request;
+    }
+    private Pageable createPageRequest(int page, int size) {
+        return new PageRequest(page,
+                size,
+                new Sort(Sort.Direction.DESC, "createdAt"));
+    }
+
+    public Page<Request> findAll(int eId, int sId, int page, int size) {
+        if (sId != -1) return requestRepository.findAllBySuperiorPageable(sId, true, createPageRequest(page, size));
+
+        else if (eId != -1) return requestRepository.findAllByUserPageable(eId, true, createPageRequest(page, size));
+
+        else return requestRepository.findAllBy(createPageRequest(page, size));
+
     }
 
     //sId == superior Id, eId == employee Id
@@ -63,8 +76,21 @@ public class RequestService {
             if (orderBy.toLowerCase().equals("asc")) return requestRepository.findAllBy(true,Sort.by(sortBy,"id").ascending());
             else return requestRepository.findAllBy(true,Sort.by(sortBy,"id").descending());
         } else throw new ResourceNotFoundException("Request","Request with user eId & sId",eId+", "+sId);
-        }
-
+    }
+//    public List<Request> findAllBy(int page,int size,int eId, int sId, String sortBy,String orderBy) {
+//        if(sId != -1) { //superior view (approval page)
+//            if (orderBy.toLowerCase().equals("asc")) return requestRepository.findAllBySuperior(sId,true ,Sort.by(sortBy,"id").ascending());// Sort by parameter kedua adalah opsional, ketika butuh 2 sort
+//            else return requestRepository.findAllBySuperior(sId, true ,Sort.by(sortBy,"id").descending());
+//        }
+//        else if(eId != -1) {  //my request list view
+//            if (orderBy.toLowerCase().equals("asc")) return requestRepository.findAllByUser(eId,true ,Sort.by(sortBy,"id").ascending());
+//            else return requestRepository.findAllByUser(eId, true ,Sort.by(sortBy,"id").descending());
+//        }
+//        else if(eId == -1 && sId == -1) { //all request list view
+//            if (orderBy.toLowerCase().equals("asc")) return requestRepository.findAllBy(true,Sort.by(sortBy,"id").ascending());
+//            else return requestRepository.findAllBy(true,Sort.by(sortBy,"id").descending());
+//        } else throw new ResourceNotFoundException("Request","Request with user eId & sId",eId+", "+sId);
+//    }
     public Request saveRequest(Request request){ //STATUS CODE = 0 ITEM IS REQUESTED WAITING FOR APPROVAL
         request.setCreatedAt(new Date().getTime());
         if(request.getUser().getRole()==2) {
