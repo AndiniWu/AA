@@ -189,7 +189,7 @@ function getReqDetails(request) {
         var dt = date > 0 ? new Date(date).toLocaleString() : "";
         var total =0,count=reqDet.length;
         $("#thead, #tbody,#mFooter").empty();
-        $('.modal-title').text(`Request Id : ${request.id}`);
+        $('.modal-title').html(`Request Id : ${request.id}  <span style="font-size:small">by ${request.user.email}</span> `);
         $("#thead").append(
             $("<tr>").append(
                 $("<th>").text("Picture"),
@@ -262,7 +262,7 @@ function getReqDetails(request) {
             $("#feedback").prop('disabled', true);
             $("#mFooter").append(buttons.returnBtn);
         }
-        else if ((myRole == 2 || myRole == 1 || myRole == 0) && (request.statusCode == 0 || request.statusCode == 1)) {  //ROLE 2 == EMPLOYEE
+        if ((myRole == 2 || myRole == 1 || myRole == 0) && (request.statusCode == 0 || request.statusCode == 1) && (myId==request.user.id)) {  //ROLE 2 == EMPLOYEE
             $("#feedback").prop('disabled', true);
             $("#mFooter").append(buttons.cancelRequestBtn);
         }
@@ -366,6 +366,13 @@ function agetRecentUpdates(currentPage){;
     else if(myRole==1) url = `http://localhost:8080/api/requests/pageable?sId=${myId}&page=`+currentPage+ `&size=7`;
     else if(myRole==2) url = `http://localhost:8080/api/requests/pageable?eId=${myId}&page=`+currentPage+ `&size=7`;
     console.log(url);
+    var message=[
+        "just made a request!",
+        "just approved a request!",
+        "just taken the requested item(s)!",
+        "just returned the requested item(s)!",
+        "request had just been rejected!"
+    ];
     $.ajax({
         type: 'GET',
         url: url,
@@ -386,14 +393,14 @@ function agetRecentUpdates(currentPage){;
                 $("#recent").append(
                     $("<tr>").addClass("hov").addClass(`s${request.statusCode}`).attr('title', 'Click for details').append(
                         $("<td>").html(`&nbsp;    Mr/Mrs. <b>${request.user.email}</b> `),
-                        $("<td>").html(`&nbsp;    just made a request! (<b>${request.id}</b>) at ${new Date(request.createdAt).toLocaleString()} `)
+                        $("<td>").html(`&nbsp;    ${message[request.statusCode]}  (<b>${request.id}</b>) at ${new Date(request.createdAt).toLocaleString()} `)
                     ).click(getReqDetails.bind(null, request)) // <-- click handler for TR
                 );
             }
             var totalPage = data.totalPages-1;
-            console.log(totalPage);
-            console.log(currentPage);;
-            console.log(totalPage-currentPage);
+            // console.log(totalPage);
+            // console.log(currentPage);;
+            // console.log(totalPage-currentPage);
             var hasNext = totalPage - currentPage > 0 ? true : false;
             var hasPrev = currentPage > 0 ? true : false;
             if(hasPrev) {

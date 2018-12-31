@@ -158,9 +158,24 @@
 	    <!-- MAIN -->
 		<!--CONTENT-->
 	    <div id="isi" class="col-md-9">
-			<div class="col-md-3 col">
+			<div class="col-md-3 col table-responsive">
 				<h5>View Item Lists</h5>
-				<p>Total : <span id="totalItem"></span><br>Available:</p>
+				<div class="table-responsive">
+					<table >
+						<tr>
+							<td>Total </td><td>:&nbsp;</td>
+							<td id="totalQty"></td>
+						</tr>
+						<tr>
+							<td>On Request </td><td>:&nbsp; </td>
+							<td id="onRequest"></td>
+						</tr>
+						<tr>
+							<td>Available </td><td>:&nbsp; </td>
+							<td id="available"></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<div class="col-md-3 col">
 				<h5>Request Lists</h5>

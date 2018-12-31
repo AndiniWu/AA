@@ -21,6 +21,12 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    @GetMapping("/items/stock")
+    public List<Object> getStock(
+            @RequestParam(value = "type",required = false,defaultValue = "current")String type){
+        return itemService.getStock(type);
+    }
+
     @GetMapping("/items")
     public List<Item> getAllItems(@RequestParam(value = "sortBy",required = false,defaultValue = "role")String sortBy,
                                   @RequestParam(value = "orderBy",required = false,defaultValue = "asc")String orderBy){
@@ -53,6 +59,7 @@ public class ItemController {
     public Boolean deleteItem(@PathVariable(value = "id")int itemId){
         return itemService.deleteItem(itemId);
     }
+
 //    @DeleteMapping("/items/{id}")
 //    public Boolean deleteItem(@PathVariable(value = "id")int itemId){
 //        Item item = itemService.findItemById(itemId);

@@ -30,8 +30,22 @@ $('#logout').click(function(e){
     deleteCookie("superior");
     window.location = "login";
 });
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function demo() {
+    agetCurrentStock();
+    console.log('Taking a break...');
+    await sleep(100);
+    agetTotalStock();
+    console.log('Two seconds later');
+}
 
 agetRecentUpdates(0);
+demo();
+// agetCurrentStock();agetTotalStock();
+
 
 
 //===================================== T O P    B U T T O N =====================================
@@ -69,8 +83,6 @@ function minMaxCheck(obj) { // user tetap bisa melakukan input ',' tpi ketika ms
 }
 
 //===================================== U S E R =====================================
-
-
 
 function superiorList(){
     $('input:radio[name="optradio"]').click(function() {

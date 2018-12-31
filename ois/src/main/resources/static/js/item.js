@@ -211,3 +211,47 @@ function adeleteItem(id){
     });
 }
 
+function agetCurrentStock(){
+        $.ajax({
+            type: 'GET',
+            url: `http://localhost:8080/api/items/stock?type=current`,
+            headers: {
+                "Content-Type": "application/json", "Accept": "application/json"
+            },
+            dataType:"json",
+            success: function (data) {
+                // console.log(data);
+                $("#available").text(data[0]);
+            },
+            error: function (error) {
+                console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+            }
+        });
+
+}
+
+function agetTotalStock(){
+    $.ajax({
+        type: 'GET',
+        url: `http://localhost:8080/api/items/stock?type=total`,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType:"json",
+        success: function (data) {
+            // console.log(data);
+            $("#onRequest").text(data[0]);
+            var onReq = parseInt($("#onRequest").html());
+            var current = parseInt($("#available").html());
+            var total = onReq+current
+            console.log(onReq,current,total);
+
+            $("#totalQty").text(total);
+
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+}
+

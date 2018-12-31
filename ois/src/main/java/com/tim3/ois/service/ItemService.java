@@ -22,7 +22,10 @@ public class ItemService {
     public List<Item> findAll(){
         return itemRepository.findAll();
     }
-
+    public List<Object> getStock(String type){
+        if(type.toLowerCase().equals("current")) return itemRepository.getSum(true); //return current stock
+        else return itemRepository.getTotal(true);  //return total stock
+    }
     public Item findItemById(int id) throws ResourceNotFoundException{
         Item item = itemRepository.findById(id);
         if(item==null){throw new ResourceNotFoundException("Item","id",id);}
