@@ -24,26 +24,28 @@ var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "S
 $('#profile').text(user[2]);
 
 
-$('#logout').click(function(e){
+$('.logout').click(function(e){
     e.preventDefault();
     deleteCookie("user");
     deleteCookie("superior");
     window.location = "login";
 });
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function demo() {
-    agetCurrentStock();
-    console.log('Taking a break...');
-    await sleep(100);
-    agetTotalStock();
-    console.log('Two seconds later');
-}
+// function sleep(ms) {
+//     return new Promise(resolve => setTimeout(resolve, ms));
+// }
+//
+// async function demo() {
+//     agetCurrentStock();
+//     console.log('waiting...');
+//     await sleep(100);
+//     agetTotalStock();
+//     console.log('0.1 seconds later');
+// }
 
 agetRecentUpdates(0);
-demo();
+agetItemCount();
+agetRequestCount()
+agetMyRequestCount();
 // agetCurrentStock();agetTotalStock();
 
 
@@ -94,7 +96,7 @@ function superiorList(){
     });
 }
 
-$('#addUser').click(function(e){
+$('.addUser').click(function(e){
     e.preventDefault();
     refresh(addUser);
     agetAllSuperiors();
@@ -121,7 +123,7 @@ function editUser(userId){ // edit user by admin
     });
 }
 
-$("#editProfile").click(function () { //edit user by user
+$(".editProfile").click(function () { //edit user by user
     refresh(addUser);
     $("#title").html('<b class="bold1">E</b>DIT<b class="bold1">&nbsp;U</b>SER');
     if(mySup) $("#mySup").html(`<b class="bold1">M</b>YSUPERIOR:<b class="bold1">&nbsp;${mySup.email}</b>`);
@@ -135,14 +137,14 @@ $("#editProfile").click(function () { //edit user by user
 function deleteUser(userId,userName){
     var r = confirm(`You are going to delete user :\nId      : ${userId}\nemail : ${userName}\n\nAre you sure? `);
     if(r==true){
-        adeleteUser(userId);//user tidak benar-benar di delete, melainkan hanya menganti value dari field enabled menjadi false.
+        checkUserRequest(userId);
+        // adeleteUser(userId);//user tidak benar-benar di delete, melainkan hanya menganti value dari field enabled menjadi false.
         //ketika yang didelete adalah user dengan role superior(1), dan memiliki hubungan foreignkey ke user lain, maka tidak akan terjadi error dan id user ini tetap menjadi foreignkey di user lain, sehingga perlu dilakukan update manual dari user lain utk mengganti superior_id nya.
-        $(`#${userId}`).parent().remove()
     }
 }
 
 
-$('#getAllUsers').click(function(e){
+$('.getAllUsers').click(function(e){
     e.preventDefault();
     refresh(getAllUsers);
     if(myRole==0) agetAllUsers();
@@ -167,7 +169,7 @@ $('#getAllUsers').click(function(e){
 
 //===================================== I T E M S =====================================
 
-$('#getAllItems').click(function (e) {
+$('.getAllItems').click(function (e) {
     e.preventDefault();
     refresh(getAllItems);
     agetAllItems();
@@ -184,7 +186,7 @@ $('#getAllItems').click(function (e) {
     });
 });
 
-$('#addItem').click(function (e) {
+$('.addItem').click(function (e) {
     e.preventDefault();
     refresh(addItem);
     $('#saveItem').click(function (){
@@ -204,9 +206,8 @@ function editItem(itemId){ //still working on
 function deleteItem(itemId,itemName){
     var r = confirm(`You are going to delete user :\nId      : ${itemId}\nemail : ${itemName}\n\nAre you sure? `);
     if(r==true){
-        adeleteItem(itemId);//user tidak benar-benar di delete, melainkan hanya menganti value dari field enabled menjadi false.
+        checkItemRequest(itemId);//user tidak benar-benar di delete, melainkan hanya menganti value dari field enabled menjadi false.
         //ketika yang didelete adalah user dengan role superior(1), dan memiliki hubungan foreignkey ke user lain, maka tidak akan terjadi error dan id user ini tetap menjadi foreignkey di user lain, sehingga perlu dilakukan update manual dari user lain utk mengganti superior_id nya.
-        $(`#${itemId}`).parent().remove()
     }
 }
 
@@ -230,7 +231,7 @@ function emptyCart(){
     $('.ad').prop('disabled', false);
     $('#cartTotal').text("Total Items: " + itemCount);
 }
-$('#getAvailableItems').click(function (e) {
+$('.getAvailableItems').click(function (e) {
     e.preventDefault();
     refresh(getAvailableItems);
     $('#title').html('<b class=\"bold1\">A</b>VAILABLE<b class=\"bold1\">&nbsp;I</b>TEMS');
@@ -276,14 +277,14 @@ $('#getAvailableItems').click(function (e) {
         $(`.${btnId}`).prop('disabled',false);
     });
 
-    $('#submit').click(function () {
+    $('#submit').unbind().click(function () {
         submitRequest();
     });
 
 }); //=============================== A V A I L A B L E    I T E M S     E N D S     H E R E ===============================
 
 //=============================== R E Q U E S T S    S T A R T S    H E R E ===============================
-$('#getAllRequests').click(function (e) {
+$('.getAllRequests').click(function (e) {
     e.preventDefault();
     refresh(getAllRequests);
     if(myRole==0)
@@ -314,7 +315,7 @@ $('#getAllRequests').click(function (e) {
     });
 });
 
-$('#getMyRequests').click(function (e) {
+$('.getMyRequests').click(function (e) {
     e.preventDefault();
     refresh(getAllRequests);
     $('#title').html('<b class=\"bold1\">M</b>Y<b class=\"bold1\">&nbsp;R</b>SEQUEST');
@@ -331,15 +332,6 @@ $('#getMyRequests').click(function (e) {
     });
 });
 
-$("#addRequest").click(function (e) {
-    e.preventDefault();
-    refresh(getAvailableItems);
-    $('#title').html('<b class=\"bold1\">A</b>VAILABLE<b class=\"bold1\">&nbsp;I</b>TEMS');
-    agetAvailableItems();
-    $("#orderBy, #sortBy").change(function () {
-        agetAvailableItems();
-    });
-});
 
 
 

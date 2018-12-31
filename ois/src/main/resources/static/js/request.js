@@ -390,10 +390,12 @@ function agetRecentUpdates(currentPage){;
                 if(!request) continue;
                 console.log(request);
                 // Use jQuery methods to add the content and bind a click handler
+                var msg = message[request.statusCode];
+                if(request.statusCode==1 & (request.user.role== 1 || request.user.role == 0)) msg= message[0]
                 $("#recent").append(
                     $("<tr>").addClass("hov").addClass(`s${request.statusCode}`).attr('title', 'Click for details').append(
-                        $("<td>").html(`&nbsp;    Mr/Mrs. <b>${request.user.email}</b> `),
-                        $("<td>").html(`&nbsp;    ${message[request.statusCode]}  (<b>${request.id}</b>) at ${new Date(request.createdAt).toLocaleString()} `)
+                        $("<td>").html(`&nbsp;    Mr/Mrs. ${request.user.email}`),
+                        $("<td>").html(`&nbsp;    ${msg}  (<b>${request.id}</b>) at ${new Date(request.createdAt).toLocaleString()} `)
                     ).click(getReqDetails.bind(null, request)) // <-- click handler for TR
                 );
             }
@@ -426,3 +428,49 @@ function agetRecentUpdates(currentPage){;
         }
     });
 }
+
+
+function agetRequestCount(){
+    $.ajax({
+        type: 'GET',
+        url: `http://localhost:8080/api/requests/count`,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType:"json",
+        success: function (data) {
+            // console.log(data);
+            $("#approved").text(data.approved);
+            $("#pending").text(data.pending);
+            $("#rejected").text(data.rejected);
+            $("#totalReq").text(`(${data.total})` );
+
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+}
+function agetMyRequestCount(){
+    $.ajax({
+        type: 'GET',
+        url: `http://localhost:8080/api/requests/count/`+myId,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType:"json",
+        success: function (data) {
+            // console.log(data);
+            $("#myApproved").text(data.approved);
+            $("#myPending").text(data.pending);
+            $("#myRejected").text(data.rejected);
+            $("#myTotalReq").text(`(${data.total})` );
+
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+}
+
+

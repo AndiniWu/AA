@@ -2,7 +2,7 @@ package com.tim3.ois.service;
 
 import com.tim3.ois.exception.ResourceNotFoundException;
 import com.tim3.ois.repository.ItemRepository;
-
+import com.tim3.ois.model.ItemCount;
 import com.tim3.ois.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,15 +22,24 @@ public class ItemService {
     public List<Item> findAll(){
         return itemRepository.findAll();
     }
-    public List<Object> getStock(String type){
-        if(type.toLowerCase().equals("current")) return itemRepository.getSum(true); //return current stock
-        else return itemRepository.getTotal(true);  //return total stock
+    public ItemCount getItemCount(){
+        ItemCount itemCount = new ItemCount();
+        itemCount.setOnRequest(itemRepository.getOnRequest(true));
+        itemCount.setAvailable(itemRepository.getAvailable(true));
+        itemCount.setTotal(itemCount.getAvailable()+itemCount.getOnRequest());
+        return itemCount;
     }
     public Item findItemById(int id) throws ResourceNotFoundException{
         Item item = itemRepository.findById(id);
         if(item==null){throw new ResourceNotFoundException("Item","id",id);}
         return item;
     }
+    public List<Object> getAllItemOnActiveRequest(int id) throws ResourceNotFoundException{ // ambil semua item yang ada di request statuscode < 3 (item yang dalam request, approve, taken)
+        Item item = itemRepository.findById(id);
+        if(item==null){throw new ResourceNotFoundException("Item","id",id);}
+        return itemRepository.getItemOnActiveRequest(id);
+    }
+
     public Item updateItem(int id,Item itemNow){
         Item item = itemRepository.findById(id);
         item.setQuantity(itemNow.getQuantity());

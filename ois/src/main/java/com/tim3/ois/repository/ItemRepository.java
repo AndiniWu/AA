@@ -24,13 +24,16 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 //    List<Item> findAvailableItems();
 
     @Query(value = "SELECT SUM(i.quantity) as current_quantity FROM Item i WHERE i.enabled =:bool",nativeQuery = true)
-    List<Object> getSum( //curent inventory
+    Integer getAvailable( //curent inventory
             @Param("bool") boolean bool
     );
 
     @Query(value = "SELECT SUM(rd.quantity) as total_quantity FROM request_detail rd INNER JOIN request r on rd.request_id = r.id where r.status_code < 3" ,nativeQuery = true)
-    List<Object> getTotal( //total item inventory + lagi dipinjam
+    Integer getOnRequest( //total item inventory + lagi dipinjam
             @Param("bool") boolean bool
     );
 
+    @Query(value = " SELECT  rd.request_id,rd.quantity FROM request_detail rd INNER JOIN request r on rd.request_id = r.id where r.status_code < 3 and rd.item = :id",nativeQuery = true)            //active request adalah request dgn status code < 3
+    List<Object> getItemOnActiveRequest(
+            @Param("id") int id);
 }

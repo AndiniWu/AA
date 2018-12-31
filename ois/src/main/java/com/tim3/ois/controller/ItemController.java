@@ -2,15 +2,12 @@ package com.tim3.ois.controller;
 
 
 import com.tim3.ois.model.Item;
-import com.tim3.ois.model.User;
 import com.tim3.ois.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -21,10 +18,9 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("/items/stock")
-    public List<Object> getStock(
-            @RequestParam(value = "type",required = false,defaultValue = "current")String type){
-        return itemService.getStock(type);
+    @GetMapping("/items/count")
+    public Object getItemCount(){
+        return itemService.getItemCount();
     }
 
     @GetMapping("/items")
@@ -32,6 +28,13 @@ public class ItemController {
                                   @RequestParam(value = "orderBy",required = false,defaultValue = "asc")String orderBy){
         return itemService.findBy(sortBy,orderBy);
     }
+
+    @GetMapping("/items/onActiveRequest/{id}")
+    public List<Object> getItemOnActiveRequest(
+            @PathVariable(value = "id") int itemId){ // get item yang ada di request dgn status code < 3
+        return itemService.getAllItemOnActiveRequest(itemId);
+    }
+
     @GetMapping("/items/{id}")
     public Item getItem(@PathVariable(value = "id") int itemId){
         return itemService.findItemById(itemId);

@@ -9,8 +9,10 @@
 	<link rel="stylesheet" href="css/cart.css">
 	<link rel="stylesheet" href="css/css.css">
 	<link rel="stylesheet" href="css/topbtn.css">
+
   	<!-- <link rel="stylesheet" href="../css/custom.scss"> -->
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" />
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -38,8 +40,8 @@
 
 	        		</a>
 	        		<div class="dropdown-menu">
-						<a id="editProfile" class="dropdown-item" href="#">Edit Profile</a>
-			            <a id="logout" class="dropdown-item" href="#">Logout</a>
+						<a class="editProfile dropdown-item" href="#">Edit Profile</a>
+			            <a class="logout dropdown-item" href="#">Logout</a>
 			        </div>
 	      		</li>
 	      
@@ -53,20 +55,20 @@
 			            <a class="dropdown-item" href="index">Dashboard</a>
 			            <a class="dropdown-item nav-link dropdown-toggle navbar1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User</a>
 			            	<div class="dropdown-menu">
-					            <a  class="dropdown-item" href="#">All Users</a>
-					            <a class="dropdown-item" href="#">Add User</a>
+					            <a  class="getAllUsers dropdown-item" href="#">All Users</a>
+					            <a class="addUser dropdown-item" href="#">Add User</a>
 					        </div>
 			            <a class="dropdown-item nav-link dropdown-toggle navbar1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Item</a>
 			            	<div class="dropdown-menu">
-					            <a class="dropdown-item" href="#">All Items</a>
-					            <a class="dropdown-item" href="#">Available Items</a>
-					            <a class="dropdown-item" href="#">Add New Item</a>
+					            <a class="getAllItems dropdown-item" href="#">All Items</a>
+					            <a class="getAvailableItems dropdown-item" href="#">Available Items</a>
+					            <a class="addItem dropdown-item" href="#">Add New Item</a>
 					        </div>
 			            <a class="dropdown-item nav-link dropdown-toggle navbar1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Request</a>
 			            	<div class="dropdown-menu">
-					            <a class="dropdown-item" href="#">All Requests</a>
-					            <a class="dropdown-item" href="#">My Requests</a>
-					            <a class="dropdown-item" href="#">Add Request</a>
+					            <a class="getAllRequests dropdown-item" href="#">All Requests</a>
+					            <a class="getMyRequests dropdown-item" href="#">My Requests</a>
+					            <a class="getAvailableItems dropdown-item" href="#">Add Request</a>
 					        </div>
 			        </div>
 	      		</li><!-- Smaller devices menu END -->
@@ -101,10 +103,10 @@
             	</a>
 	            <!-- Submenu content -->
 	            <div id='submenu1' class="collapse sidebar-submenu">
-	                <a id="getAllUsers" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a href="#" class=" getAllUsers list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">All Users</span>
 	                </a>
-	                <a id="addUser" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a href="#" class="addUser list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">Add User</span>
 	                </a>
 	            </div>
@@ -117,13 +119,13 @@
 	            </a>
 	            <!-- Submenu content -->
 	            <div id='submenu2' class="collapse sidebar-submenu">
-	                <a id="getAllItems" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a href="#" class="getAllItems list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">All Items</span>
 	                </a>
-	                <a id="getAvailableItems" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a href="#" class="getAvailableItems list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">Available Item</span>
 	                </a>
-	                <a id="addItem" href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a href="#" class="addItem list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">Add New Item</span>
 	                </a>
 	            </div> 
@@ -136,13 +138,13 @@
 	            </a>
 	            <!-- Submenu content -->
 	            <div id='submenu3' class="collapse sidebar-submenu">
-	                <a id="getAllRequests"	href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a href="#" class="getAllRequests list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">All Requests</span>
 	                </a>
-	                <a id="getMyRequests"  href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+	                <a href="#" class="getMyRequests list-group-item list-group-item-action bg-list1 text-white">
 	                    <span class="menu-collapsed">My Requests</span>
 	                </a>
-					<a id="addRequest"  href="#" class="list-group-item list-group-item-action bg-list1 text-white">
+					<a href="#" class="getAvailableItems list-group-item list-group-item-action bg-list1 text-white">
 						<span class="menu-collapsed">Create New Requests</span>
 					</a>
 	            </div>
@@ -158,47 +160,140 @@
 	    <!-- MAIN -->
 		<!--CONTENT-->
 	    <div id="isi" class="col-md-9">
-			<div class="col-md-3 col table-responsive">
-				<h5>View Item Lists</h5>
-				<div class="table-responsive">
-					<table >
+			<div class="row">
+			<div class="getAllItems col-md-3 col btn btn-secondary">
+				<h5>View Item List</h5>
+				<div>
+					<table>
 						<tr>
-							<td>Total </td><td>:&nbsp;</td>
+							<td>Total </td><td>&nbsp;:&nbsp;</td>
 							<td id="totalQty"></td>
 						</tr>
 						<tr>
-							<td>On Request </td><td>:&nbsp; </td>
+							<td>On Request </td><td>&nbsp;:&nbsp; </td>
 							<td id="onRequest"></td>
 						</tr>
 						<tr>
-							<td>Available </td><td>:&nbsp; </td>
+							<td>Available </td><td>&nbsp;:&nbsp; </td>
 							<td id="available"></td>
 						</tr>
 					</table>
 				</div>
 			</div>
-			<div class="col-md-3 col">
-				<h5>Request Lists</h5>
-				<p>Request :<br>Pending: <br>Approved:</p>
-			</div>
-			<div class="col-md-3 col sty1">
-				<button><b>My Request</b></button>
-			</div>
-			<div class="col-md-9" style="float: none;">
-				<h4 style="border-bottom: 1px solid rgba(0,0,0,0.2);padding-bottom: 10px;">Recent Updates <span id="nextPrev"></span></h4>
-				<div class="table-responsive">
-					<table class="table table-hover recentUpdate">
-						<tbody id="recent">
+				<div class="getAllRequests col-md-3 col btn btn-info">
+					<h5>View Request List <span id="totalReq"></span></h5>
+					<div>
+						<table >
 							<tr>
-								<td>[] just made a Request with ID: []</td>
+								<td>Approved </td><td>&nbsp;:&nbsp;</td>
+								<td id="approved"></td>
 							</tr>
-						</tbody>
+							<tr>
+								<td>Pending </td><td>&nbsp;:&nbsp; </td>
+								<td id="pending"></td>
+							</tr>
+							<tr>
+								<td>Rejected </td><td>&nbsp;:&nbsp; </td>
+								<td id="rejected"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="col-md-3 col btn btn-success getMyRequests">
+					<h5>My Request <span id="myTotalReq"></span></h5>
+					<div class="table-responsive">
+						<table >
+							<tr>
+								<td>Approved </td><td>&nbsp;:&nbsp;</td>
+								<td id="myApproved"></td>
+							</tr>
+							<tr>
+								<td>Pending </td><td>&nbsp;:&nbsp; </td>
+								<td id="myPending"></td>
+							</tr>
+							<tr>
+								<td>Rejected </td><td>&nbsp;:&nbsp; </td>
+								<td id="myRejected"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!--<div class="row">-->
+				<!--<div class="getAllItems col-md-3 col btn btn-outline-secondary table-responsive">-->
+					<!--<h5>View Item List</h5>-->
+					<!--<div class="table-responsive">-->
+						<!--<table>-->
+							<!--<tbody><tr>-->
+								<!--<td>Total </td><td>&nbsp;:&nbsp;</td>-->
+								<!--<td id="totalQty">905</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>On Request </td><td>&nbsp;:&nbsp; </td>-->
+								<!--<td id="onRequest">142</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>Available </td><td>&nbsp;:&nbsp; </td>-->
+								<!--<td id="available">763</td>-->
+							<!--</tr>-->
+							<!--</tbody></table>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="getAllRequests col-md-3 col btn btn-outline-info .table-responsive">-->
+					<!--<h5>View Request List <span id="totalReq">(43)</span></h5>-->
+					<!--<div class="table-responsive">-->
+						<!--<table>-->
+							<!--<tbody><tr>-->
+								<!--<td>Approved </td><td>&nbsp;:&nbsp;</td>-->
+								<!--<td id="approved">36</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>Pending </td><td>&nbsp;:&nbsp; </td>-->
+								<!--<td id="pending">2</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>Rejected </td><td>&nbsp;:&nbsp; </td>-->
+								<!--<td id="rejected">5</td>-->
+							<!--</tr>-->
+							<!--</tbody></table>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col-md-3 col btn btn-outline-success getMyRequests">-->
+					<!--<h5>My Requests <span id="myTotalReq">(6)</span></h5>-->
+					<!--<div class="table-responsive">-->
+						<!--<table>-->
+							<!--<tbody><tr>-->
+								<!--<td>Approved </td><td>&nbsp;:&nbsp;</td>-->
+								<!--<td id="myApproved">3</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>Pending </td><td>&nbsp;:&nbsp; </td>-->
+								<!--<td id="myPending">2</td>-->
+							<!--</tr>-->
+							<!--<tr>-->
+								<!--<td>Rejected </td><td>&nbsp;:&nbsp; </td>-->
+								<!--<td id="myRejected">1</td>-->
+							<!--</tr>-->
+							<!--</tbody></table>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+			<div class="row">
+				<div class="col-md-9" >
+					<h5 >Recent Updates <span id="nextPrev"></span></h5>
+					<div class="table-responsive">
+						<table class="table table-hover recentUpdate">
+							<tbody id="recent">
+								<tr>
+									<td>[] just made a Request with ID: []</td>
+								</tr>
+							</tbody>
 
-					</table> <!-- recentUpdates END-->
+						</table> <!-- recentUpdates END-->
+					</div>
 				</div>
 			</div>
 		</div>
-
 
 	</div><!-- body-row END -->
 

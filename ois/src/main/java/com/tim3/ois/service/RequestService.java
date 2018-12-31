@@ -2,6 +2,8 @@ package com.tim3.ois.service;
 
 import com.tim3.ois.exception.ResourceNotFoundException;
 import com.tim3.ois.model.Request;
+import com.tim3.ois.model.RequestCount;
+
 import com.tim3.ois.service.RequestDetailService;
 //import com.tim3.ois.model.RequestDetail;
 //import com.tim3.ois.repository.RequestDetailRepository;
@@ -37,7 +39,8 @@ public class RequestService {
     }
     @Autowired
     public RequestDetailService requestDetailService;
-
+    @Autowired
+    public UserService userService;
 
 //    public List<RequestDetail> findAllRequestDetail(){
 //        return requestDetailRepository.findAll();
@@ -58,10 +61,29 @@ public class RequestService {
 
         else if (eId != -1) return requestRepository.findAllByUserPageable(eId, true, createPageRequest(page, size));
 
-        else return requestRepository.findAllBy(createPageRequest(page, size));
+        else return requestRepository.findAll(true,createPageRequest(page, size));
 
     }
 
+    public RequestCount getRequestCount(){
+        RequestCount reqCount = new RequestCount();
+        reqCount.setRejected(requestRepository.getRequestRejectedCount(true));
+        reqCount.setApproved(requestRepository.getRequestApprovedCount(true));
+        reqCount.setPending(requestRepository.getRequestPendingCount(true));
+        reqCount.setTotal(reqCount.getApproved()+reqCount.getPending()+reqCount.getRejected());
+        return reqCount;
+    }
+
+    public RequestCount getMyRequestCount(Integer userId)  throws ResourceNotFoundException{
+        User userExist = userService.findUserById(userId);
+        if(userExist==null) throw new ResourceNotFoundException("User","id",userId);
+        RequestCount myReqCount = new RequestCount();
+        myReqCount.setRejected(requestRepository.getMyRequestRejectedCount(true,userId));
+        myReqCount.setApproved(requestRepository.getMyRequestApprovedCount(true,userId));
+        myReqCount.setPending(requestRepository.getMyRequestPendingCount(true,userId));
+        myReqCount.setTotal(myReqCount.getApproved()+myReqCount.getPending()+myReqCount.getRejected());
+        return myReqCount;
+    }
     //sId == superior Id, eId == employee Id
     public List<Request> findAllBy(int eId, int sId, String sortBy,String orderBy) {
         if(sId != -1) { //superior view (approval page)

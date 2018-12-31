@@ -256,6 +256,35 @@ function aaddUser(type){
     }
 }
 
+function checkUserRequest(userId){
+    $.ajax({
+        type: 'GET',
+        url: `http://localhost:8080/api/requests?eId=`+userId,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType:"json",
+        success: function (data) {      // FROM TRINCOT STACKOVERFLOW
+            console.log("yes. data: " + data);
+            if (data.length!=0) {
+                var msg="";
+                for(var i =0; i< data.length;i++){
+                    msg+=data[i].id+", ";
+                }
+                alert(`Failed to delete User (id: ${userId})\nThis User still haven't returned their requested item(s) (requestId: ${msg})`);
+            }
+            else{
+                adeleteUser(userId);
+            }
+
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+}
+
+
 function adeleteUser(id){
     $.ajax({
         type: 'PUT',
@@ -266,8 +295,9 @@ function adeleteUser(id){
         dataType: "json", //to parse string into JSON object,
         success: function (data) {
             if(data==true){
-                console.log("User DELETED : sucess");
-                alert("Successed to delete user")
+                console.log(`Successed to delete user with id: ${id}`);
+                $(`#${id}`).parent().remove();
+                alert("Successed to delete user");
             }
         },
         error: function (error) {

@@ -189,7 +189,34 @@ function agetItemById(id){
     });
 }
 
+function checkItemRequest(itemId){
+    $.ajax({
+        type: 'GET',
+        url: `http://localhost:8080/api/items/onActiveRequest/`+itemId,
+        headers: {
+            "Content-Type": "application/json", "Accept": "application/json"
+        },
+        dataType:"json",
+        success: function (data) {      // FROM TRINCOT STACKOVERFLOW
+            console.log("yes. data: " + data);
+            if (data.length!=0) {
+                var msg="";
+                for(var i =0; i< data.length;i++){
+                    var req=data[i];
+                    msg+=`${req[0]},Qty: ${req[1]}\n`       //req[0] adalah index dari requestId , req[1] adalah index dari quantity
+                }
+                alert(`Failed to delete item (id: ${itemId})\nThe Item(s) still being requested/taken in Request Id:\n${msg}`);
+            }
+            else{
+                adeleteItem(itemId);
+            }
 
+        },
+        error: function (error) {
+            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+        }
+    });
+}
 function adeleteItem(id){
     $.ajax({
         type: 'PUT',
@@ -201,6 +228,7 @@ function adeleteItem(id){
         success: function (data) {
             if(data==true){
                 console.log("Item DELETED : sucess");
+                $(`#${id}`).parent().remove()
                 alert("Successed to delete item");
             }
         },
@@ -211,47 +239,21 @@ function adeleteItem(id){
     });
 }
 
-function agetCurrentStock(){
+function agetItemCount(){
         $.ajax({
             type: 'GET',
-            url: `http://localhost:8080/api/items/stock?type=current`,
+            url: `http://localhost:8080/api/items/count`,
             headers: {
                 "Content-Type": "application/json", "Accept": "application/json"
             },
             dataType:"json",
             success: function (data) {
-                // console.log(data);
-                $("#available").text(data[0]);
+                $("#totalQty").text(data.total);
+                $("#onRequest").text(data.onRequest);
+                $("#available").text(data.available);
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
             }
         });
-
 }
-
-function agetTotalStock(){
-    $.ajax({
-        type: 'GET',
-        url: `http://localhost:8080/api/items/stock?type=total`,
-        headers: {
-            "Content-Type": "application/json", "Accept": "application/json"
-        },
-        dataType:"json",
-        success: function (data) {
-            // console.log(data);
-            $("#onRequest").text(data[0]);
-            var onReq = parseInt($("#onRequest").html());
-            var current = parseInt($("#available").html());
-            var total = onReq+current
-            console.log(onReq,current,total);
-
-            $("#totalQty").text(total);
-
-        },
-        error: function (error) {
-            console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-        }
-    });
-}
-

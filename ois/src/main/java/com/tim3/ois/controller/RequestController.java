@@ -25,10 +25,10 @@ public class RequestController {
 //        return requestService.findAll();
 //    }
 
-//    @GetMapping("/requests/{id}")
-//    public Request getRequest(@PathVariable(value = "id") int reqId){
-//        return requestService.findRequestById(reqId);
-//    }
+    @GetMapping("/requests/{id}")
+    public Request getRequest(@PathVariable(value = "id") int reqId){
+        return requestService.findRequestById(reqId);
+    }
 
     @GetMapping("/requests/pageable") // api for get recent updates
     public Page<Request> getRequestPage(
@@ -47,6 +47,16 @@ public class RequestController {
             @RequestParam(value = "sortBy",required = false,defaultValue = "createdAt")String sortBy,
             @RequestParam(value = "orderBy",required = false,defaultValue = "asc")String orderBy){
         return requestService.findAllBy(eId,sId,sortBy,orderBy);
+    }
+
+    @GetMapping("/requests/count")
+    public Object getRequestCount(){
+        return requestService.getRequestCount();
+    }
+    @GetMapping("/requests/count/{id}")
+    public Object getMyRequestCount(
+            @PathVariable("id") Integer id){
+        return requestService.getMyRequestCount(id);
     }
 
     @PostMapping(value = "/requests", produces = MediaType.APPLICATION_JSON_VALUE)

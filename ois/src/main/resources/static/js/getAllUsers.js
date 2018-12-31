@@ -22,10 +22,10 @@ function getAllUsers(){
         "</div>                   " +
         "<div  class=\"col-md-3 col11 sort\">                   " +
         "   <label for=\"orderBy\">OrderBy:</label>                  " +
-        "       <select style='width: 36%' id='orderBy'>                       " +
-        "           <option value='asc'>Asc</option>                        " +
-        "           <option value='desc'>Desc</option>                    " +
-        "       </select>                    " +
+    "       <select style='width: 36%' id='orderBy'>                       " +
+    "           <option value='asc'>Asc</option>                        " +
+    "           <option value='desc'>Desc</option>                    " +
+    "       </select>                    " +
         "</div>    "+
         "            <div class='table-responsive'>" +
         "            <table class='table even table-sm table-hover table-bordered'>" +
