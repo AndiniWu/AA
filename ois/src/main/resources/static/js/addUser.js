@@ -102,7 +102,7 @@ function addUser() {
                 '<label class="radio-inline">' +
                     ' <input value=2 id="emp" type="radio" name="optradio" >Employee' +
                 '</label>' +
-                '<select id="superiorList" disabled>' +
+                '<select id="superiorList" class="form-control" disabled>' +
                      '<option value="">Optional</option>' +
                 '</select>' +
             '   </div>' +

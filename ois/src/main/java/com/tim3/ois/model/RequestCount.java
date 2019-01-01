@@ -12,5 +12,5 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestCount {
-    private Integer rejected,approved,pending,total;
+    private int rejected,approved,pending,total;
 }

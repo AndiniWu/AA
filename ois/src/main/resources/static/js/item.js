@@ -15,16 +15,18 @@ function agetAllItems(){
                 if (len > 0) {
                     if(myRole==0) {
                         for (var i = 0; i < len; i++) {
+                            console.log(data[i].imagePath);
                             if (data[i]) {
-                                txt += `<tr >\n 
-                                          <td>${data[i].picture}</td>                                      
+                                txt += `<tr class="text-middle">\n 
+                                          <td class="text-center"><img width="50px" height="50px" src="img/${data[i].imagePath}" alt="Image">
+</td>                                      
                                           <td id=${data[i].id}>${data[i].id}</td>
                                           <td>${data[i].name}</td>
                                           <td>${data[i].quantity}</td>
                                           <td>${data[i].price}</td>
                                           <td>${data[i].detail}</td>
-                                          <td align="center"  class="action1">
-                                             <button   onclick="editItem(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                          <td  class="action1 text-middle text-center">
+                                             <button onclick="editItem(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
                                              <button onclick="deleteItem(${data[i].id},'${data[i].name}')" class="btn btn-danger">Delete</button>
                                           </td>
                                    </tr>`;
@@ -34,8 +36,8 @@ function agetAllItems(){
                     else{
                         for (var i = 0; i < len; i++) {
                             if (data[i]) {
-                                txt += `<tr>
-                                          <td>${data[i].picture}</td>
+                                txt += `<tr class="text-middle">\n 
+                                          <td class="text-center"><img width="50px" height="50px" src="img/${data[i].imagePath}" alt="Image"></td>
                                           <td id=${data[i].id}>${data[i].id}</td>
                                           <td>${data[i].name}</td>
                                           <td>${data[i].quantity}</td>
@@ -79,15 +81,15 @@ function agetAvailableItems(){
                             maxL= `${data[i].quantity}`;
                             maxL = maxL.length;
                             txt += `<tr id="${data[i].id}" >\n                                            
-                            \t\t\t\t<td class ="rem">${data[i].picture}</td>\n 
-                            <td class="id">${data[i].id}</td>
-                            <td>${data[i].name}</td>\n 
-                            <td>${data[i].detail}. Stock left: ${data[i].quantity}</td>\n
-                            <td class="qty"><input class="quantity" style="width: 100%;" type="number" maxlength="${maxL}" min="1" max="${data[i].quantity}" oninput="minMaxCheck(this)" placeholder="Max:${data[i].quantity}"></td>
-                            <td align="center" class="rem action1">
-                            <button onclick="add(${data[i].id})" class="ad btn btn-success ${data[i].id}"><span style="font-family:verdana;color:whitesmoke">&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;</span></button>
-                            </td>\n
-                            </tr>`;
+                                        <td class="text-center img"><img width="50px" height="50px" src="img/${data[i].imagePath}" alt="Image">            
+                                        <td class="id">${data[i].id}</td>
+                                        <td>${data[i].name}</td>\n 
+                                        <td>${data[i].detail}. Stock left: ${data[i].quantity}</td>\n
+                                        <td class="qty"><input class="quantity" style="width: 100%;" type="number" maxlength="${maxL}" min="1" max="${data[i].quantity}" oninput="minMaxCheck(this)" placeholder="Max:${data[i].quantity}"></td>
+                                        <td align="center" class="rem action1">
+                                        <button onclick="add(${data[i].id})" class="ad btn btn-success ${data[i].id}"><span style="font-family:verdana;color:whitesmoke">&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;</span></button>
+                                        </td>\n
+                                    </tr>`;
                         }
                     }
                     if(txt){
@@ -107,34 +109,20 @@ function agetAvailableItems(){
 }
 
 function aaddItem(type){
-    var item = {
-        name:$('#name').val(),
-        quantity:$('#quantity').val(),
-        price:$('#price').val(),
-        detail:$('#detail').val(),
-        picture:$('#picture').val()
-    };
-    var itemJson = JSON.stringify(item);
-    console.log(itemJson);
+
+    var data = new FormData();
+    data.append("files",$("#image")[0].files[0]);
     if(type ==="POST") {
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080/api/items',
-            data: itemJson,
-            headers: {
-                "Content-Type": "application/json", "Accept": "application/json"
-            },
-            dataType: "json", //to parse string into JSON object,
+            enctype: 'multipart/form-data',
+            url: 'http://localhost:8080/api/items?name='+$("#name").val()+'&quantity='+$("#quantity").val()+'&price='+$("#price").val()+'&detail='+$("#detail").val(),
+            data: data,
+            contentType: false,
+            processData: false,
+            cache:false,
             success: function (data) {
-                var msg="";
-                if (data == false) {
-                    msg += "There is already an item registered with the name provided"
-                }
-                else {
-                    msg += "Successed to SAVE item";
-                }
-                console.log(msg);
-                alert(`Result : \n\n ${msg}`);
+               alert("SUCCESS"+data);
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
@@ -143,21 +131,16 @@ function aaddItem(type){
         });
     }
     else if (type==="PUT"){
-        var id=$('#id').val();
-        console.log(`http://localhost:8080/api/items/${id}`);
         $.ajax({
             type: 'PUT',
-            url: `http://localhost:8080/api/items/${id}`,
-            data: itemJson,
-            headers: {
-                "Content-Type": "application/json", "Accept": "application/json"
-            },
-            dataType: "json", //to parse string into JSON object,
+            enctype: 'multipart/form-data',
+            url: 'http://localhost:8080/api/items/'+$("#id").val()+'?name='+$("#name").val()+'&quantity='+$("#quantity").val()+'&price='+$("#price").val()+'&detail='+$("#detail").val(),
+            data: data,
+            contentType: false,
+            processData: false,
+            cache:false,
             success: function (data) {
-                if(data){
-                    console.log("Item updated : sucess");
-                    alert("Successed to update item");
-                }
+                alert("SUCCESS\n"+data);
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
@@ -166,6 +149,67 @@ function aaddItem(type){
         });
     }
 }
+
+
+// function aaddItem(type){ BACKUP
+//     var item = {
+//         name:$('#name').val(),
+//         quantity:$('#quantity').val(),
+//         price:$('#price').val(),
+//         detail:$('#detail').val(),
+//     };
+//     var itemJson = JSON.stringify(item);
+//     console.log(itemJson);
+//     if(type ==="POST") {
+//         $.ajax({
+//             type: 'POST',
+//             url: 'http://localhost:8080/api/items',
+//             data: itemJson,
+//             headers: {
+//                 "Content-Type": "application/json", "Accept": "application/json"
+//             },
+//             dataType: "json", //to parse string into JSON object,
+//             success: function (data) {
+//                 var msg="";
+//                 if (data == false) {
+//                     msg += "There is already an item registered with the name provided"
+//                 }
+//                 else {
+//                     msg += "Successed to SAVE item";
+//                 }
+//                 console.log(msg);
+//                 alert(`Result : \n\n ${msg}`);
+//             },
+//             error: function (error) {
+//                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+//                 alert(`Error: ${error.status}\n\nPlease fill in the *`);
+//             }
+//         });
+//     }
+//     else if (type==="PUT"){
+//         var id=$('#id').val();
+//         console.log(`http://localhost:8080/api/items/${id}`);
+//         $.ajax({
+//             type: 'PUT',
+//             url: `http://localhost:8080/api/items/${id}`,
+//             data: itemJson,
+//             headers: {
+//                 "Content-Type": "application/json", "Accept": "application/json"
+//             },
+//             dataType: "json", //to parse string into JSON object,
+//             success: function (data) {
+//                 if(data){
+//                     console.log("Item updated : sucess");
+//                     alert("Successed to update item");
+//                 }
+//             },
+//             error: function (error) {
+//                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
+//                 alert(`Error: ${error.status}\n\nPlease fill in the *`);
+//             }
+//         });
+//     }
+// }
 
 function agetItemById(id){
     $.ajax({

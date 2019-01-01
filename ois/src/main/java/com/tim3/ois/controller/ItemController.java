@@ -5,8 +5,10 @@ import com.tim3.ois.model.Item;
 import com.tim3.ois.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -40,24 +42,40 @@ public class ItemController {
         return itemService.findItemById(itemId);
     }
 
-    @PostMapping(value = "/items", produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean createNewItem(
-            @Valid
-            @RequestBody
-                    Item item, BindingResult bindingResult) {
-        Item itemExists= itemService.findItemByName(item.getName());
-        if (itemExists != null) {
-            //bindingResult.rejectValue("item", "There is already an item registered with the name provided");
-            return false;
-        }
-        itemService.saveItem(item);
-        return true;
+//    @PostMapping(value = "/items", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public boolean createNewItem(
+//            @Valid
+//            @RequestBody
+//                    Item item, BindingResult bindingResult) {
+//
+//        itemService.saveItem(item);
+//        return true;
+//    }
+
+    @PostMapping("/items")
+    public ResponseEntity<?> createNewItem(
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "quantity") int quantity,
+            @RequestParam(value = "price") long price,
+            @RequestParam(value = "detail") String detail,
+            @RequestParam("files")MultipartFile files){
+        return itemService.storeItem(name,quantity,price,detail,files);
     }
     @PutMapping("/items/{id}")
-    public Item updateItem(@PathVariable(value = "id") int itemId,
-                           @Valid @RequestBody Item itemNow) {
-        return itemService.updateItem(itemId,itemNow);
+    public ResponseEntity<?> updateItem(
+            @PathVariable(value = "id") int itemId,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "quantity") int quantity,
+            @RequestParam(value = "price") long price,
+            @RequestParam(value = "detail") String detail,
+            @RequestParam("files")MultipartFile files){
+        return itemService.updateItem(itemId,name,quantity,price,detail,files);
     }
+//    @PutMapping("/items/{id}")
+//    public Item updateItem(@PathVariable(value = "id") int itemId,
+//                           @Valid @RequestBody Item itemNow) {
+//        return itemService.updateItem(itemId,itemNow);
+//    }
     @PutMapping("/items/delete/{id}")
     public Boolean deleteItem(@PathVariable(value = "id")int itemId){
         return itemService.deleteItem(itemId);

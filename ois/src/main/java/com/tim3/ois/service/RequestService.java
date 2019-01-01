@@ -124,8 +124,8 @@ public class RequestService {
             request.setStatusCode(1);
             request.setApprovedAt(new Date().getTime());
         }
-        requestRepository.save(request);
         requestDetailService.updateRequestDetail(request,1);
+        requestRepository.save(request);
         System.out.println(request);
         return request;
     }

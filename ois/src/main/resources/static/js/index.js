@@ -44,7 +44,7 @@ $('.logout').click(function(e){
 
 agetRecentUpdates(0);
 agetItemCount();
-agetRequestCount()
+agetRequestCount();
 agetMyRequestCount();
 // agetCurrentStock();agetTotalStock();
 
@@ -189,7 +189,8 @@ $('.getAllItems').click(function (e) {
 $('.addItem').click(function (e) {
     e.preventDefault();
     refresh(addItem);
-    $('#saveItem').click(function (){
+    $('#saveItem').click(function (e){
+        e.preventDefault();
         aaddItem("POST");
     });
 });
@@ -198,7 +199,8 @@ function editItem(itemId){ //still working on
     refresh(addItem);
     $('#title').html('<b class=\"bold1\">E</b>DIT<b class=\"bold1\">&nbsp;I</b>TEM');
     agetItemById(itemId);
-    $('#saveItem').click(function (){
+    $('#saveItem').click(function (e){
+        e.preventDefault();
         aaddItem("PUT");
     });
 }
@@ -218,7 +220,7 @@ function add(btnId){
     console.log(itemCount);
     $('#itemCount').text(itemCount).css('display', 'block');
     $(`#${btnId}`).clone().appendTo('#cartItems').append('<button class="removeItem btn btn-danger" style="color:whitesmoke;width:100%;font-size: small;margin:3px;padding:5px;">Remove</button>');
-    $('#cartItems .rem').remove();
+    $('#cartItems .rem,#cartItems .img').remove();
     $('#cartTotal').text("Total Items: " + itemCount);
     $(`.${btnId}`).prop('disabled',true);
 }

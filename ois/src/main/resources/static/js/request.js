@@ -157,7 +157,7 @@ function submitRequest(){
                 cek = false;
                 return cek;
             }
-            list += ` ${i}. ${cart.item.name} : ${cart.qty}\n`;
+            list += `${i}. ${cart.item.name} : ${cart.qty}\n`;
             myCart.push(cart);
             i++;
         });
@@ -371,7 +371,8 @@ function agetRecentUpdates(currentPage){;
         "just approved a request!",
         "just taken the requested item(s)!",
         "just returned the requested item(s)!",
-        "request had just been rejected!"
+        "request just  been rejected!",
+        "request just  been approved!"
     ];
     $.ajax({
         type: 'GET',
@@ -392,6 +393,7 @@ function agetRecentUpdates(currentPage){;
                 // Use jQuery methods to add the content and bind a click handler
                 var msg = message[request.statusCode];
                 if(request.statusCode==1 & (request.user.role== 1 || request.user.role == 0)) msg= message[0]
+                else if(request.statusCode==1 & request.user.role == 2) msg= message[5]
                 $("#recent").append(
                     $("<tr>").addClass("hov").addClass(`s${request.statusCode}`).attr('title', 'Click for details').append(
                         $("<td>").html(`&nbsp;    Mr/Mrs. ${request.user.email}`),
@@ -451,6 +453,7 @@ function agetRequestCount(){
         }
     });
 }
+
 function agetMyRequestCount(){
     $.ajax({
         type: 'GET',
@@ -464,7 +467,7 @@ function agetMyRequestCount(){
             $("#myApproved").text(data.approved);
             $("#myPending").text(data.pending);
             $("#myRejected").text(data.rejected);
-            $("#myTotalReq").text(`(${data.total})` );
+            $("#myTotalReq").text(`(${data.total})`);
 
         },
         error: function (error) {

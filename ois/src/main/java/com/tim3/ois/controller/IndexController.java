@@ -18,30 +18,35 @@ import java.util.List;
 //import java.util.
 
 //@Controller
-@RestController
+@Controller
 public class IndexController {
 
 
 
-    @GetMapping("/index")
-    public ModelAndView getIndex() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
-        return modelAndView;
-    }
-    @GetMapping("/login")
-    public ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView();
 
-        modelAndView.setViewName("login");
-        return modelAndView;
-    }
-
-
-//    @GetMapping("/users")
-//    public String getRegistration(){
-//        return "registration";
+//    @GetMapping("/index")
+//    public ModelAndView getIndex() {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("index");
+//        return modelAndView;
 //    }
+//    @GetMapping("/login")
+//    public ModelAndView login() {
+//        ModelAndView modelAndView = new ModelAndView();
+//
+//        modelAndView.setViewName("login");
+//        return modelAndView;
+//    }
+//
+    @GetMapping("/index")
+    public String index(){
+        return "index";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 
 
 }

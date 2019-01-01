@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
@@ -40,6 +41,7 @@ public class RequestDetail {
     @SequenceGenerator (name = "id_reqDet", sequenceName = "reqDet_seq",allocationSize = 1, initialValue= 1)
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "id_reqDet")
     private int id;
+
 
     @ManyToOne(targetEntity = Item.class)
     @JoinColumn(name = "item",referencedColumnName = "id")

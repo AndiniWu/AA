@@ -3,30 +3,90 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>OIS - Login</title>
-    <link rel="stylesheet" type="text/css" href="/css/css.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="../css/custom.scss"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     </head>
 <body>
-<div class="LoginPage">
-    <div class="Rectangle">
-        Login
-    </div>
-    <div class="box">
-        <div class="lbl">
-            <label style="margin-right: 100px;">Email</label>
-            <input id="email" type="email" name="email">
-        </div>
-        <div class="lbl">
-            <label style="margin-right: 63px;">Password</label>
-            <input id="password" type="password" name="password">
-        </div>
-        <div class="lbl">
-            <button id="login" class="btn">Login</button>
-        </div>
+
+<!--<div class="LoginPage">-->
+    <!--<div class="Rectangle">-->
+        <!--Login-->
+    <!--</div>-->
+    <!--<div class="box">-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-12">-->
+                <!--<div class="lbl">-->
+                    <!--<label style="margin-right: 100px;">Email</label>-->
+                    <!--<input class="form-control" id="email" type="email" name="email">-->
+                <!--</div>-->
+                <!--<div class="lbl">-->
+                    <!--<label style="margin-right: 63px;">Password</label>-->
+                    <!--<input class="form-control" id="password" type="password" name="password">-->
+                <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-7">&nbsp;</div>-->
+            <!--<div class="col-md-5">-->
+                <!--<div class="lbl">-->
+                    <!--<button id="login" class="btn btn-info">Login</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="limiter">
+<div class="container-login100">
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+        <!--<form class="login100-form validate-form">-->
+					<span class="login100-form-title p-b-33">
+						Account Login
+					</span>
+
+            <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                <input id="email" class="input100" type="text" name="email" placeholder="Email">
+                <span class="focus-input100-1"></span>
+                <span class="focus-input100-2"></span>
+            </div>
+
+            <div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
+                <input id="password" class="input100" type="password" name="pass" placeholder="Password">
+                <span class="focus-input100-1"></span>
+                <span class="focus-input100-2"></span>
+            </div>
+
+            <div class="container-login100-form-btn m-t-20">
+                <button id="login" class="login100-form-btn">
+                    Sign in
+                </button>
+            </div>
+
+            <div class="text-center p-t-45 p-b-4">
+                <input type="checkbox" id="remember">
+                <span class="txt1">
+							Remember
+						</span>
+
+                <a href="#" class="txt2 hov1">
+                    me
+                </a>
+            </div>
+        <!--</form>-->
     </div>
 </div>
-<script type="text/javascript" src="/js/cookies.js"></script>
-<script type="text/javascript" src="/js/login.js"></script>
+</div>
+
+<script type="text/javascript" src="js/cookies.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+
 
 
 </body>

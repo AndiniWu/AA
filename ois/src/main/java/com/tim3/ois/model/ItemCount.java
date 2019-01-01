@@ -12,5 +12,5 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemCount {
-    private Integer total,onRequest,available;
+    private int total,onRequest,available;
 }

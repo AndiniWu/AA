@@ -9,7 +9,7 @@ function addItem(){
 			    	</div>
 			    	<div class="col-md-3"></div>
 			    </div>
-	    	<form>			 
+	    	<form class="formItem">			 
 			    <div class="col-md-9"></div>
 			    <div class="col-md-9">
 			    	<div class="col-md-3">
@@ -26,7 +26,7 @@ function addItem(){
 			    		<label class="col-form-label">Qty*</label>
 			    	</div>
 			    	<div class="col-md-6">
-			    		<input id="quantity" type="number" class="form-control" name="qty" required>
+			    		<input id="quantity" type="number" class="form-control" name="quantity" required>
 			    	</div>
 			    	<div class="col-md-3"></div>
 			    </div>
@@ -52,10 +52,10 @@ function addItem(){
 			    </div>
 			    <div class="col-md-9 wrap" style="margin-top: 7%;">
 			    	<div class="col-md-3">
-			    		<label class="col-form-label">Picture*</label>
+			    		<label class="col-form-label">Image*</label>
 			    	</div>
 			    	<div class="col-md-6">
-			    		<input id="picture" type="file" name="picture" required>
+			    		<input id="image" type="file" name="image" required>
 			    	</div>
 			    </div>
 			    <div class="col-md-9">

@@ -39,8 +39,12 @@ public class Item {
     @NotEmpty(message = "*Please provide the description")
     private String detail;
 
-    @Column(name="picture")
-    private String picture;
+//    @Lob
+//    @Column(name="image")
+//    private byte[] image;
+
+    @Column(name = "image_path")
+    private String imagePath;
 
     @NotNull
     @Column(name = "enabled")

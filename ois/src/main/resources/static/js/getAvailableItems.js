@@ -28,7 +28,7 @@ function getAvailableItems() {
         "            </select>" +
         "            </div>" +
         "            <div class='table-responsive'>" +
-        "            <table class='tabel even table-sm table-bordered'>" +
+        "            <table style='vertical-align: middle ' class='table even table-sm table-bordered'>" +
         "            <thead>" +
         "            <tr>" +
         "            <th>Picture</th>" +
