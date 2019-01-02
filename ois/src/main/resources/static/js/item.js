@@ -18,7 +18,7 @@ function agetAllItems(){
                             console.log(data[i].imagePath);
                             if (data[i]) {
                                 txt += `<tr class="text-middle">\n 
-                                          <td class="text-center"><img width="50px" height="50px" src="img/${data[i].imagePath}" alt="Image">
+                                          <td class="text-center"><img width="50px" height="50px"  src="${data[i].imagePath}" alt="Image">
 </td>                                      
                                           <td id=${data[i].id}>${data[i].id}</td>
                                           <td>${data[i].name}</td>
@@ -37,7 +37,7 @@ function agetAllItems(){
                         for (var i = 0; i < len; i++) {
                             if (data[i]) {
                                 txt += `<tr class="text-middle">\n 
-                                          <td class="text-center"><img width="50px" height="50px" src="img/${data[i].imagePath}" alt="Image"></td>
+                                          <td class="text-center"><img width="50px" height="50px"  src="${data[i].imagePath}" alt="Image"></td>
                                           <td id=${data[i].id}>${data[i].id}</td>
                                           <td>${data[i].name}</td>
                                           <td>${data[i].quantity}</td>
@@ -81,7 +81,7 @@ function agetAvailableItems(){
                             maxL= `${data[i].quantity}`;
                             maxL = maxL.length;
                             txt += `<tr id="${data[i].id}" >\n                                            
-                                        <td class="text-center img"><img width="50px" height="50px" src="img/${data[i].imagePath}" alt="Image">            
+                                        <td class="text-center img"><img width="50px" height="50px" src="${data[i].imagePath}" alt="Image">            
                                         <td class="id">${data[i].id}</td>
                                         <td>${data[i].name}</td>\n 
                                         <td>${data[i].detail}. Stock left: ${data[i].quantity}</td>\n
@@ -110,13 +110,29 @@ function agetAvailableItems(){
 
 function aaddItem(type){
 
+    // var formData = new FormData()
+    // formData.append('data', new Blob([JSON.stringify(product)], {type: 'application/json'}))
+    // formData.append('images', image)
+    var item = {
+        name:$('#name').val(),
+        quantity:parseInt($('#quantity').val()),
+        price:parseInt($('#price').val()),
+        detail:$('#detail').val(),
+    };
+    console.log(JSON.stringify(item));
     var data = new FormData();
-    data.append("files",$("#image")[0].files[0]);
+    data.append("file",$("#image")[0].files[0]);
+    // data.append("item",new Blob([JSON.stringify(item)],{type: "application/json"}));
+    data.append("name",$('#name').val());
+    data.append("quantity",parseInt($('#quantity').val()));
+    data.append("price",parseInt($('#price').val()));
+    data.append("detail",$('#detail').val());
+
     if(type ==="POST") {
         $.ajax({
             type: 'POST',
             enctype: 'multipart/form-data',
-            url: 'http://localhost:8080/api/items?name='+$("#name").val()+'&quantity='+$("#quantity").val()+'&price='+$("#price").val()+'&detail='+$("#detail").val(),
+            url: 'http://localhost:8080/api/items',
             data: data,
             contentType: false,
             processData: false,
@@ -126,7 +142,7 @@ function aaddItem(type){
             },
             error: function (error) {
                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-                alert(`Error: ${error.status}\n\nPlease fill in the *`);
+                alert(`Failed to add user: ${error.status}\n\nSome error occurred *`);
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.tim3.ois.service;
 
+import com.sun.org.apache.xpath.internal.operations.Mult;
 import com.tim3.ois.exception.ResourceNotFoundException;
+import com.tim3.ois.model.CreateNewItem;
 import com.tim3.ois.repository.ItemRepository;
 import com.tim3.ois.model.ItemCount;
 import com.tim3.ois.model.Item;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,7 +26,7 @@ public class ItemService {
 
     private ItemRepository itemRepository;
 
-    private static String UPLOAD_FOLDER = "D:\\Blibli Futureprogram\\PROJECT\\project\\AA\\ois\\src\\main\\resources\\static\\img\\";// sesuai dengan folder kita masing-masing.
+    private static String UPLOADED_FOLDER = "D:\\Blibli Futureprogram\\PROJECT\\project\\AA\\ois\\src\\main\\resources\\static\\img\\";// sesuai dengan folder kita masing-masing.
 
     @Autowired
     public ItemService(ItemRepository itemRepository) {
@@ -111,8 +114,8 @@ public class ItemService {
             item.setDetail(detail);
             byte[] bytes = file.getBytes();
 //            item.setImage(bytes);
-            Path path = Paths.get(file.getOriginalFilename());
-            item.setImagePath(path.toString());
+            Path path = Paths.get(UPLOADED_FOLDER+file.getOriginalFilename());
+            item.setImagePath(file.getOriginalFilename());
             Files.write(path, bytes);
             saveItem(item);
         } catch (IOException e) {
@@ -120,32 +123,57 @@ public class ItemService {
         }
         return new ResponseEntity("Successed to add Item", HttpStatus.OK);
     }
-
-    public ResponseEntity<?> storeItem(String name, int quantity, long price, String detail, MultipartFile file) {
-        String fileName = file.getOriginalFilename();
+//    public ResponseEntity<?> storeItem(MultipartFile file, CreateNewItem newItem) {
+//        Item itemExist = itemRepository.findByName(newItem.getName());
+//        if(itemExist!=null)  return new ResponseEntity("Item already Exists with the name provided",HttpStatus.OK);
+//        String fileName = file.getOriginalFilename();
+//        if (StringUtils.isEmpty(fileName)) {
+//            return new ResponseEntity("Please select a file!", HttpStatus.OK);
+//        }
+//        try {
+////            item.setImage(bytes); // untuk save file / gambar ke field picture di database
+//            Item item = new Item();
+//            item.setDetail(newItem.getDetail());
+//            item.setQuantity(newItem.getQuantity());
+//            item.setName(newItem.getName());
+//            item.setPrice(newItem.getPrice());
+//            item.setImagePath(file.getOriginalFilename());
+//            saveUploadedFile(file);
+//            saveItem(item);
+//        } catch (IOException e) {
+//            return new ResponseEntity<>("Some error occured. Failed to add item", HttpStatus.BAD_REQUEST);
+//        }
+//        return new ResponseEntity("Successed to add Item", HttpStatus.OK);
+//    }
+    public ResponseEntity<?> storeItem(CreateNewItem newItem) {
+        Item itemExist = itemRepository.findByName(newItem.getName());
+        if(itemExist!=null)  return new ResponseEntity("Item already Exists with the name provided",HttpStatus.OK);
+        String fileName = newItem.getFile().getOriginalFilename();
         if (StringUtils.isEmpty(fileName)) {
             return new ResponseEntity("Please select a file!", HttpStatus.OK);
         }
         try {
+    //            item.setImage(bytes); // untuk save file / gambar ke field picture di database
             Item item = new Item();
-            item.setName(name);
-            item.setQuantity(quantity);
-            item.setPrice(price);
-            item.setDetail(detail);
-            byte[] bytes = file.getBytes();
-//            item.setImage(bytes); // untuk save file / gambar ke field picture di database
-            Path path = Paths.get(file.getOriginalFilename());
-            item.setImagePath(path.toString());
-            Files.write(path, bytes);
+            item.setDetail(newItem.getDetail());
+            item.setQuantity(newItem.getQuantity());
+            item.setName(newItem.getName());
+            item.setPrice(newItem.getPrice());
+            item.setImagePath("/img/"+fileName);
+            saveUploadedFile(newItem.getFile());
             saveItem(item);
         } catch (IOException e) {
             return new ResponseEntity<>("Some error occured. Failed to add item", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity("Successed to add Item", HttpStatus.OK);
     }
-
-
-
+        private void saveUploadedFile(MultipartFile file) throws IOException {
+            if (!file.isEmpty()) {
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+                Files.write(path, bytes);
+            }
+        }
 
     public Item saveItem(Item item){
         item.setEnabled(true);
