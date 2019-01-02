@@ -94,11 +94,13 @@ public class ItemService {
             return new ResponseEntity("Please select a file!", HttpStatus.BAD_REQUEST);
         }
         try {
+            Path deletePath= Paths.get(UPLOADED_FOLDER+item.getImagePath());
+            Files.delete(deletePath);
             item.setDetail(newItem.getDetail());
             item.setQuantity(newItem.getQuantity());
             item.setName(newItem.getName());
             item.setPrice(newItem.getPrice());
-            item.setImagePath("/img/"+fileName);
+            item.setImagePath(fileName);
             saveUploadedFile(newItem.getFile());
             saveItem(item);
         } catch (IOException e) {
