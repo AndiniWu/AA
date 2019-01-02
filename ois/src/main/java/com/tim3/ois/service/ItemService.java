@@ -7,6 +7,7 @@ import com.tim3.ois.repository.ItemRepository;
 import com.tim3.ois.model.ItemCount;
 import com.tim3.ois.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,9 @@ public class ItemService {
 
     private ItemRepository itemRepository;
 
-    private static String UPLOADED_FOLDER = "D:\\Blibli Futureprogram\\PROJECT\\project\\AA\\ois\\src\\main\\resources\\static\\img\\";// sesuai dengan folder kita masing-masing.
+    @Value("${static.path}")
+    private static String UPLOADED_FOLDER = "D:/Blibli_Futureprogram/PROJECT/project/AA/asset/img/";
+        // sesuai dengan folder kita masing-masing.
 
     @Autowired
     public ItemService(ItemRepository itemRepository) {
@@ -63,11 +66,6 @@ public class ItemService {
         return itemRepository.getItemOnActiveRequest(id);
     }
 
-
-    public Item findItemByName(String name) {
-        return itemRepository.findByName(name);
-    }
-
     public List<Item> findBy(String sortBy, String orderBy) {
         if (orderBy.toLowerCase().equals("asc"))
             return itemRepository.findAllBy(true, Sort.by(sortBy, "id").ascending());
@@ -77,15 +75,6 @@ public class ItemService {
 
         else return itemRepository.findAll();
     }
-
-//    public List<Item> findAvailableItems(){
-//        return itemRepository.findAvailableItems();
-//    }
-
-
-    //    public void deleteItem(Item item){
-//        itemRepository.delete(item);
-//    }
     public Boolean deleteItem(int id) {
         Item item = itemRepository.findById(id);
         if (item == null) {
@@ -95,59 +84,32 @@ public class ItemService {
         itemRepository.save(item);
         return true;
     }
-//    public Item updateItem(int id,Item itemNow){
-//        Item item = itemRepository.findById(id);
-//        item.setQuantity(itemNow.getQuantity());
-//        item.setDetail(itemNow.getDetail());
-//        item.setPrice(itemNow.getPrice());
-//        item.setName(itemNow.getName());
-//        Item updatedItem = itemRepository.save(item);
-//        return updatedItem;
-//    }
 
-    public ResponseEntity<?> updateItem(int id, String name, int quantity, long price, String detail, MultipartFile file) throws ResourceNotFoundException {
+
+    public ResponseEntity<?> updateItem(int id,CreateNewItem newItem) throws ResourceNotFoundException {
+        Item item = itemRepository.findById(id);
+        if(item==null)  return new ResponseEntity("Item not found with id : "+id,HttpStatus.NOT_FOUND);
+        String fileName = newItem.getFile().getOriginalFilename();
+        if (StringUtils.isEmpty(fileName)) {
+            return new ResponseEntity("Please select a file!", HttpStatus.BAD_REQUEST);
+        }
         try {
-            Item item = itemRepository.findById(id);
-            item.setName(name);
-            item.setQuantity(quantity);
-            item.setPrice(price);
-            item.setDetail(detail);
-            byte[] bytes = file.getBytes();
-//            item.setImage(bytes);
-            Path path = Paths.get(UPLOADED_FOLDER+file.getOriginalFilename());
-            item.setImagePath(file.getOriginalFilename());
-            Files.write(path, bytes);
+            item.setDetail(newItem.getDetail());
+            item.setQuantity(newItem.getQuantity());
+            item.setName(newItem.getName());
+            item.setPrice(newItem.getPrice());
+            item.setImagePath("/img/"+fileName);
+            saveUploadedFile(newItem.getFile());
             saveItem(item);
         } catch (IOException e) {
-            return new ResponseEntity<>("Some error occured. Failed to update item", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Some error occured. Failed to add item", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity("Successed to add Item", HttpStatus.OK);
+        return new ResponseEntity("Successed to update Item", HttpStatus.OK);
     }
-//    public ResponseEntity<?> storeItem(MultipartFile file, CreateNewItem newItem) {
-//        Item itemExist = itemRepository.findByName(newItem.getName());
-//        if(itemExist!=null)  return new ResponseEntity("Item already Exists with the name provided",HttpStatus.OK);
-//        String fileName = file.getOriginalFilename();
-//        if (StringUtils.isEmpty(fileName)) {
-//            return new ResponseEntity("Please select a file!", HttpStatus.OK);
-//        }
-//        try {
-////            item.setImage(bytes); // untuk save file / gambar ke field picture di database
-//            Item item = new Item();
-//            item.setDetail(newItem.getDetail());
-//            item.setQuantity(newItem.getQuantity());
-//            item.setName(newItem.getName());
-//            item.setPrice(newItem.getPrice());
-//            item.setImagePath(file.getOriginalFilename());
-//            saveUploadedFile(file);
-//            saveItem(item);
-//        } catch (IOException e) {
-//            return new ResponseEntity<>("Some error occured. Failed to add item", HttpStatus.BAD_REQUEST);
-//        }
-//        return new ResponseEntity("Successed to add Item", HttpStatus.OK);
-//    }
+
     public ResponseEntity<?> storeItem(CreateNewItem newItem) {
         Item itemExist = itemRepository.findByName(newItem.getName());
-        if(itemExist!=null)  return new ResponseEntity("Item already Exists with the name provided",HttpStatus.OK);
+        if(itemExist!=null)  return new ResponseEntity("Item already Exists with the name provided",HttpStatus.BAD_REQUEST);
         String fileName = newItem.getFile().getOriginalFilename();
         if (StringUtils.isEmpty(fileName)) {
             return new ResponseEntity("Please select a file!", HttpStatus.OK);
@@ -159,7 +121,7 @@ public class ItemService {
             item.setQuantity(newItem.getQuantity());
             item.setName(newItem.getName());
             item.setPrice(newItem.getPrice());
-            item.setImagePath("/img/"+fileName);
+            item.setImagePath(fileName);
             saveUploadedFile(newItem.getFile());
             saveItem(item);
         } catch (IOException e) {
@@ -174,7 +136,6 @@ public class ItemService {
                 Files.write(path, bytes);
             }
         }
-
     public Item saveItem(Item item){
         item.setEnabled(true);
         return itemRepository.save(item);

@@ -65,21 +65,24 @@ public class ItemController {
         return itemService.storeItem(createNewItem);
     }
 
-    @PutMapping("/items/{id}")
+    @PutMapping(value="/items/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
     public ResponseEntity<?> updateItem(
-            @PathVariable(value = "id") int itemId,
-            @RequestParam(value = "name") String name,
-            @RequestParam(value = "quantity") int quantity,
-            @RequestParam(value = "price") long price,
-            @RequestParam(value = "detail") String detail,
-            @RequestParam("files")MultipartFile files){
-        return itemService.updateItem(itemId,name,quantity,price,detail,files);
+            @PathVariable(value = "id") int id,
+            @ModelAttribute("createNewItem") CreateNewItem createNewItem){
+        return itemService.updateItem(id,createNewItem);
     }
+
 //    @PutMapping("/items/{id}")
-//    public Item updateItem(@PathVariable(value = "id") int itemId,
-//                           @Valid @RequestBody Item itemNow) {
-//        return itemService.updateItem(itemId,itemNow);
+//    public ResponseEntity<?> updateItem(
+//            @PathVariable(value = "id") int itemId,
+//            @RequestParam(value = "name") String name,
+//            @RequestParam(value = "quantity") int quantity,
+//            @RequestParam(value = "price") long price,
+//            @RequestParam(value = "detail") String detail,
+//            @RequestParam("files")MultipartFile files){
+//        return itemService.updateItem(itemId,name,quantity,price,detail,files);
 //    }
+
     @PutMapping("/items/delete/{id}")
     public Boolean deleteItem(@PathVariable(value = "id")int itemId){
         return itemService.deleteItem(itemId);
