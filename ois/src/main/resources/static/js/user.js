@@ -4,7 +4,6 @@ function getMySuperior(){
     $("th.action1, .sort").remove();
     $("#userList").append(
         $("<tr>").append(
-            $("<td>").text(mySup.picture),
             $("<td>").text(mySup.id),
             $("<td>").text(mySup.email),
             $("<td>").text(mySup.nik),

@@ -25,9 +25,9 @@ function checkCookie(cname) {
     if (cookie != "") {
         console.log("Welcome again " + myEmail);
         if(myRole!=0){
-            $("#addUser").remove();
-            $("#addItem").remove();
-            if(myRole==2) $("#getAllRequests").remove();
+            $(".addUser").remove();
+            $(".addItem").remove();
+            if(myRole==2) $(".getAllRequests").prop("disabled",true);
         }
 
     } else {
