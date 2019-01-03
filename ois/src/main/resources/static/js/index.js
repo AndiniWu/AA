@@ -101,7 +101,8 @@ $('.addUser').click(function(e){
     refresh(addUser);
     agetAllSuperiors();
     superiorList();
-    $("#saveUser").click(function () {
+    $("#saveUser").click(function (e) {
+        e.preventDefault();
         aaddUser("POST")
     });
 });
@@ -220,7 +221,8 @@ function add(btnId){
     console.log(itemCount);
     $('#itemCount').text(itemCount).css('display', 'block');
     $(`#${btnId}`).clone().appendTo('#cartItems').append('<button class="removeItem btn btn-danger" style="color:whitesmoke;width:100%;font-size: small;margin:3px;padding:5px;">Remove</button>');
-    $('#cartItems .rem,#cartItems .img').remove();
+    $('#cartItems .img,#cartItems .rem').remove();
+    // $('#cartItems .rem').remove();
     $('#cartTotal').text("Total Items: " + itemCount);
     $(`.${btnId}`).prop('disabled',true);
 }

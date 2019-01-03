@@ -30,19 +30,18 @@ function getAllUsers(){
         "            <div class='table-responsive'>" +
         "            <table class='table even table-sm table-hover table-bordered'>" +
         "            <thead>" +
-        "            <tr>" +
-        "            <th>Picture</th>" +
-        "            <th>ID</th>" +
-        "            <th>Email</th>" +
-        "            <th>NIK</th>" +
-        "            <th>Name</th>" +
-        "            <th>Division</th>" +
-        "            <th>Position</th>" +
-        "            <th>ContactNum</th>" +
-        "            <th>Address</th>" +
-        "            <th>Superior</th>" +
-        "            <th class='action1' >Action</th>" +
-        "            </tr>" +
+            "            <tr class='table-light'>" +
+                "            <th>ID</th>" +
+                "            <th>Email</th>" +
+                "            <th>NIK</th>" +
+                "            <th>Name</th>" +
+                "            <th>Division</th>" +
+                "            <th>Position</th>" +
+                "            <th>ContactNum</th>" +
+                "            <th>Address</th>" +
+                "            <th>Superior</th>" +
+                "            <th class='action1' >Action</th>" +
+            "            </tr>" +
         "            </thead>" +
         "            <tbody id='userList'>" +
         "            </tbody>" +

@@ -30,7 +30,7 @@ function getAllRequests(){
             <div class='table-responsive'>
             	<table class='table table-hover table-bordered'>
             		<thead>
-            			<tr>
+            			<tr class='table-light'>
             				<th>RequestId</th>
             				<th>Status</th>
             				<th>RequestBy</th>

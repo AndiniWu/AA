@@ -201,7 +201,11 @@ function getReqDetails(request) {
         for (var i = 0; i < reqDet.length; i++) {
             $("#tbody").append(
                 $("<tr>").append(
-                    $("<td>").text(reqDet[i].item.picture),
+                    $("<td>").append($("<img>").attr({
+                        src: "/img/" + reqDet[i].item.imagePath,
+                        title: reqDet[i].item.name,
+                        alt: "image"
+                        }).width(30).height(30)),
                     $("<td>").text(reqDet[i].item.id),
                     $("<td>").text(reqDet[i].item.name),
                     $("<td>").text(reqDet[i].qty))

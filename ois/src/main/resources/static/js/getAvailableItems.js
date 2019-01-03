@@ -30,13 +30,13 @@ function getAvailableItems() {
         "            <div class='table-responsive'>" +
         "            <table style='vertical-align: middle ' class='table even table-sm table-bordered'>" +
         "            <thead>" +
-        "            <tr>" +
-        "            <th>Picture</th>" +
-        "            <th>Id</th>" +
-        "            <th>Name</th>" +
-        "            <th>Detail</th>" +
-        "            <th style='padding-right: 1.5em'>Quantity</th>" +
-        "            <th>" +
+            "            <tr class='table-light'>" +
+                "            <th>Picture</th>" +
+                "            <th>Id</th>" +
+                "            <th>Name</th>" +
+                "            <th>Detail</th>" +
+                "            <th style='padding-right: 1.5em'>Quantity</th>" +
+            "               <th>" +
                     "    <div id='cart-container'>" +
                     "      <div id='cart'>" +
                     "        <i class='fa fa-shopping-cart fa-2x openCloseCart' aria-hidden='true'></i>" +

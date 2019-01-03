@@ -267,17 +267,17 @@
 }
 
 thead tr:nth-child(even){
-    background-color: rgba(137,207,240,0.2);
+    background-color: #e9faff;
 }
 /*td:last-child{*/
     /*background-color: transparent;*/
     /*border: none;*/
 /*}*/
 
-.action1 button{
-    font-size: 8pt;
-    margin: 1% 0 1% 0;
-}
+/*.action1 button{*/
+    /*font-size: 8pt;*/
+    /*margin: 1% 0 1% 0;*/
+/*}*/
 
 .modal1{
     background-color: #489DD0;
@@ -289,8 +289,8 @@ th, td {
     /*padding: 8px;*/
 }
 
-.even tr:nth-child(even){
-    background-color: rgba(0,128,255,0.1);
+.even tbody tr:nth-child(odd){
+    background-color: #e9faff;
 ;
 }
 .hov {
@@ -325,6 +325,15 @@ a {
     color: black;
 }
 
+#printItem{
+    visibility: hidden;
+}
+
 .btndb {
     padding: 100px;
 }
+/*.noprint{*/
+    /*!*display: none;*!*/
+/*}*/
+
+

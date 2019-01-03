@@ -2,7 +2,6 @@ function getMySuperior(){
     $("#title1").html('<b class="bold1">M</b>Y<b class="bold1">&nbsp;S</b>UPERIOR');
     $("#userList").empty();// Clear whatever content there was before
     $("th.action1, .sort").remove();
-
     $("#userList").append(
         $("<tr>").append(
             $("<td>").text(mySup.picture),
@@ -71,7 +70,6 @@ function agetAllUsersBySuperior(){
                 // Use jQuery methods to add the content and bind a click handler
                 $("#userList").append(
                     $("<tr>").append(
-                        $("<td>").text(user.picture),
                         $("<td>").text(user.id),
                         $("<td>").text(user.email),
                         $("<td>").text(user.nik),
@@ -106,42 +104,21 @@ function agetAllUsers(){
                 var txt = ``;
                 if (len > 0) {
                     for (var i = 0; i < len; i++) {
-                        if(data[i].superior!=null) {
                             txt += `<tr>\n 
-                                            <td>${data[i].picture}</td>\\n 
                                             <td id=${data[i].id}>${data[i].id}</td>\n 
                                             <td id=${data[i].email}>${data[i].email}</td>\n 
-                                            <td style="width: 6%">${data[i].nik}</td>\n 
+                                            <td style="width: 6%">${data[i].nik != null ? data[i].nik : ""}</td>\n 
                                             <td>${data[i].name}</td>\n 
-                                            <td>${data[i].division}</td>\n 
-                                            <td>${data[i].position}</td>\n 
-                                            <td>${data[i].cnumber}</td>\n 
-                                            <td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
-                                            <td>${data[i].superior.name}</td>\n 
+                                            <td>${data[i].division != null ? data[i].division : ""}</td>\n 
+                                            <td>${data[i].position != null ? data[i].position : ""}</td>\n 
+                                            <td>${data[i].cnumber  != null ? data[i].cnumber : ""}</td>\n 
+                                            <td><div style="width:100%;word-break: break-all">${data[i].address != null ? data[i].address : ""}</div></td>\n 
+                                            <td>${data[i].superior != null ? data[i].superior.name : "" }</td>\n 
                                             <td align="center"  class="action1">\n 
                                             <button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
                                             <button onclick="deleteUser(${data[i].id},'${data[i].email}')" class="btn btn-danger">Delete</button></>\n 
                                             </td>\n
                                             </tr>`;
-                        }
-                        else if(data[i].superior==null){
-                            txt += `<tr>\n
-                                             <td>${data[i].picture}</td>\\n
-                                            <td id=${data[i].id}>${data[i].id}</td>\n 
-                                            <td id=${data[i].email}>${data[i].email}</td>\n 
-                                            <td style="width: 6%">${data[i].nik}</td>\n
-                                            <td>${data[i].name}</td>\n
-                                            <td>${data[i].division}</td>\n
-                                            <td>${data[i].position}</td>\n
-                                            <td>${data[i].cnumber}</td>\n
-                                            <td><div style="width:100%;word-break: break-all">${data[i].address}</div></td>\n 
-                                            <td></td>\n
-                                            <td align="center"  class="action1">\n
-                                            <button onclick="editUser(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                                            <button onclick="deleteUser(${data[i].id},'${data[i].email}')" class="btn btn-danger">Delete</button>\n
-                                            </td>\n
-                                            </tr>`;
-                        }
                     }
                     if(txt){
                         $("#userList").html(txt);

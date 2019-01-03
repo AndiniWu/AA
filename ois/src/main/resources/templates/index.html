@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="css/cart.css">
 	<link rel="stylesheet" href="css/css.css">
 	<link rel="stylesheet" href="css/topbtn.css">
-
   	<!-- <link rel="stylesheet" href="../css/custom.scss"> -->
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" />
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -17,8 +16,20 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+	<style>
+		/*.printme { display:none;}*/
+		/*@media print {*/
+			/*.noprint, .noprint * {*/
+				/*display:none!important;*/
+				/*visibility: hidden;*/
+			/*}*/
+			/*.printme {display:block!important;}*/
 
+		/*}*/
+
+	</style>
 </head>
+
 <body>
 	<!-- Bootstrap NavBar -->
 	<!--move to top button-->
@@ -219,65 +230,7 @@
 					</div>
 				</div>
 			</div>
-			<!--<div class="row">-->
-				<!--<div class="getAllItems col-md-3 col btn btn-outline-secondary table-responsive">-->
-					<!--<h5>View Item List</h5>-->
-					<!--<div class="table-responsive">-->
-						<!--<table>-->
-							<!--<tbody><tr>-->
-								<!--<td>Total </td><td>&nbsp;:&nbsp;</td>-->
-								<!--<td id="totalQty">905</td>-->
-							<!--</tr>-->
-							<!--<tr>-->
-								<!--<td>On Request </td><td>&nbsp;:&nbsp; </td>-->
-								<!--<td id="onRequest">142</td>-->
-							<!--</tr>-->
-							<!--<tr>-->
-								<!--<td>Available </td><td>&nbsp;:&nbsp; </td>-->
-								<!--<td id="available">763</td>-->
-							<!--</tr>-->
-							<!--</tbody></table>-->
-					<!--</div>-->
-				<!--</div>-->
-				<!--<div class="getAllRequests col-md-3 col btn btn-outline-info .table-responsive">-->
-					<!--<h5>View Request List <span id="totalReq">(43)</span></h5>-->
-					<!--<div class="table-responsive">-->
-						<!--<table>-->
-							<!--<tbody><tr>-->
-								<!--<td>Approved </td><td>&nbsp;:&nbsp;</td>-->
-								<!--<td id="approved">36</td>-->
-							<!--</tr>-->
-							<!--<tr>-->
-								<!--<td>Pending </td><td>&nbsp;:&nbsp; </td>-->
-								<!--<td id="pending">2</td>-->
-							<!--</tr>-->
-							<!--<tr>-->
-								<!--<td>Rejected </td><td>&nbsp;:&nbsp; </td>-->
-								<!--<td id="rejected">5</td>-->
-							<!--</tr>-->
-							<!--</tbody></table>-->
-					<!--</div>-->
-				<!--</div>-->
-				<!--<div class="col-md-3 col btn btn-outline-success getMyRequests">-->
-					<!--<h5>My Requests <span id="myTotalReq">(6)</span></h5>-->
-					<!--<div class="table-responsive">-->
-						<!--<table>-->
-							<!--<tbody><tr>-->
-								<!--<td>Approved </td><td>&nbsp;:&nbsp;</td>-->
-								<!--<td id="myApproved">3</td>-->
-							<!--</tr>-->
-							<!--<tr>-->
-								<!--<td>Pending </td><td>&nbsp;:&nbsp; </td>-->
-								<!--<td id="myPending">2</td>-->
-							<!--</tr>-->
-							<!--<tr>-->
-								<!--<td>Rejected </td><td>&nbsp;:&nbsp; </td>-->
-								<!--<td id="myRejected">1</td>-->
-							<!--</tr>-->
-							<!--</tbody></table>-->
-					<!--</div>-->
-				<!--</div>-->
-			<!--</div>-->
+
 			<div class="row">
 				<div class="col-md-9" >
 					<h5 >Recent Updates <span id="nextPrev"></span></h5>
@@ -368,7 +321,8 @@
 
       <!--scripts loaded here-->
 	<script src="js/1.js"></script>
-    <script src="js/cookies.js"></script>
+	<script src="js/xepOnline.jqPlugin.js"></script>
+	<script src="js/cookies.js"></script>
 	<script src="js/addUser.js"></script>
 	<script src="js/getAllUsers.js"></script>
 	<script src="js/getAllItems.js"></script>

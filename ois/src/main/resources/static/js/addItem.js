@@ -26,7 +26,7 @@ function addItem(){
 			    		<label class="col-form-label">Qty*</label>
 			    	</div>
 			    	<div class="col-md-6">
-			    		<input id="quantity" type="number" class="form-control" name="quantity" required>
+			    		<input id="quantity" type="number" class="form-control" min="1" max="9999" maxlength="4" oninput="minMaxCheck(this)" name="quantity" required>
 			    	</div>
 			    	<div class="col-md-3"></div>
 			    </div>

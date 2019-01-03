@@ -16,18 +16,20 @@ function agetAllItems(){
                     if(myRole==0) {
                         for (var i = 0; i < len; i++) {
                             console.log(data[i].imagePath);
+                            // src="/img/${data[i].imagePath}"
                             if (data[i]) {
                                 txt += `<tr class="text-middle">\n 
-                                          <td class="text-center"><img width="60px" height="60px"  src="/img/${data[i].imagePath}" alt="Image">
-</td>                                      
-                                          <td id=${data[i].id} class="text-middle">${data[i].id} </td>
+                                          <td class="text-center text-middle noprint">
+                                            <img  width="60px" height="60px"  src="/img/${data[i].imagePath}" alt="Image">
+                                          </td>                                      
+                                          <td id=${data[i].id} class="text-middle"> ${data[i].id} </td>
                                           <td class="text-middle">${data[i].name}</td>
                                           <td class="text-middle">${data[i].quantity}</td>
                                           <td class="text-middle">${data[i].price}</td>
                                           <td class="text-middle">${data[i].detail}</td>
-                                          <td  class="action1 text-middle text-center">
-                                             <button onclick="editItem(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                                             <button onclick="deleteItem(${data[i].id},'${data[i].name}')" class="btn btn-danger">Delete</button>
+                                          <td class="action1 text-middle text-center noprint">
+                                             <button onclick="editItem(${data[i].id})" class="noprint btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                             <button onclick="deleteItem(${data[i].id},'${data[i].name}')" class="noprint btn btn-danger">Delete</button>
                                           </td>
                                    </tr>`;
                             } //${variabel} atau template literals mengauto convert menjadi string ONCLICK onclick="deleteItem(${data[i].id},'${data[i].name}') jalan karena di javasript '2' di auto convert menjadi integer jika dibutuhkan.
@@ -37,8 +39,8 @@ function agetAllItems(){
                         for (var i = 0; i < len; i++) {
                             if (data[i]) {
                                 txt += `<tr>\n 
-                                          <td class="text-center text-middle"><img width="60px" height="60px" src="/img/${data[i].imagePath}" alt="Image"></td>
-                                          <td  id=${data[i].id}>${data[i].id} class="text-middle"</td>
+                                          <td class="text-center text-middle noprint"><img width="60px" height="60px" src="/img/${data[i].imagePath}" alt="Image"></td>
+                                          <td  id=${data[i].id}  class="text-middle">${data[i].id}</td>
                                           <td class="text-middle">${data[i].name}</td>
                                           <td class="text-middle">${data[i].quantity}</td>
                                           <td class="text-middle">${data[i].price}</td>
@@ -49,6 +51,21 @@ function agetAllItems(){
                     }
                     if(txt) $("#itemList").html(txt);
 
+                    $("#allItem").clone().appendTo("#printItem");
+                    $("#printItem .noprint").remove();
+
+                    function printNow(){
+                        return xepOnline.Formatter.Format('printItem',{
+                                render:'newwin',
+                                filename:'Items List',
+                                pageWidth:'216mm',
+                                pageHeight:'279mm',
+                            }
+                        );
+                    }
+                    $("#print").html("<a href='#'><img src='/img/print.png' width='30px' height='30px'></a>");
+                    // $("#print").append($("<a>").attr("href","#").width(30).height(30).append($("<img>").attr("src","/img/print.png")));
+                    $("#print").click(printNow);
                     // alert("Success :"+data);
                     console.log(data);
                 }
@@ -86,7 +103,7 @@ function agetAvailableItems(){
                                         <td class="text-middle">${data[i].name}</td>\n 
                                         <td class="text-middle">${data[i].detail}. Stock left: ${data[i].quantity}</td>\n
                                         <td class="qty text-middle"><input class="quantity" style="width: 100%;" type="number" maxlength="${maxL}" min="1" max="${data[i].quantity}" oninput="minMaxCheck(this)" placeholder="Max:${data[i].quantity}"></td>
-                                        <td class="text-middle" class="rem action1">
+                                        <td class="text-middle action1 rem">
                                         <button onclick="add(${data[i].id})" class="ad btn btn-success ${data[i].id}"><span style="font-family:verdana;color:whitesmoke">&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;</span></button>
                                         </td>\n
                                     </tr>`;
