@@ -42,24 +42,12 @@ public class Request {
     @Column(name = "status")
     private String status;
 
-//    @Column(name = "statusCode")
-//    private int statusCode;
-
-
     @Column(name = "request_date", updatable = false)
     private long createdAt;
-
-//    @ManyToMany
-//    @JoinTable(name = "request_detail",joinColumns ={@JoinColumn(referencedColumnName = "id",name = "reqId")},inverseJoinColumns =@JoinColumn(referencedColumnName = "id",name = "itemId"))
-//    private List<Item> item ;
-
 
     @OneToMany(targetEntity = RequestDetail.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id",referencedColumnName = "id")
     private Set<RequestDetail> reqDetail;
-//
-//    @Column(name = "approvedBy")
-//    private String approvedBy;
 
     @Column(name = "approval_date")
     private Long approvedAt;
