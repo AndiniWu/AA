@@ -51,12 +51,13 @@ function agetAllItems(){
                     }
                     if(txt) $("#itemList").html(txt);
 
-                    $("#allItem").clone().appendTo("#printItem");
-                    $("#printItem .noprint").remove();
+
 
                     function printNow(){
+                        $("#printItem").empty();
+                        $("#allItem").clone().appendTo("#printItem");
+                        $("#printItem .noprint").remove();
                         return xepOnline.Formatter.Format('printItem',{
-                                render:'newwin',
                                 filename:'Items List',
                                 pageWidth:'216mm',
                                 pageHeight:'279mm',
@@ -130,13 +131,13 @@ function aaddItem(type){
     // var formData = new FormData()
     // formData.append('data', new Blob([JSON.stringify(product)], {type: 'application/json'}))
     // formData.append('images', image)
-    var item = {
-        name:$('#name').val(),
-        quantity:parseInt($('#quantity').val()),
-        price:parseInt($('#price').val()),
-        detail:$('#detail').val(),
-    };
-    console.log(JSON.stringify(item));
+    // var item = {
+    //     name:$('#name').val(),
+    //     quantity:parseInt($('#quantity').val()),
+    //     price:parseInt($('#price').val()),
+    //     detail:$('#detail').val(),
+    // };
+    // console.log(JSON.stringify(item));
     var data = new FormData();
     data.append("file",$("#image")[0].files[0]);
     // data.append("item",new Blob([JSON.stringify(item)],{type: "application/json"}));
@@ -182,67 +183,6 @@ function aaddItem(type){
         });
     }
 }
-
-
-// function aaddItem(type){ BACKUP
-//     var item = {
-//         name:$('#name').val(),
-//         quantity:$('#quantity').val(),
-//         price:$('#price').val(),
-//         detail:$('#detail').val(),
-//     };
-//     var itemJson = JSON.stringify(item);
-//     console.log(itemJson);
-//     if(type ==="POST") {
-//         $.ajax({
-//             type: 'POST',
-//             url: 'http://localhost:8080/api/items',
-//             data: itemJson,
-//             headers: {
-//                 "Content-Type": "application/json", "Accept": "application/json"
-//             },
-//             dataType: "json", //to parse string into JSON object,
-//             success: function (data) {
-//                 var msg="";
-//                 if (data == false) {
-//                     msg += "There is already an item registered with the name provided"
-//                 }
-//                 else {
-//                     msg += "Successed to SAVE item";
-//                 }
-//                 console.log(msg);
-//                 alert(`Result : \n\n ${msg}`);
-//             },
-//             error: function (error) {
-//                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-//                 alert(`Error: ${error.status}\n\nPlease fill in the *`);
-//             }
-//         });
-//     }
-//     else if (type==="PUT"){
-//         var id=$('#id').val();
-//         console.log(`http://localhost:8080/api/items/${id}`);
-//         $.ajax({
-//             type: 'PUT',
-//             url: `http://localhost:8080/api/items/${id}`,
-//             data: itemJson,
-//             headers: {
-//                 "Content-Type": "application/json", "Accept": "application/json"
-//             },
-//             dataType: "json", //to parse string into JSON object,
-//             success: function (data) {
-//                 if(data){
-//                     console.log("Item updated : sucess");
-//                     alert("Successed to update item");
-//                 }
-//             },
-//             error: function (error) {
-//                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-//                 alert(`Error: ${error.status}\n\nPlease fill in the *`);
-//             }
-//         });
-//     }
-// }
 
 function agetItemById(id){
     $.ajax({

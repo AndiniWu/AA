@@ -43,22 +43,6 @@ public class ItemController {
         return itemService.findItemById(itemId);
     }
 
-//    @PostMapping(value = "/items", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public boolean createNewItem(
-//            @Valid
-//            @RequestBody
-//                    Item item, BindingResult bindingResult) {
-//
-//        itemService.saveItem(item);
-//        return true;
-//    }
-
-//    @PostMapping(value="/items", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
-//    public ResponseEntity<?> createNewItem(
-//            @RequestParam(value = "files")MultipartFile file,
-//            @RequestParam(value = "item") CreateNewItem item){
-//        return itemService.storeItem(file,item);
-//    }
     @PostMapping(value="/items", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
     public ResponseEntity<?> createNewItem(
             @ModelAttribute("createNewItem") CreateNewItem createNewItem){
@@ -72,28 +56,9 @@ public class ItemController {
         return itemService.updateItem(id,createNewItem);
     }
 
-//    @PutMapping("/items/{id}")
-//    public ResponseEntity<?> updateItem(
-//            @PathVariable(value = "id") int itemId,
-//            @RequestParam(value = "name") String name,
-//            @RequestParam(value = "quantity") int quantity,
-//            @RequestParam(value = "price") long price,
-//            @RequestParam(value = "detail") String detail,
-//            @RequestParam("files")MultipartFile files){
-//        return itemService.updateItem(itemId,name,quantity,price,detail,files);
-//    }
-
     @PutMapping("/items/delete/{id}")
     public Boolean deleteItem(@PathVariable(value = "id")int itemId){
         return itemService.deleteItem(itemId);
     }
-
-//    @DeleteMapping("/items/{id}")
-//    public Boolean deleteItem(@PathVariable(value = "id")int itemId){
-//        Item item = itemService.findItemById(itemId);
-//        if(item==null){return false;}
-//        itemService.deleteItem(item);
-//        return true;
-//    }
 
 }
