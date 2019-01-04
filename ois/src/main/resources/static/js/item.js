@@ -34,7 +34,7 @@ function agetAllItems(){
                         if(myRole != 0 ) $(".remove").remove();
                         function printNow(){
                             $("#printItem").empty();
-                            $("#printItem").append($("<p>").html("Items List  <span class='text-right'> "+ new Date(Date.now()).toLocaleString() +" </span><br>" ));
+                            $("#printItem").append($("<p>").html("Items List at <span class='text-right'> "+ new Date(Date.now()).toLocaleString() +" </span><br>" ));
                             $("#allItem").clone().appendTo("#printItem");
                             $("#printItem .noprint").remove();
                             return xepOnline.Formatter.Format('printItem',{
