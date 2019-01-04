@@ -1,83 +1,4 @@
-// function agetAllItems(){
-//     // console.log(`http://localhost:8080/api/items?orderBy=${sort[0]}&sortBy=${sort[0]}`)
-//     $.ajax({
-//         type: 'GET',
-//         url: `http://localhost:8080/api/items?sortBy=${$('#sortBy').val()}&orderBy=${$('#orderBy').val()}`,
-//         headers: {
-//             "Content-Type": "application/json", "Accept": "application/json"
-//         },
-//         dataType:"json",
-//         success: function (data) {
-//             console.log("yes. data: " + data);
-//             if (data) {
-//                 var len = data.length;
-//                 var txt = ``;
-//                 if (len > 0) {
-//                     if(myRole==0) {
-//                         for (var i = 0; i < len; i++) {
-//                             console.log(data[i].imagePath);
-//                             // src="/img/${data[i].imagePath}"
-//                             if (data[i]) {
-//                                 txt += `<tr class="text-middle">\n
-//                                           <td class="text-center text-middle noprint">
-//                                             <img  width="60px" height="60px"  src="/img/${data[i].imagePath}" alt="Image">
-//                                           </td>
-//                                           <td id=${data[i].id} class="text-middle"> ${data[i].id} </td>
-//                                           <td class="text-middle">${data[i].name}</td>
-//                                           <td class="text-middle">${data[i].quantity}</td>
-//                                           <td class="text-middle">${data[i].price}</td>
-//                                           <td class="text-middle">${data[i].detail}</td>
-//                                           <td class="action1 text-middle text-center noprint">
-//                                              <button onclick="editItem(${data[i].id})" class="noprint btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
-//                                              <button onclick="deleteItem(${data[i].id},'${data[i].name}')" class="noprint btn btn-danger">Delete</button>
-//                                           </td>
-//                                    </tr>`;
-//                             } //${variabel} atau template literals mengauto convert menjadi string ONCLICK onclick="deleteItem(${data[i].id},'${data[i].name}') jalan karena di javasript '2' di auto convert menjadi integer jika dibutuhkan.
-//                         }
-//                     }
-//                     else{
-//                         for (var i = 0; i < len; i++) {
-//                             if (data[i]) {
-//                                 txt += `<tr>\n
-//                                           <td class="text-center text-middle noprint"><img width="60px" height="60px" src="/img/${data[i].imagePath}" alt="Image"></td>
-//                                           <td  id=${data[i].id}  class="text-middle">${data[i].id}</td>
-//                                           <td class="text-middle">${data[i].name}</td>
-//                                           <td class="text-middle">${data[i].quantity}</td>
-//                                           <td class="text-middle">${data[i].price}</td>
-//                                           <td class="text-middle">${data[i].detail}</td>
-//                                         </tr>`;
-//                             } //${variabel} atau template literals mengauto convert menjadi string ONCLICK onclick="deleteItem(${data[i].id},'${data[i].name}') jalan karena di javasript '2' di auto convert menjadi integer jika dibutuhkan.
-//                         }
-//                     }
-//                     if(txt) $("#itemList").html(txt);
-//
-//
-//
-//                     function printNow(){
-//                         $("#printItem").empty();
-//                         $("#allItem").clone().appendTo("#printItem");
-//                         $("#printItem .noprint").remove();
-//                         return xepOnline.Formatter.Format('printItem',{
-//                                 render:'newwin',
-//                                 filename:'Items List',
-//                                 pageWidth:'216mm',
-//                                 pageHeight:'279mm',
-//                             }
-//                         );
-//                     }
-//                     $("#print").html("<a href='#'><img src='/img/print.png' width='30px' height='30px'></a>");
-//                     // $("#print").append($("<a>").attr("href","#").width(30).height(30).append($("<img>").attr("src","/img/print.png")));
-//                     $("#print").click(printNow);
-//                     // alert("Success :"+data);
-//                     console.log(data);
-//                 }
-//             }
-//         },
-//         error: function (error) {
-//             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-//         }
-//     });
-// }
+
 function agetAllItems(){
     // console.log(`http://localhost:8080/api/items?orderBy=${sort[0]}&sortBy=${sort[0]}`)
     $.ajax({
@@ -186,10 +107,6 @@ function agetAvailableItems(){
 }
 
 function aaddItem(type){
-
-    // var formData = new FormData()
-    // formData.append('data', new Blob([JSON.stringify(product)], {type: 'application/json'}))
-    // formData.append('images', image)
     var item = {
         name:$('#name').val(),
         quantity:parseInt($('#quantity').val()),
