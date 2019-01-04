@@ -28,7 +28,7 @@ public class ItemService {
     private ItemRepository itemRepository;
 
     @Value("${static.path}")
-    private static String UPLOADED_FOLDER = "D:/Blibli_Futureprogram/PROJECT/project/AA/asset/img/";
+    private static String UPLOADED_FOLDER = "D:/Blibli_Future_Program/project/AA/asset/img/";
         // sesuai dengan folder kita masing-masing.
 
     @Autowired
