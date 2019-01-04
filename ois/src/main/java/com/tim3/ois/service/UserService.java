@@ -56,7 +56,8 @@ public class UserService {
             throw new ResourceNotFoundException("User","id",u.getId());
         }
         user.setNik(u.getNik());
-        user.setSuperior(u.getSuperior());
+        user.setSuperior(
+                u.getSuperior());
         user.setPosition(u.getPosition());
         user.setDivision(u.getDivision());
         user.setEmail(u.getEmail());
