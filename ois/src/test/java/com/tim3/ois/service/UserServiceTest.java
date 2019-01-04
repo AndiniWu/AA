@@ -53,4 +53,26 @@ public class UserServiceTest {
         verify(userRepository).findAllByRoleAndEnabledOrderByEmailAsc(0,true);
     }
 
+//    @Test
+//    public void findUserById_Test() {
+//        User user1= User.builder()
+//                .id(1)
+//                .role(0)
+//                .email("a@mail.com")
+//                .build();
+//        User user2= User.builder()
+//                .id(2)
+//                .role(0)
+//                .email("b@mail.com")
+//                .build();
+//
+//        List<User> userList = new ArrayList<>();
+//        userList.add(user1);
+//        userList.add(user2);
+//
+//        when(userRepository.findById(1)).thenReturn(userList);
+//        userService.findUserById(1);
+//        verify(userRepository).findById(1);
+//    }
+
 }
