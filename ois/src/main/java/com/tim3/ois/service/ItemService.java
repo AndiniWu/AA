@@ -113,7 +113,7 @@ public class ItemService {
         Item itemExist = itemRepository.findByName(newItem.getName());
         if(itemExist!=null)  return new ResponseEntity("Item already Exists with the name provided",HttpStatus.BAD_REQUEST);
         String fileName = newItem.getFile().getOriginalFilename();
-        if (StringUtils.isEmpty(fileName)) {
+        if (StringUtils.isEmpty(fileName) || newItem.getFile().getContentType().toLowerCase().equals("image/jpeg") || newItem.getFile().getContentType().toLowerCase().equals("image/jpg") || newItem.getFile().getContentType().toLowerCase().equals("image/png") || newItem.getFile().getContentType().toLowerCase().equals("image/bmp")) {
             return new ResponseEntity("Please select a file!", HttpStatus.OK);
         }
         try {

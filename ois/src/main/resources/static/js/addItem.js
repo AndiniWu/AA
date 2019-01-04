@@ -55,7 +55,7 @@ function addItem(){
 			    		<label class="col-form-label">Image*</label>
 			    	</div>
 			    	<div class="col-md-6">
-			    		<input id="image" accept=".jpg,.png,.gif,.bmp" type="file" name="image" required>
+			    		<input id="image" accept=".jpg,.png,.bmp" type="file" name="image" required>
 			    	</div>
 			    </div>
 			    <div class="col-md-9">

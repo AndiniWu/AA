@@ -296,7 +296,9 @@ th, td {
 .hov {
     cursor: pointer;
 }
-
+.red {
+    color: red;
+}
 .s1 {
     background-color: rgba(127,255,0,0.2);
 }

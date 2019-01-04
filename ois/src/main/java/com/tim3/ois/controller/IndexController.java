@@ -38,7 +38,7 @@ public class IndexController {
 //        return modelAndView;
 //    }
 //
-    @GetMapping("/**")
+    @GetMapping("/index")
     public String index(){
         return "index";
     }

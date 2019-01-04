@@ -30,17 +30,6 @@ $('.logout').click(function(e){
     deleteCookie("superior");
     window.location = "login";
 });
-// function sleep(ms) {
-//     return new Promise(resolve => setTimeout(resolve, ms));
-// }
-//
-// async function demo() {
-//     agetCurrentStock();
-//     console.log('waiting...');
-//     await sleep(100);
-//     agetTotalStock();
-//     console.log('0.1 seconds later');
-// }
 
 agetRecentUpdates(0);
 agetItemCount();
@@ -209,8 +198,9 @@ function editItem(itemId){ //still working on
 function deleteItem(itemId,itemName){
     var r = confirm(`You are going to delete user :\nId      : ${itemId}\nemail : ${itemName}\n\nAre you sure? `);
     if(r==true){
-        checkItemRequest(itemId);//user tidak benar-benar di delete, melainkan hanya menganti value dari field enabled menjadi false.
+        acheckItemRequest(itemId,"delete");//user tidak benar-benar di delete, melainkan hanya menganti value dari field enabled menjadi false.
         //ketika yang didelete adalah user dengan role superior(1), dan memiliki hubungan foreignkey ke user lain, maka tidak akan terjadi error dan id user ini tetap menjadi foreignkey di user lain, sehingga perlu dilakukan update manual dari user lain utk mengganti superior_id nya.
+        $(`#${itemId}`).remove();
     }
 }
 

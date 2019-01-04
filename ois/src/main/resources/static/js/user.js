@@ -79,7 +79,7 @@ function agetAllUsersBySuperior(){
                         $("<td>").text(user.address),
                         $("<td>").text(user.superior.name)
                         ),
-                    )
+                    );
                 }
             },
         error: function (error) {
