@@ -1,3 +1,4 @@
+
 function agetAllItems(){
     // console.log(`http://localhost:8080/api/items?orderBy=${sort[0]}&sortBy=${sort[0]}`)
     $.ajax({
@@ -11,72 +12,52 @@ function agetAllItems(){
             console.log("yes. data: " + data);
             if (data) {
                 var len = data.length;
-                var txt = ``;
                 if (len > 0) {
-                    if(myRole==0) {
+                        $("#itemList").empty();
                         for (var i = 0; i < len; i++) {
                             console.log(data[i].imagePath);
-                            // src="/img/${data[i].imagePath}"
                             if (data[i]) {
-                                txt += `<tr class="text-middle">\n 
-                                          <td class="text-center text-middle noprint">
-                                            <img  width="60px" height="60px"  src="/img/${data[i].imagePath}" alt="Image">
-                                          </td>                                      
-                                          <td id=${data[i].id} class="text-middle"> ${data[i].id} </td>
-                                          <td class="text-middle">${data[i].name}</td>
-                                          <td class="text-middle">${data[i].quantity}</td>
-                                          <td class="text-middle">${data[i].price}</td>
-                                          <td class="text-middle">${data[i].detail}</td>
-                                          <td class="action1 text-middle text-center noprint">
-                                             <button onclick="editItem(${data[i].id})" class="noprint btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                                             <button onclick="deleteItem(${data[i].id},'${data[i].name}')" class="noprint btn btn-danger">Delete</button>
-                                          </td>
-                                   </tr>`;
-                            } //${variabel} atau template literals mengauto convert menjadi string ONCLICK onclick="deleteItem(${data[i].id},'${data[i].name}') jalan karena di javasript '2' di auto convert menjadi integer jika dibutuhkan.
+                                $("#itemList").append(
+                                    $("<tr>").attr("id",`${data[i].id}`).append(
+                                        $("<td>").addClass("noprint").html(`<img width="60px" height="60px"  src="/img/${data[i].imagePath}" alt="Image">`),
+                                        $("<td>").addClass("hov").text(data[i].id).click(acheckItemRequest.bind(null, data[i].id, "get")),
+                                        $("<td>").text(data[i].name),
+                                        $("<td>").text(data[i].quantity),
+                                        $("<td>").text(data[i].price),
+                                        $("<td>").text(data[i].detail),
+                                        $("<td>").addClass("remove noprint").html(`<button onclick="editItem(${data[i].id})" class="btn btn-warning">Edit&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                             <button onclick="deleteItem(${data[i].id},'${data[i].name}')" class="btn btn-danger">Delete</button>`)
+                                    )
+                                );
+                            }}
+                       }
+                        if(myRole != 0 ) $(".remove").remove();
+                        function printNow(){
+                            $("#printItem").empty();
+                            $("#printItem").append($("<p>").html("Items List  <span class='text-right'> "+ new Date(Date.now()).toLocaleString() +" </span><br>" ));
+                            $("#allItem").clone().appendTo("#printItem");
+                            $("#printItem .noprint").remove();
+                            return xepOnline.Formatter.Format('printItem',{
+                                    render:'newwin',
+                                    filename:'Items List',
+                                    pageWidth:'216mm',
+                                    pageHeight:'279mm',
+                                }
+                            );
                         }
-                    }
-                    else{
-                        for (var i = 0; i < len; i++) {
-                            if (data[i]) {
-                                txt += `<tr>\n 
-                                          <td class="text-center text-middle noprint"><img width="60px" height="60px" src="/img/${data[i].imagePath}" alt="Image"></td>
-                                          <td  id=${data[i].id}  class="text-middle">${data[i].id}</td>
-                                          <td class="text-middle">${data[i].name}</td>
-                                          <td class="text-middle">${data[i].quantity}</td>
-                                          <td class="text-middle">${data[i].price}</td>
-                                          <td class="text-middle">${data[i].detail}</td>
-                                        </tr>`;
-                            } //${variabel} atau template literals mengauto convert menjadi string ONCLICK onclick="deleteItem(${data[i].id},'${data[i].name}') jalan karena di javasript '2' di auto convert menjadi integer jika dibutuhkan.
-                        }
-                    }
-                    if(txt) $("#itemList").html(txt);
-
-                    $("#allItem").clone().appendTo("#printItem");
-                    $("#printItem .noprint").remove();
-
-                    function printNow(){
-                        return xepOnline.Formatter.Format('printItem',{
-                                render:'newwin',
-                                filename:'Items List',
-                                pageWidth:'216mm',
-                                pageHeight:'279mm',
-                            }
-                        );
-                    }
-                    $("#print").html("<a href='#'><img src='/img/print.png' width='30px' height='30px'></a>");
-                    // $("#print").append($("<a>").attr("href","#").width(30).height(30).append($("<img>").attr("src","/img/print.png")));
-                    $("#print").click(printNow);
-                    // alert("Success :"+data);
-                    console.log(data);
+                        $("#print").html("<a href='#'><img src='/img/print.png' width='30px' height='30px'></a>");
+                        // $("#print").append($("<a>").attr("href","#").width(30).height(30).append($("<img>").attr("src","/img/print.png")));
+                        $("#print").click(printNow);
+                        // alert("Success :"+data);
+                        console.log(data);
                 }
-            }
+
         },
         error: function (error) {
             console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
         }
     });
 }
-
 function agetAvailableItems(){
     $.ajax({
         type: 'GET',
@@ -126,10 +107,6 @@ function agetAvailableItems(){
 }
 
 function aaddItem(type){
-
-    // var formData = new FormData()
-    // formData.append('data', new Blob([JSON.stringify(product)], {type: 'application/json'}))
-    // formData.append('images', image)
     var item = {
         name:$('#name').val(),
         quantity:parseInt($('#quantity').val()),
@@ -183,67 +160,6 @@ function aaddItem(type){
     }
 }
 
-
-// function aaddItem(type){ BACKUP
-//     var item = {
-//         name:$('#name').val(),
-//         quantity:$('#quantity').val(),
-//         price:$('#price').val(),
-//         detail:$('#detail').val(),
-//     };
-//     var itemJson = JSON.stringify(item);
-//     console.log(itemJson);
-//     if(type ==="POST") {
-//         $.ajax({
-//             type: 'POST',
-//             url: 'http://localhost:8080/api/items',
-//             data: itemJson,
-//             headers: {
-//                 "Content-Type": "application/json", "Accept": "application/json"
-//             },
-//             dataType: "json", //to parse string into JSON object,
-//             success: function (data) {
-//                 var msg="";
-//                 if (data == false) {
-//                     msg += "There is already an item registered with the name provided"
-//                 }
-//                 else {
-//                     msg += "Successed to SAVE item";
-//                 }
-//                 console.log(msg);
-//                 alert(`Result : \n\n ${msg}`);
-//             },
-//             error: function (error) {
-//                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-//                 alert(`Error: ${error.status}\n\nPlease fill in the *`);
-//             }
-//         });
-//     }
-//     else if (type==="PUT"){
-//         var id=$('#id').val();
-//         console.log(`http://localhost:8080/api/items/${id}`);
-//         $.ajax({
-//             type: 'PUT',
-//             url: `http://localhost:8080/api/items/${id}`,
-//             data: itemJson,
-//             headers: {
-//                 "Content-Type": "application/json", "Accept": "application/json"
-//             },
-//             dataType: "json", //to parse string into JSON object,
-//             success: function (data) {
-//                 if(data){
-//                     console.log("Item updated : sucess");
-//                     alert("Successed to update item");
-//                 }
-//             },
-//             error: function (error) {
-//                 console.log('errorCode: ' + error.status + ' . Message: ' + error.responseText);
-//                 alert(`Error: ${error.status}\n\nPlease fill in the *`);
-//             }
-//         });
-//     }
-// }
-
 function agetItemById(id){
     $.ajax({
         type: 'GET',
@@ -266,7 +182,7 @@ function agetItemById(id){
     });
 }
 
-function checkItemRequest(itemId){
+function acheckItemRequest(itemId,type){
     $.ajax({
         type: 'GET',
         url: `http://localhost:8080/api/items/onActiveRequest/`+itemId,
@@ -274,18 +190,37 @@ function checkItemRequest(itemId){
             "Content-Type": "application/json", "Accept": "application/json"
         },
         dataType:"json",
-        success: function (data) {      // FROM TRINCOT STACKOVERFLOW
+        success: function (data) {
             console.log("yes. data: " + data);
-            if (data.length!=0) {
-                var msg="";
-                for(var i =0; i< data.length;i++){
-                    var req=data[i];
-                    msg+=`${req[0]},Qty: ${req[1]}\n`       //req[0] adalah index dari requestId , req[1] adalah index dari quantity
+            $("#itemOnUserBody").empty();
+            if (data.length != 0) {
+                var msg = "";
+                for (var i = 0; i < data.length; i++) {
+                    var req = data[i];
+                    $("#itemOnUserBody").append(
+                        $("<tr>").append(
+                            $("<td>").text(req[0]),        //index 0 request Id,
+                            $("<td>").text(req[2]),        //index 2 user Id
+                            $("<td>").text(req[1])         // index 1 quantity on requestdetail
+                        )
+                    );
                 }
-                alert(`Failed to delete item (id: ${itemId})\nThe Item(s) still being requested/taken in Request Id:\n${msg}`);
             }
-            else{
-                adeleteItem(itemId);
+            if(type=="delete") {
+                if (data.length != 0) {
+                    // alert(`Failed to delete item (id: ${itemId})\nThe Item(s) still being requested/taken in Request Id:\n${msg}`);
+                    $("#itemOnUserHead").html("<span class='red'>Item's still on request.\nPlease return/cancel the following request:</span>");
+                    $("#itemOnUser").modal();
+                }
+                else {
+                    adeleteItem(itemId);
+                }
+            }
+            else if(type=="get"){
+
+                console.log("OK get MODAL");
+                $("#itemOnUserHead").text("Requests on this item");
+                $("#itemOnUser").modal();
             }
 
         },

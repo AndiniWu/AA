@@ -33,7 +33,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
             @Param("bool") boolean bool
     );
 
-    @Query(value = " SELECT  rd.request_id,rd.quantity FROM request_detail rd INNER JOIN request r on rd.request_id = r.id where r.status_code < 3 and rd.item = :id",nativeQuery = true)            //active request adalah request dgn status code < 3
+    @Query(value = " SELECT  rd.request_id,rd.quantity,r.request_by FROM request_detail rd INNER JOIN request r on rd.request_id = r.id where r.status_code < 3 and rd.item = :id",nativeQuery = true)            //active request adalah request dgn status code < 3
     List<Object> getItemOnActiveRequest(
             @Param("id") int id);
 }

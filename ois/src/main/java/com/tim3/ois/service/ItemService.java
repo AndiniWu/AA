@@ -113,23 +113,28 @@ public class ItemService {
         Item itemExist = itemRepository.findByName(newItem.getName());
         if(itemExist!=null)  return new ResponseEntity("Item already Exists with the name provided",HttpStatus.BAD_REQUEST);
         String fileName = newItem.getFile().getOriginalFilename();
+        MultipartFile file = newItem.getFile();
         if (StringUtils.isEmpty(fileName)) {
-            return new ResponseEntity("Please select a file!", HttpStatus.OK);
+            return new ResponseEntity("Something error occured!", HttpStatus.BAD_REQUEST);
         }
-        try {
-    //            item.setImage(bytes); // untuk save file / gambar ke field picture di database
-            Item item = new Item();
-            item.setDetail(newItem.getDetail());
-            item.setQuantity(newItem.getQuantity());
-            item.setName(newItem.getName());
-            item.setPrice(newItem.getPrice());
-            item.setImagePath(fileName);
-            saveUploadedFile(newItem.getFile());
-            saveItem(item);
-        } catch (IOException e) {
-            return new ResponseEntity<>("Some error occured. Failed to add item", HttpStatus.BAD_REQUEST);
+        if (file.getContentType().equals("image/png")||file.getContentType().equals("image/jpg")||file.getContentType().equals("image/jpeg")||file.getContentType().equals("image/bmp")) {
+            try {
+                //            item.setImage(bytes); // untuk save file / gambar ke field picture di database
+                Item item = new Item();
+                item.setDetail(newItem.getDetail());
+                item.setQuantity(newItem.getQuantity());
+                item.setName(newItem.getName());
+                item.setPrice(newItem.getPrice());
+                item.setImagePath(fileName);
+                saveUploadedFile(newItem.getFile());
+                saveItem(item);
+            } catch (IOException e) {
+                return new ResponseEntity<>("Some error occured. Failed to add item", HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity("Successed to add Item", HttpStatus.OK);
         }
-        return new ResponseEntity("Successed to add Item", HttpStatus.OK);
+        return new ResponseEntity("Error occured (file is not an image)", HttpStatus.BAD_REQUEST);
+
     }
         private void saveUploadedFile(MultipartFile file) throws IOException {
             if (!file.isEmpty()) {
