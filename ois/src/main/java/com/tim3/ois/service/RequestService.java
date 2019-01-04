@@ -56,6 +56,7 @@ public class RequestService {
                 new Sort(Sort.Direction.DESC, "createdAt"));
     }
 
+
     public Page<Request> findAll(int eId, int sId, int page, int size) {
         if (sId != -1) return requestRepository.findAllBySuperiorPageable(sId, true, createPageRequest(page, size));
 
