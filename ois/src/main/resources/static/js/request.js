@@ -168,7 +168,7 @@ function submitRequest(){
         if(r==true) {
             var request = {
                 user: {
-                    id: user[0],
+                    id: myId,
                     role: myRole
                 },
                 message: $('#reqMessage').val(),

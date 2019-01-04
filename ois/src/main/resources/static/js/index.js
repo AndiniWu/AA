@@ -187,7 +187,7 @@ $('.addItem').click(function (e) {
 
 function editItem(itemId){ //still working on
     refresh(addItem);
-    $('#title').html('<b class=\"bold1\">E</b>DIT<b class=\"bold1\">&nbsp;I</b>TEM');
+    $('.title1').html('<b class=\"bold1\">E</b>DIT<b class=\"bold1\">&nbsp;I</b>TEM');
     agetItemById(itemId);
     $('#saveItem').click(function (e){
         e.preventDefault();
@@ -196,7 +196,7 @@ function editItem(itemId){ //still working on
 }
 
 function deleteItem(itemId,itemName){
-    var r = confirm(`You are going to delete user :\nId      : ${itemId}\nemail : ${itemName}\n\nAre you sure? `);
+    var r = confirm(`You are going to delete user :\nId      : ${itemId}\nitemName : ${itemName}\n\nAre you sure? `);
     if(r==true){
         acheckItemRequest(itemId,"delete");//user tidak benar-benar di delete, melainkan hanya menganti value dari field enabled menjadi false.
         //ketika yang didelete adalah user dengan role superior(1), dan memiliki hubungan foreignkey ke user lain, maka tidak akan terjadi error dan id user ini tetap menjadi foreignkey di user lain, sehingga perlu dilakukan update manual dari user lain utk mengganti superior_id nya.
