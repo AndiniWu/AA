@@ -378,6 +378,7 @@ function agetRecentUpdates(currentPage){;
         "request just  been rejected!",
         "request just  been approved!"
     ];
+
     $.ajax({
         type: 'GET',
         url: url,
@@ -392,6 +393,12 @@ function agetRecentUpdates(currentPage){;
             var len= data.content.length;
             for (var i = 0; i < len; i++) {
                 var request = data.content[i]; // Use a local variable to avoid repetition
+                var time=[
+                    new Date(request.createdAt).toLocaleString(),
+                    new Date(request.approvedAt).toLocaleString(),
+                    new Date(request.handedAt).toLocaleString(),
+                    new Date(request.returnedAt).toLocaleString(),
+                    new Date(request.rejectedAt).toLocaleString()];
                 if(!request) continue;
                 console.log(request);
                 // Use jQuery methods to add the content and bind a click handler
@@ -401,14 +408,12 @@ function agetRecentUpdates(currentPage){;
                 $("#recent").append(
                     $("<tr>").addClass("hov").addClass(`s${request.statusCode}`).attr('title', 'Click for details').append(
                         $("<td>").html(`&nbsp;    Mr/Mrs. ${request.user.email}`),
-                        $("<td>").html(`&nbsp;    ${msg}  (<b>${request.id}</b>) at ${new Date(request.createdAt).toLocaleString()} `)
+                        $("<td>").html(`&nbsp;    ${msg}  (<b>${request.id}</b>) at ${time[request.statusCode]} `)
                     ).click(getReqDetails.bind(null, request)) // <-- click handler for TR
                 );
             }
             var totalPage = data.totalPages-1;
-            // console.log(totalPage);
-            // console.log(currentPage);;
-            // console.log(totalPage-currentPage);
+
             var hasNext = totalPage - currentPage > 0 ? true : false;
             var hasPrev = currentPage > 0 ? true : false;
             if(hasPrev) {

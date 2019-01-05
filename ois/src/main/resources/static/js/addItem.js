@@ -36,7 +36,7 @@ function addItem(){
 			    		<label class="col-form-label">Price*</label>
 			    	</div>
 			    	<div class="col-md-6">
-			    		<input id="price" type="number" class="form-control" name="price" required>
+			    		<input id="price" type="number" class="form-control"  min="1" max="99999999999999999999" maxlength="20" oninput="minMaxCheck(this)"  name="price" required>
 			    	</div>
 			    	<div class="col-md-3"></div>
 			    </div>
